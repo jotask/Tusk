@@ -32,6 +32,6 @@ public class DesktopPlayerController implements PlayerController{
 
     @Override
     public boolean shoot() {
-        return Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || Gdx.input.isButtonPressed(Input.Buttons.LEFT);
+        return Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.isButtonPressed(Input.Buttons.LEFT);
     }
 }

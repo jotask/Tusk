@@ -78,6 +78,7 @@ public final class Factory {
             FixtureDef fd = new FixtureDef();
             fd.friction = 5f;
             fd.shape = shape;
+            fd.restitution = 0.05f;
 
             com.badlogic.gdx.physics.box2d.Body body = world.createBody(bd);
             body.createFixture(fd);
