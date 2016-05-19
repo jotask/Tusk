@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="16" tilewidth="16" tileheight="16" nextobjectid="22">
+ <tileset firstgid="1" name="dungeon_sheet" tilewidth="16" tileheight="16" tilecount="240">
+  <image source="dungeon_sheet.png" trans="ff00ff" width="384" height="160"/>
+ </tileset>
+ <layer name="bg" width="32" height="16">
+  <data encoding="base64" compression="zlib">
+   eJx9lW0OAyEIRLn/BfUWcIS2iU2mr8/9YXZFHGD4cKpqvdc+6/Pf8e0jnyNL3cb/xPk6+47zDozcG0Zif7E2zidsTOgu2NmCNSK/4e/6j8X0F/BHZBlr16/vxFjYp5+Mkxx1OXeNlTln3vNuy/39cIf5Sc54x/wgfxlzxmNc3/JFvhPL+KdvrLdb3ga22EOst1tNp92nexuLfZq873K+mTv298ieHKVenlt9TbkvKWN+rX8Y15cTcpg5IjY5Y30YzkA3fbN+49wz+6bP2cEa5JxLvNt8Jl/GO2c2Z5n5t/DN+szc822xebsg55f88S2hPzZ/2Dd852xOse6tVxgvsW2emH3GzZxYn3BW2puSmC8gsMez
+  </data>
+ </layer>
+ <objectgroup name="obstacles">
+  <object id="15" x="0" y="224" width="32" height="32"/>
+  <object id="16" x="96" y="224" width="416" height="32"/>
+  <object id="17" x="192" y="208" width="128" height="16"/>
+  <object id="18" x="32" y="240" width="64" height="16"/>
+ </objectgroup>
+ <layer name="ground" width="32" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoGP2AEYiYcmJkM83Dpw2WPFB6ciMdtuDAuffjsoSYGANanBHc=
+  </data>
+ </layer>
+ <objectgroup name="spawn">
+  <object id="19" name="player" x="64" y="176" width="16" height="16"/>
+ </objectgroup>
+</map>
