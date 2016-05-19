@@ -98,15 +98,15 @@ public class Level implements Disposable{
         this.map.dispose();
     }
 
-}
+    public class Ground{
+        private Rectangle rect;
 
-class Ground{
-    private Rectangle rect;
+        public Ground(Rectangle rect) {
+            this.rect = rect;
+        }
 
-    public Ground(Rectangle rect) {
-        this.rect = rect;
+        public Rectangle getRect() { return rect; }
+
     }
-
-    public Rectangle getRect() { return rect; }
 
 }

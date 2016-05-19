@@ -15,7 +15,7 @@ public class Collisions implements ContactListener{
         if(a == null || b == null)
             return;
 
-        if ((a instanceof Player && b instanceof Ground) || (a instanceof Ground && b instanceof Player)) {
+        if ((a instanceof Player && b instanceof Level.Ground) || (a instanceof Level.Ground && b instanceof Player)) {
             Player player;
             if(a instanceof Play){
                 player = (Player) a;
