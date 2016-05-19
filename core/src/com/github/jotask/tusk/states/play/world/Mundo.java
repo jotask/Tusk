@@ -4,8 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.github.jotask.tusk.states.play.Play;
 
 public class Mundo {
@@ -16,10 +15,31 @@ public class Mundo {
     private Level level;
 
     public Mundo() {
-        this.world = new World(new Vector2(0f,-9.8f), false);
+        this.world = new World( new Vector2(0f,-9.8f), false);
+        world.setContactListener(new Collisions());
         this.debug = new Box2DDebugRenderer();
 
         this.level = new Level(this.world);
+
+        createGround();
+
+    }
+
+    private void createGround(){
+        float width = 1000;
+        BodyDef bd = new BodyDef();
+        bd.type = BodyDef.BodyType.StaticBody;
+        bd.position.set(0,0);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(width, 10);
+
+        FixtureDef fd = new FixtureDef();
+        fd.shape = shape;
+
+        world.createBody(bd);
+        shape.dispose();
+
     }
 
     public void update(){
@@ -42,4 +62,5 @@ public class Mundo {
         return world;
     }
     public Level getLevel(){ return level; }
+
 }

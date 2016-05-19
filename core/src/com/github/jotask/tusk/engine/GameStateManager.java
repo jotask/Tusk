@@ -7,6 +7,7 @@ import com.github.jotask.tusk.states.options.Options;
 import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.selectplayer.SelectPlayer;
 import com.github.jotask.tusk.states.splash.Splash;
+import com.github.jotask.tusk.test.Test;
 import com.github.jotask.tusk.util.Constants;
 
 public class GameStateManager{
@@ -52,15 +53,17 @@ public class GameStateManager{
             case SELECTPLAYER:
                 screen = new SelectPlayer();
                 break;
+            case TEST:
+                screen = new Test();
+                break;
             default:
             case SPLASH:
                 screen = new Splash();
                 break;
         }
 
-        // FIXME
-//        if(state != null)
-//            this.state.dispose();
+        if(this.state != null)
+            this.state.dispose();
 
         this.state = screen;
 

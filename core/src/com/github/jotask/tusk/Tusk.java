@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.Timer;
 import com.github.jotask.tusk.engine.Debug;
 import com.github.jotask.tusk.engine.GameStateManager;
+import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.util.Constants;
 
 public class Tusk extends ApplicationAdapter {
@@ -28,6 +28,8 @@ public class Tusk extends ApplicationAdapter {
 		sb = new SpriteBatch();
 		sr = new ShapeRenderer();
 		sr.setAutoShapeType(true);
+
+		AssetManager.get();
 
 		gsm = GameStateManager.get();
 

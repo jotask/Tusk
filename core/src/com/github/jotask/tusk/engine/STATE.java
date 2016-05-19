@@ -7,6 +7,7 @@ public enum STATE {
     OPTIONS,
     PLAY,
     EXIT,
+    TEST,
     SELECTPLAYER;
 
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
+import com.github.jotask.tusk.util.Util;
 
 public class Level implements Disposable{
 
@@ -21,8 +22,8 @@ public class Level implements Disposable{
     private Vector2 playerSpawn;
 
     public Level(World world) {
-        map = new TmxMapLoader().load("level/map.tmx");
-        mapRenderer = new OrthogonalTiledMapRenderer(map);
+        map = new TmxMapLoader().load("level/test.tmx");
+        mapRenderer = new OrthogonalTiledMapRenderer(map, 0.0625f);
         {
             MapObjects collisionsObjects = map.getLayers().get("obstacles").getObjects();
             for(int i = 0; i < collisionsObjects.getCount(); i++){
@@ -45,7 +46,7 @@ public class Level implements Disposable{
                 float x = Float.valueOf(props.get("x").toString());
                 float y = Float.valueOf(props.get("y").toString());
                 Rectangle rectangle = new Rectangle(x, y, 1, 1);
-                playerSpawn= new Vector2(rectangle.x, rectangle.y);
+                playerSpawn = new Vector2(rectangle.x, rectangle.y);
             }
         }
     }
@@ -55,25 +56,33 @@ public class Level implements Disposable{
         mapRenderer.render();
     }
 
-    private Body buildBodyFromRect(World w, Rectangle r){
+    private Body buildBodyFromRect(World world, Rectangle r){
 
-        float x = r.x + (r.getWidth() / 2);
-        float y = r.y + (r.getHeight() / 2);
+        Vector2 position = new Vector2(r.x, r.y);
+        position.x = Util.Pixel.toMeter(r.x);
+        position.y = Util.Pixel.toMeter(r.y);
 
-        Vector2 position = new Vector2(x, y);
+        float w = Util.Pixel.toMeter(r.width);
+        float h = Util.Pixel.toMeter(r.height);
+        Vector2 size = new Vector2(w, h);
+
+        position.x += size.x / 2;
+        position.y += size.y / 2;
 
         BodyDef bd = new BodyDef();
         bd.type = BodyDef.BodyType.StaticBody;
         bd.position.set(position);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(r.getWidth() / 2, r.getHeight() / 2);
+        shape.setAsBox(size.x / 2, size.y / 2);
 
         FixtureDef fd = new FixtureDef();
         fd.shape = shape;
 
-        Body body = w.createBody(bd);
+        Body body = world.createBody(bd);
         body.createFixture(fd);
+
+        body.setUserData(new Ground(r));
 
         shape.dispose();
 
@@ -88,4 +97,16 @@ public class Level implements Disposable{
     public void dispose() {
         this.map.dispose();
     }
+
+}
+
+class Ground{
+    private Rectangle rect;
+
+    public Ground(Rectangle rect) {
+        this.rect = rect;
+    }
+
+    public Rectangle getRect() { return rect; }
+
 }

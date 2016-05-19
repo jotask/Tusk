@@ -1,4 +1,4 @@
-package com.github.jotask.tusk.util;
+package com.github.jotask.tusk.engine.game;
 
 public class Timer {
 

@@ -10,11 +10,11 @@ import com.github.jotask.tusk.util.Constants;
 public class AbstractState implements IState{
 
     protected Color bgColor = Color.CYAN;
-    protected OrthographicCamera camera;
+    protected Camera camera;
 
     @Override
     public void init() {
-        this.camera = new OrthographicCamera(Gdx.graphics.getWidth() / Constants.SCALE,
+        this.camera = new Camera(Gdx.graphics.getWidth() / Constants.SCALE,
                 Gdx.graphics.getHeight() / Constants.SCALE);
     }
 
@@ -40,7 +40,7 @@ public class AbstractState implements IState{
         return bgColor;
     }
 
-    public OrthographicCamera getCamera() { return camera; }
+    public Camera getCamera() { return camera; }
 
     public void setBgColor(Color bgColor) {
         this.bgColor = bgColor;
