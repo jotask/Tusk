@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.engine.AbstractState;
+import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.states.play.entities.EntityManager;
 import com.github.jotask.tusk.states.play.entities.player.Player;
 import com.github.jotask.tusk.states.play.world.Mundo;
@@ -19,8 +20,8 @@ public class Play extends AbstractState {
         super.init();
         this.setBgColor(Color.BLACK);
         this.world = new Mundo();
-        this.entityManager = new EntityManager();
-        this.player = new Player(this);
+        this.entityManager = EntityManager.get();
+        this.player = Factory.createPlayer(this);
     }
 
     @Override

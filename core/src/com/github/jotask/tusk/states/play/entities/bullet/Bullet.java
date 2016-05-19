@@ -1,45 +1,29 @@
 package com.github.jotask.tusk.states.play.entities.bullet;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
+import com.github.jotask.tusk.engine.game.Timer;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
-import com.github.jotask.tusk.states.play.entities.TypeEntity;
-import com.github.jotask.tusk.states.play.world.Mundo;
 
 public class Bullet extends BodyEntity {
 
-    private Bullet(TypeEntity type, Mundo world, Vector2 position, Vector2 size) {
-        super(type, world, position, size);
+    private float SPEED = 100f;
+    private final Timer timer;
 
-        if(this.body == null){
-            return;
-        }
-
+    public Bullet(World world, Body body) {
+        super(world, body);
+        this.timer = new Timer(1f);
+        this.body.setLinearVelocity(SPEED, 0);
     }
 
-    @Override
-    public void update() {
-        if(this.body != null)
-            super.update();
-    }
-
-    @Override
-    public void render(SpriteBatch sb) {
-        if(this.body != null)
-            super.render(sb);
-    }
-
-    @Override
-    public void debug(ShapeRenderer sr) {
-        if(this.body != null)
-            super.debug(sr);
+    public boolean isDead(){
+        return timer.isFinished();
     }
 
     @Override
     public void dispose() {
-        if(this.body != null)
-            super.dispose();
+        super.dispose();
+        System.out.println("bullet destroyed");
     }
 
 }

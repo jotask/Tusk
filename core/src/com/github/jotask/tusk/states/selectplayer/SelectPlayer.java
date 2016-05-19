@@ -1,8 +1,6 @@
 package com.github.jotask.tusk.states.selectplayer;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -13,7 +11,18 @@ import java.util.ArrayList;
 
 public class SelectPlayer extends AbstractState {
 
-    public enum PLAYERS {JOTA, DALAN}
+    public enum Players {
+
+        DEFAULT(15f, 20f);
+
+        public final float width, height;
+
+        Players(float width, float height) {
+            this.height = height;
+            this.width = width;
+        }
+
+    }
 
     private ArrayList<PlayerSelection> players;
 
@@ -22,10 +31,10 @@ public class SelectPlayer extends AbstractState {
         super.init();
         this.setBgColor(Color.BLACK);
 
-        int size = PLAYERS.values().length;
+        int size = Players.values().length;
         players = new ArrayList<PlayerSelection>(size);
-        for(PLAYERS player: PLAYERS.values()){
-            System.out.println(PLAYERS.valueOf(player.toString()));
+        for(Players player: Players.values()){
+            System.out.println(Players.valueOf(player.toString()));
             PlayerSelection p = new PlayerSelection(
                     player.name(),
                     null,

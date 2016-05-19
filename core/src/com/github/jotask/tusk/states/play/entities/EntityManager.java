@@ -2,15 +2,25 @@ package com.github.jotask.tusk.states.play.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.github.jotask.tusk.states.play.entities.bullet.Bullet;
 
 import java.util.LinkedList;
 
 public class EntityManager implements IEntity{
 
-    private LinkedList<IEntity> entities;
+    private static EntityManager instance;
 
-    public EntityManager() {
-        this.entities = new LinkedList();
+    public static EntityManager get(){
+        if(instance == null)
+            instance = new EntityManager();
+        return instance;
+    }
+
+    private final int MAX_BULLETS = 10;
+    private LinkedList<Bullet> bullets;
+
+    private EntityManager() {
+        this.bullets = new LinkedList();
     }
 
     @Override
@@ -18,29 +28,46 @@ public class EntityManager implements IEntity{
 
     @Override
     public void update() {
-        for(IEntity e: entities){
-            e.update();
+        LinkedList<Bullet> toDestroy = new LinkedList<Bullet>();
+        for(Bullet b: bullets){
+            if(b.isDead()){
+                toDestroy.add(b);
+                continue;
+            }
+        }
+        for(Bullet b: toDestroy){
+            b.dispose();
+            bullets.remove(b);
         }
     }
 
     @Override
     public void render(SpriteBatch sb) {
-        for(IEntity e: entities){
-            e.render(sb);
+        for(Bullet b: bullets){
+            b.render(sb);
         }
     }
 
     @Override
     public void debug(ShapeRenderer sr) {
-        for(IEntity e: entities){
-            e.debug(sr);
+        for(Bullet b: bullets){
+            b.debug(sr);
         }
     }
 
     @Override
     public void dispose() {
-        for(IEntity e: entities){
-            e.dispose();
+        for(Bullet b: bullets){
+            b.dispose();
         }
     }
+
+    public void addBullet(Bullet bullet){
+        if(bullets.size() > MAX_BULLETS)
+            return;
+
+        bullets.add(bullet);
+
+    }
+
 }

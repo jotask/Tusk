@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.states.play.entities.player.Player;
-import com.github.jotask.tusk.states.play.world.Mundo;
 import com.github.jotask.tusk.util.Util;
 
 public class BodyEntity extends Entity{
@@ -15,10 +13,9 @@ public class BodyEntity extends Entity{
     protected World world;
     protected Body body;
 
-    public BodyEntity(TypeEntity type, Mundo world, Vector2 position, Vector2 size) {
-        if(type != TypeEntity.BULLET)
-            this.world = world.getWorld();
-            this.body = Factory.Body.createBody(type, world, position, size);
+    public BodyEntity(World world, Body body) {
+        this.body = body;
+        this.world = world;
     }
 
     @Override
@@ -40,6 +37,7 @@ public class BodyEntity extends Entity{
     }
 
     public Body getBody() { return this.body; }
+    public World getWorld() { return this.world; }
     public Vector2 getPosition(){
         return this.body.getPosition();
     }

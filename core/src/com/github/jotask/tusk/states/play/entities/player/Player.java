@@ -1,31 +1,22 @@
 package com.github.jotask.tusk.states.play.entities.player;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.*;
 import com.github.jotask.tusk.engine.game.animations.BasicAnimation;
-import com.github.jotask.tusk.states.play.Play;
+import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.states.play.weapons.BasicWeapon;
 import com.github.jotask.tusk.states.play.weapons.MachineGun;
 import com.github.jotask.tusk.states.play.weapons.Weapon;
-import com.github.jotask.tusk.states.play.entities.BodyEntity;
-import com.github.jotask.tusk.states.play.entities.TypeEntity;
 
 public class Player extends BodyEntity {
-
-    //test
 
     public static final int width = 16; // 15
     public static final int height = 16; // 20
 
     private final float SPEED = 5f;
     private final float JUMP = 200f;
-
-    private OrthographicCamera camera;
 
     private boolean canJump;
 
@@ -37,21 +28,18 @@ public class Player extends BodyEntity {
 
     private Fixture jumpSensor;
 
-    public Player(Play state) {
-        super(TypeEntity.PLAYER, state.getWorld(),
-                state.getWorld().getLevel().getPlayerSpawn(),
-                new Vector2(width, height));
+    public Player(World world, Body body) {
+        super(world, body);
 
         this.body.setUserData(this);
 
-        this.camera = state.getCamera();
         this.controller = new DesktopPlayerController();
         this.animation = new BasicAnimation();
 
-        this.weapon = new BasicWeapon();
+        this.weapon = new MachineGun(this);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.05f, 0.05f, new Vector2(0,-0.5f), 0);
+        shape.setAsBox(0.05f, 0.05f, new Vector2(0,-0.60f), 0);
         FixtureDef fd = new FixtureDef();
         fd.shape = shape;
         fd.isSensor = true;

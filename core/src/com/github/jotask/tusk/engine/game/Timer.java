@@ -1,9 +1,15 @@
 package com.github.jotask.tusk.engine.game;
 
+import com.github.jotask.tusk.util.Util;
+
 public class Timer {
 
     private long delay;
     private long lastTime;
+
+    public Timer (float seconds){
+        this(Util.secondsToNano(seconds));
+    }
 
     public Timer(long delay) {
         this.delay = delay;
