@@ -58,6 +58,10 @@ public class Debug extends AbstractState{
         playerY = Math.round(playerY * PRECISION) / PRECISION;
         String playerPosition = "Player: [x: " + playerX + "] [y: " + playerY + "]";
         font.draw(sb, playerPosition, offset + camera.position.x - (camera.viewportWidth / 2), y - 15);
+
+        String entities = "Entities: " + play.getWorld().getWorld().getBodyCount();
+        font.draw(sb, entities,offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 2);
+
     }
 
     @Override
