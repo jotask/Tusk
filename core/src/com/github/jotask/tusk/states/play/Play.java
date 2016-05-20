@@ -60,6 +60,8 @@ public class Play extends AbstractState {
         }
         sr.line(0,width,0,0,-width,0);
 
+        camera.debug(sr);
+
     }
 
     @Override
