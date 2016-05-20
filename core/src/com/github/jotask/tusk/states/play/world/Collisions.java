@@ -17,24 +17,13 @@ public class Collisions implements ContactListener{
 
         if ((a instanceof Player && b instanceof Level.Ground) || (a instanceof Level.Ground && b instanceof Player)) {
             Player player;
-            if(a instanceof Play){
+            if(a instanceof Player){
                 player = (Player) a;
             }else{
                 player = (Player) b;
             }
             player.setCanJump(true);
         }
-
-    }
-
-    private boolean areColliding(Contact contact, Class c1, Class c2){
-
-        Object a = contact.getFixtureA().getBody().getUserData();
-        Object b = contact.getFixtureB().getBody().getUserData();
-
-//        return ((a instanceof c1) || ());
-
-        return false;
 
     }
 
