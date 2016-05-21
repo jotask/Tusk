@@ -60,12 +60,22 @@ public class Player extends BodyEntity {
 
         this.animation.update();
 
+        Vector2 velocity = new Vector2();
+
         if(controller.left()) {
-            applyLinearImpulse(new Vector2(-SPEED, 0));
+            velocity.x -= SPEED;
         }
         if (controller.right()){
-            applyLinearImpulse(new Vector2(SPEED, 0));
+            velocity.x += SPEED;
         }
+
+        if(controller.up()) {
+            velocity.y -= SPEED;
+        }
+        if (controller.down()){
+            velocity.y += SPEED;
+        }
+        applyLinearImpulse(velocity);
 
         if(canJump && controller.jump()){
             body.applyForceToCenter(new Vector2(0, body.getMass() * JUMP), true);

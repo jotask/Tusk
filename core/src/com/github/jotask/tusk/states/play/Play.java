@@ -53,12 +53,12 @@ public class Play extends AbstractState {
         final float width = 100;
         final float size = 0.2f;
 
-        sr.line(width,0,0,-width,0,0);
-        for(float i = -width; i < width; i += 1f){
-            sr.line(i, size, 0, i, -size, 0);
-            sr.line(size, i, 0, -size, i, 0);
-        }
-        sr.line(0,width,0,0,-width,0);
+//        sr.line(width,0,0,-width,0,0);
+//        for(float i = -width; i < width; i += 1f){
+//            sr.line(i, size, 0, i, -size, 0);
+//            sr.line(size, i, 0, -size, i, 0);
+//        }
+//        sr.line(0,width,0,0,-width,0);
 
         camera.debug(sr);
 

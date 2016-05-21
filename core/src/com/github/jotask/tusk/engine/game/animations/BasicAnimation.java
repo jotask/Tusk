@@ -20,6 +20,8 @@ public class BasicAnimation implements Animation {
 
     private float stateTime;
 
+    private boolean flip = true;
+
     public BasicAnimation() {
         Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.PLAYER_TEXTURE);
         walkFrames = new TextureRegion[2];
@@ -46,4 +48,5 @@ public class BasicAnimation implements Animation {
     public void dispose() {
 
     }
+
 }

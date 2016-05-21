@@ -19,7 +19,6 @@ public class DesktopLauncher {
 
 		cfg.resizable = false;
 		cfg.initialBackgroundColor = Color.WHITE;
-		cfg.vSyncEnabled = true;
 
 		new LwjglApplication(new Tusk(), cfg);
 	}

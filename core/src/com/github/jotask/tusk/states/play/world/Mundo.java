@@ -15,7 +15,7 @@ public class Mundo {
     private Level level;
 
     public Mundo() {
-        this.world = new World( new Vector2(0f,-9.8f), false);
+        this.world = new World( new Vector2(0f,0f), false);
         world.setContactListener(new Collisions());
         this.debug = new Box2DDebugRenderer();
 
