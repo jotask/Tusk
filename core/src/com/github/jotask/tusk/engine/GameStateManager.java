@@ -81,8 +81,7 @@ public class GameStateManager{
     }
 
     public void dispose(){
-        if(state != null)
-            state.dispose();
+        if(state != null) state.dispose();
         instance = null;
     }
 

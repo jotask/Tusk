@@ -36,8 +36,8 @@ public class EntityManager implements IEntity{
             }
         }
         for(Bullet b: toDestroy){
-            b.dispose();
             bullets.remove(b);
+            b.dispose();
         }
     }
 

@@ -11,7 +11,7 @@ public class Constants {
     public static final int BACKGROUND_FPS = 30;
     public static final int FOREGROUND_FPS = 30;
 
-    public static final int SCALE = 50;
+    public static final int SCALE = 50; // 50
 
     public static final STATE DEFAULT_STATE = STATE.PLAY;
 

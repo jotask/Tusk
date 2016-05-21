@@ -2,27 +2,49 @@ package com.github.jotask.tusk.engine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
+import com.github.jotask.tusk.states.play.entities.player.DesktopPlayerController;
 
 public class Camera extends OrthographicCamera {
 
     private final float lerp = 0.1f;
     private float speedZoom = 0.005f;
 
+    private final DesktopPlayerController controller;
+
     private Rectangle bounds;
     private Rectangle rect;
 
     public Camera(float viewportWidth, float viewportHeight) {
         super(viewportWidth, viewportHeight);
+        controller = new DesktopPlayerController();
     }
 
     public void input(){
 
         float multiplier = 1f;
+//        float speed = 1f;
+//
+//        if(controller.left()){
+//            this.position.x -= speed * multiplier;
+//        }
+//
+//        if(controller.right()){
+//            this.position.x += speed * multiplier;
+//        }
+//
+//        if(controller.up()){
+//            this.position.y += speed * multiplier;
+//        }
+//
+//        if(controller.down()){
+//            this.position.y -= speed * multiplier;
+//        }
 
         if(Gdx.input.isKeyPressed(Input.Keys.M)){
             multiplier = 2f;
@@ -40,6 +62,8 @@ public class Camera extends OrthographicCamera {
         this.rect = new Rectangle(this.position.x - (s / 2f), this.position.y - (s / 2f), s, s);
         float size = 4f;
         this.bounds = new Rectangle(this.position.x - (size / 2f), this.position.y - (size / 2f), size, size);
+
+        this.update();
 
     }
 

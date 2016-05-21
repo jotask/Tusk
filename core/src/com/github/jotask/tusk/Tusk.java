@@ -65,6 +65,7 @@ public class Tusk extends ApplicationAdapter {
 			if(this.debug.isEnabled())
 				debug.debug(sr);
 		}
+
 	}
 
 	@Override
@@ -80,5 +81,8 @@ public class Tusk extends ApplicationAdapter {
 	@Override
 	public void dispose() {
 		gsm.dispose();
+		debug.dispose();
+		sb.dispose();
+		sr.dispose();
 	}
 }

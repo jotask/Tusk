@@ -27,7 +27,6 @@ public class BodyEntity extends Entity{
     public void debug(ShapeRenderer sr) {
         Vector2 p = body.getPosition();
         Vector2 s = new Vector2(Util.Pixel.toMeter(Player.width) * 2, Util.Pixel.toMeter(Player.height) * 2);
-//        sr.box( p.x - (s.x / 2), p.y - (s.y / 2), 0, s.x, s.y, 0 );
     }
 
     @Override
