@@ -96,4 +96,8 @@ public class Player extends BodyEntity {
     public PlayerController getController() {
         return controller;
     }
+
+    public float getAngleFromPlayer(Vector2 other){
+        return (float)Math.toDegrees(Math.atan2(other.y - this.getPosition().y, other.x - this.getPosition().x));
+    }
 }
