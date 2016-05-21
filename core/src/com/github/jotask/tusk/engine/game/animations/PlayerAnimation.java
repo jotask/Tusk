@@ -18,7 +18,14 @@ public class PlayerAnimation extends BasicAnimation{
 
         Animation walk = new com.badlogic.gdx.graphics.g2d.Animation(FRAMES, walkFrames);
 
-        addAnimation(ANIMATIONS.WALK, walk);
+        TextureRegion[] idleFrames = new TextureRegion[1];
+        idleFrames[0] = new TextureRegion(texture, 9, 12, width, height);
+
+        Animation idle = new com.badlogic.gdx.graphics.g2d.Animation(FRAMES, idleFrames);
+
+        this.addAnimation(ANIMATIONS.WALK, walk);
+        this.addAnimation(ANIMATIONS.IDLE, idle);
 
     }
+
 }

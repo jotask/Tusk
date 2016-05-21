@@ -8,6 +8,10 @@ public interface Animation {
 
     void update();
 
+    void changeAnimation(BasicAnimation.ANIMATIONS anim);
+
+    void direction(BasicAnimation.DIRECTION direction);
+
     void render(SpriteBatch sb, Body body);
 
     void debug(ShapeRenderer sr, Body body);

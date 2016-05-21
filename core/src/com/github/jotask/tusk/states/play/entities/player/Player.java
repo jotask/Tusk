@@ -55,13 +55,17 @@ public class Player extends BodyEntity {
 
         this.animation.update();
 
+        animation.changeAnimation(BasicAnimation.ANIMATIONS.IDLE);
+
         Vector2 velocity = new Vector2();
 
         if(controller.left()) {
             velocity.x -= SPEED;
+            this.animation.direction(BasicAnimation.DIRECTION.LEFT);
         }
         if (controller.right()){
             velocity.x += SPEED;
+            this.animation.direction(BasicAnimation.DIRECTION.RIGHT);
         }
 
         lantern.update();
@@ -71,6 +75,10 @@ public class Player extends BodyEntity {
         }
         if (controller.down()){
             velocity.y -= SPEED;
+        }
+
+        if(!velocity.isZero()){
+            animation.changeAnimation(BasicAnimation.ANIMATIONS.WALK);
         }
 
         this.applyLinearImpulse(velocity);

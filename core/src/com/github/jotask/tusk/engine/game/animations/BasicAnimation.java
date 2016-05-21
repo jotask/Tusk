@@ -13,16 +13,21 @@ import java.util.HashMap;
 
 public abstract  class BasicAnimation implements Animation {
 
-    public enum ANIMATIONS{
-        IDLE, WALK, DEAD
-    }
+    public enum DIRECTION {LEFT, RIGHT, UP, DOWN}
+    public enum ANIMATIONS{ IDLE, WALK, DEAD }
 
-    private ANIMATIONS currentAnimations = ANIMATIONS.WALK;
+    private ANIMATIONS currentAnimations = ANIMATIONS.IDLE;
 
     final int width = 16; // 15
     final int height = 16; // 20
 
+    private TextureRegion currentFrame;
+
+    private boolean flipX, flipY;
+
     public static final float FRAMES = 0.25f;
+
+    private boolean flip;
 
     private float stateTime;
 
@@ -40,20 +45,34 @@ public abstract  class BasicAnimation implements Animation {
         currentAnimations = anim;
     }
 
+    public void direction(DIRECTION dir){
+        switch (dir){
+            case LEFT:
+                if(!currentFrame.isFlipX())
+                    currentFrame.flip(!currentFrame.isFlipX(), currentFrame.isFlipY());
+                break;
+            case RIGHT:
+                if(currentFrame.isFlipX())
+                    currentFrame.flip(currentFrame.isFlipX(), currentFrame.isFlipY());
+                break;
+            case UP:
+            case DOWN:
+                default:
+                break;
+        }
+    }
+
     @Override
     public void update() {
         stateTime += Gdx.graphics.getDeltaTime();
+        currentFrame = animations.get(currentAnimations).getKeyFrame(stateTime, true);
     }
 
     @Override
-    public void render(SpriteBatch sb, Body body) {
-        Util.Render.render(sb, animations.get(currentAnimations).getKeyFrame(stateTime, true), body);
-    }
+    public void render(SpriteBatch sb, Body body) { Util.Render.render(sb, currentFrame, body); }
 
     @Override
-    public void debug(ShapeRenderer sr, Body body) {
-        Util.Render.debug(sr, animations.get(currentAnimations).getKeyFrame(stateTime, true), body);
-    }
+    public void debug(ShapeRenderer sr, Body body) { Util.Render.debug(sr, currentFrame, body); }
 
     @Override
     public void dispose() {
