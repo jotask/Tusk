@@ -16,7 +16,7 @@ public class Bullet extends BodyEntity {
 
     public static final float RADIUS = 0.1f;
 
-    public static float SPEED = 10f;
+    public static float SPEED = 100f;
     private final Timer timer;
 
     private PointLight light;
@@ -38,19 +38,19 @@ public class Bullet extends BodyEntity {
         Vector2 currentPosition = body.getPosition();
 
         float x = targetPosition.x - currentPosition.x;
-        float y = targetPosition.y - targetPosition.y;
+        float y = targetPosition.y - currentPosition.y;
 
         Vector2 vel = new Vector2(x, y);
-
-        vel.y += 10f;
+        vel.nor();
+        vel.x *= SPEED;
+        vel.y *= SPEED;
 
         body.setLinearVelocity(vel);
 
     }
 
     @Override
-    public void update() {
-    }
+    public void update() { }
 
     public boolean isDead(){
         return timer.isFinished();
