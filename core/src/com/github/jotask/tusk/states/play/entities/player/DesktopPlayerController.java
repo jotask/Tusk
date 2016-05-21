@@ -2,6 +2,7 @@ package com.github.jotask.tusk.states.play.entities.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
 
 public class DesktopPlayerController implements PlayerController{
 
@@ -26,9 +27,7 @@ public class DesktopPlayerController implements PlayerController{
     }
 
     @Override
-    public boolean jump() {
-        return Gdx.input.isKeyJustPressed(Input.Keys.SPACE);
-    }
+    public boolean light() { return Gdx.input.isKeyJustPressed(Input.Keys.F); }
 
     @Override
     public boolean shoot() {

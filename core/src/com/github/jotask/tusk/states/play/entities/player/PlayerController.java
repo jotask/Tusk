@@ -7,7 +7,7 @@ public interface PlayerController {
     boolean up();
     boolean down();
 
-    boolean jump();
+    boolean light();
 
     boolean shoot();
 

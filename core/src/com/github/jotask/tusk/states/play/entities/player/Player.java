@@ -28,35 +28,19 @@ public class Player extends BodyEntity {
 
     private Weapon weapon;
 
-    private Light light;
-
-    private Fixture jumpSensor;
+    private Lintern lintern;
 
     public Player(World world, Body body) {
         super(world, body);
 
         this.body.setUserData(this);
 
-        {
-            // LIGHT
-            RayHandler rayHandler = Play.getInstance().getWorld().getEnviorment().getRayHandler();
-
-            light = new PointLight(rayHandler, 500);
-
-        }
-
         this.controller = new DesktopPlayerController();
         this.animation = new BasicAnimation();
 
         this.weapon = new MachineGun(this);
 
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.05f, 0.05f, new Vector2(0,-0.60f), 0);
-        FixtureDef fd = new FixtureDef();
-        fd.shape = shape;
-        fd.isSensor = true;
-        jumpSensor = body.createFixture(fd);
-        shape.dispose();
+        this.lintern = new Lintern(this);
 
     }
 
@@ -81,6 +65,8 @@ public class Player extends BodyEntity {
             velocity.x += SPEED;
         }
 
+        lintern.update();
+
         if(controller.up()) {
             velocity.y += SPEED;
         }
@@ -90,15 +76,9 @@ public class Player extends BodyEntity {
 
         applyLinearImpulse(velocity);
 
-        if(canJump && controller.jump()){
-            body.applyForceToCenter(new Vector2(0, body.getMass() * JUMP), true);
-            canJump = false;
-        }
         if (controller.shoot() && weapon != null) {
             weapon.shot();
         }
-
-        light.setPosition(body.getPosition());
 
     }
 
@@ -116,4 +96,7 @@ public class Player extends BodyEntity {
         this.canJump = j;
     }
 
+    public PlayerController getController() {
+        return controller;
+    }
 }
