@@ -19,13 +19,33 @@ public class AbstractState implements IState{
     }
 
     @Override
+    public void preUpdate() {
+
+    }
+
+    @Override
     public void update() {
+
+    }
+
+    @Override
+    public void postUpdate() {
+
+    }
+
+    @Override
+    public void preRender(SpriteBatch sb) {
 
     }
 
     @Override
     public void render(SpriteBatch sb) {
         
+    }
+
+    @Override
+    public void postRender(SpriteBatch sb) {
+
     }
 
     @Override

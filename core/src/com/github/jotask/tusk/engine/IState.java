@@ -7,9 +7,13 @@ public interface IState{
 
     void init();
 
+    void preUpdate();
     void update();
+    void postUpdate();
 
+    void preRender(SpriteBatch sb);
     void render(SpriteBatch sb);
+    void postRender(SpriteBatch sb);
 
     void debug(ShapeRenderer sr);
 

@@ -73,10 +73,11 @@ public class Level implements Disposable{
 
     private Rectangle getRectangle(MapObject obj){
 
-        float x = Float.valueOf(obj.getProperties().get("x").toString());
-        float y = Float.valueOf(obj.getProperties().get("y").toString());
         float w = Float.valueOf(obj.getProperties().get("width").toString());
         float h = Float.valueOf(obj.getProperties().get("height").toString());
+
+        float x = Float.valueOf(obj.getProperties().get("x").toString());
+        float y = Float.valueOf(obj.getProperties().get("y").toString());
 
         return new Rectangle(x, y, w, h);
 

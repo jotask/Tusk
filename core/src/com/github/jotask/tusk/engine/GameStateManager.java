@@ -21,13 +21,21 @@ public class GameStateManager{
     }
 
     public void update(){
+        state.preUpdate();
         state.update();
+        state.postUpdate();
     }
 
     public void render(SpriteBatch sb){
         sb.begin();
         sb.setProjectionMatrix(state.getCamera().combined);
+        state.preRender(sb);
+        sb.end();
+        sb.begin();
         state.render(sb);
+        sb.end();
+        sb.begin();
+        state.postRender(sb);
         sb.end();
     }
 

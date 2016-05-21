@@ -9,7 +9,6 @@ public class Fire extends Luz{
     public Fire(Environment environment) {
         super(environment);
         this.color = Color.RED;
-        xRay = false;
         super.create();
     }
 

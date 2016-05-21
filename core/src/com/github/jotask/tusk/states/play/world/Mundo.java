@@ -60,6 +60,11 @@ public class Mundo {
 
     public void render(SpriteBatch sb, OrthographicCamera camera){
         this.level.render(camera);
+        sb.end();
+        sb.begin();
+    }
+
+    public void postRender(SpriteBatch sb){
         this.environment.render(sb, Play.getInstance().getCamera());
     }
 

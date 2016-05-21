@@ -10,7 +10,7 @@ public abstract class Luz implements Ambient {
 
     protected Environment environment;
     protected Color color = Color.WHITE;
-    protected boolean xRay = true;
+    protected boolean xRay;
     protected float distance = 10f;
     protected boolean soft;
     protected float alpha = 1f;
@@ -46,8 +46,6 @@ public abstract class Luz implements Ambient {
     public Color getColor() {
         return color;
     }
-
-    public Vector2 getPosition() { return this.light.getPosition(); }
 
     public void setPosition(Vector2 position) {
         this.light.setPosition(position);
