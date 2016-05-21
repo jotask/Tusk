@@ -13,19 +13,20 @@ public class Environment {
     protected World world;
     protected RayHandler rayHandler;
 
+    private Ambient ambient;
+
     public Environment(World world) {
 
         RayHandler.useDiffuseLight(true);
         this.rayHandler = new RayHandler(world);
         this.rayHandler.setShadows(shadows);
 
-        this.rayHandler.setAmbientLight(0f);
-        this.rayHandler.setAmbientLight(0f, 0f, 1f, .5f);
+        ambient = new BasicAmbient(rayHandler);
 
     }
 
     public void update() {
-
+        ambient.update();
     }
 
     public void render(SpriteBatch sb, OrthographicCamera camera) {
