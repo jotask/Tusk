@@ -9,11 +9,6 @@ public class PlayerAnimation extends BasicAnimation{
 
     public PlayerAnimation() {
         super();
-//        Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.PLAYER_TEXTURE);
-//        walkFrames = new TextureRegion[2];
-//        walkFrames[0] = new TextureRegion(texture, 9, 12, width, height);
-//        walkFrames[1] = new TextureRegion(texture, 42, 12, width, height);
-//        walkAnimation = new com.badlogic.gdx.graphics.g2d.Animation(FRAMES, walkFrames);
 
         Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.PLAYER_TEXTURE);
 
