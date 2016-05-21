@@ -1,10 +1,9 @@
 package com.github.jotask.tusk.states.play.world;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
@@ -16,6 +15,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
+import com.github.jotask.tusk.states.play.Play;
+import com.github.jotask.tusk.states.play.world.environment.Environment;
+import com.github.jotask.tusk.states.play.world.environment.lights.Fire;
 import com.github.jotask.tusk.util.Util;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -24,14 +26,17 @@ public class Level implements Disposable{
     private TiledMap map;
     private TiledMapRenderer mapRenderer;
 
-
     private Vector2 playerSpawn;
 
-    public Level(World world) {
+    private World world;
 
+    public Level(World world) {
+        this.world = world;
         map = new TmxMapLoader().load("level/new.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map, 0.0625f);
+    }
 
+    protected void init(){
         for(MapLayer layer: map.getLayers()) {
             if (layer.getName().equals("obstacles")) {
                 for(MapObject obj: layer.getObjects()){
@@ -47,11 +52,33 @@ public class Level implements Disposable{
                         System.out.println("object not detected");
                     }
                 }
+            }else if(layer.getName().equals("light")){
+                Environment environment = Play.getInstance().getWorld().getEnviorment();
+                for(MapObject obj : layer.getObjects()){
+                    if(obj.getName().equals("fire")) {
+                        Rectangle rect = this.getRectangle(obj);
+                        Vector2 position = new Vector2(rect.x + (rect.width / 2f), rect.y + (rect.height / 2f));
+                        Fire luz = new Fire(environment);
+                        luz.setPosition(Util.Pixel.toMeter(position));
+                        environment.addLight(luz);
+                    }
+                }
+
             }
 
         }
 
         knowPlayerSpawn();
+    }
+
+    private Rectangle getRectangle(MapObject obj){
+
+        float x = Float.valueOf(obj.getProperties().get("x").toString());
+        float y = Float.valueOf(obj.getProperties().get("y").toString());
+        float w = Float.valueOf(obj.getProperties().get("width").toString());
+        float h = Float.valueOf(obj.getProperties().get("height").toString());
+
+        return new Rectangle(x, y, w, h);
 
     }
 

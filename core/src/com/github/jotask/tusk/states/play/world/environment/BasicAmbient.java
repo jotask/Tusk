@@ -1,4 +1,4 @@
-package com.github.jotask.tusk.states.play.world.enviorement;
+package com.github.jotask.tusk.states.play.world.environment;
 
 import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.Color;
@@ -26,5 +26,10 @@ public class BasicAmbient implements Ambient{
     @Override
     public void update() {
 
+    }
+
+    @Override
+    public void dispose() {
+        rayHandler.dispose();
     }
 }

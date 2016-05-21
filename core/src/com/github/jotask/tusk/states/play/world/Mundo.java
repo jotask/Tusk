@@ -8,31 +8,32 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.github.jotask.tusk.states.play.Play;
-import com.github.jotask.tusk.states.play.world.enviorement.Environment;
+import com.github.jotask.tusk.states.play.world.environment.Environment;
 
 public class Mundo {
 
     private World world;
     private Box2DDebugRenderer debug;
 
-    private Play state;
-
     private Level level;
 
-    private Environment enviorment;
+    private Environment environment;
 
-    public Mundo(Play state) {
-        this.state = state;
+    public Mundo() {
         this.world = new World( new Vector2(0f,0f), false);
-        world.setContactListener(new Collisions());
+        this.world.setContactListener(new Collisions());
+
         this.debug = new Box2DDebugRenderer();
+
+        this.environment = new Environment(this.world);
 
         this.level = new Level(this.world);
 
-        this.enviorment = new Environment(world);
+    }
 
-        createGround();
-
+    public void init(){
+        this.level.init();
+        this.createGround();
     }
 
     private void createGround(){
@@ -54,24 +55,24 @@ public class Mundo {
 
     public void update(){
         this.world.step(Gdx.graphics.getDeltaTime(), 6, 2);
-        enviorment.update();
+        this.environment.update();
     }
 
     public void render(SpriteBatch sb, OrthographicCamera camera){
-        level.render(camera);
-        enviorment.render(sb, state.getCamera());
+        this.level.render(camera);
+        this.environment.render(sb, Play.getInstance().getCamera());
     }
 
     public void debug(ShapeRenderer sr, Matrix4 matrix){
         this.debug.render(this.world, matrix);
-        enviorment.debug(sr);
+        this.environment.debug(sr);
     }
 
     public void dispose(){
         this.debug.dispose();
         this.world.dispose();
         this.level.dispose();
-        enviorment.dispose();
+        this.environment.dispose();
     }
 
     public World getWorld() {
@@ -80,6 +81,6 @@ public class Mundo {
     public Level getLevel() { return level; }
 
     public Environment getEnviorment() {
-        return enviorment;
+        return environment;
     }
 }

@@ -14,7 +14,9 @@ public class Play extends AbstractState {
     private static Play state;
 
     public static Play getInstance(){
-        if(state == null) throw new UnsupportedOperationException("Can't get instance, is not this state");
+        if(state == null){
+            throw new UnsupportedOperationException("Can't get instance, is not the current state");
+        }
         return state;
     }
 
@@ -25,9 +27,12 @@ public class Play extends AbstractState {
     @Override
     public void init() {
         super.init();
-        Play.state = this;
         this.setBgColor(Color.BLACK);
-        this.world = new Mundo(this);
+        state = this;
+
+        this.world = new Mundo();
+        this.world.init();
+
         this.entityManager = EntityManager.get();
         this.player = Factory.createPlayer(this);
     }
@@ -68,13 +73,12 @@ public class Play extends AbstractState {
 //        }
 //        sr.line(0,width,0,0,-width,0);
 
-        camera.debug(sr);
+//        camera.debug(sr);
 
     }
 
     @Override
     public void dispose() {
-        super.dispose();
         this.world.dispose();
         this.player.dispose();
         this.entityManager.dispose();
