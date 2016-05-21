@@ -179,6 +179,8 @@ public class Level implements Disposable{
         shape.setAsBox(size.x / 2, size.y / 2);
 
         FixtureDef fd = new FixtureDef();
+        fd.filter.categoryBits = Collisions.Filters.CATEGORY_SCENERY;
+        fd.filter.maskBits = Collisions.Filters.MASK_SCENERY;
         fd.shape = shape;
 
         Body body = world.createBody(bd);

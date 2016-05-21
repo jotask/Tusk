@@ -89,4 +89,8 @@ public class Play extends AbstractState {
         return player;
     }
     public Mundo getWorld() { return world; }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 }

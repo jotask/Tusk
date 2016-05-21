@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.github.jotask.tusk.engine.game.AssetManager;
@@ -13,15 +14,14 @@ import com.github.jotask.tusk.util.Util;
 
 public class Bullet extends BodyEntity {
 
-    private float SPEED = 100f;
+    public static float SPEED = 10f;
     private final Timer timer;
 
     private TextureRegion textureRegion;
 
-    public Bullet(World world, Body body) {
+    public Bullet(World world, Body body, float angle) {
         super(world, body);
         this.timer = new Timer(1f);
-        this.body.setLinearVelocity(SPEED, 0);
 
         Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.BULLET_TEXTURE);
         this.textureRegion = new TextureRegion(texture, 16, 20, 7, 3);

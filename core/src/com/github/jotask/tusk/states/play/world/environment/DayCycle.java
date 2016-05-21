@@ -48,7 +48,6 @@ public class DayCycle implements Ambient{
             }
             isDay = !isDay;
         }
-
     }
 
     private void changeLightType(LIGHT l){

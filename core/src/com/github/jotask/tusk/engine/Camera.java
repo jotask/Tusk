@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.engine.controller.DesktopPlayerController;
 
@@ -79,6 +80,16 @@ public class Camera extends OrthographicCamera {
 
     private void debug(ShapeRenderer sr, Rectangle rect){
         sr.box(rect.x, rect.y, 0, rect.width, rect.height, 0);
+    }
+
+    public Vector2 getMousePosInGameWorld(){
+        Vector3 mouseP = new Vector3(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0f));
+        mouseP = unproject(mouseP);
+        return new Vector2(mouseP.x, mouseP.y);
+    }
+
+    public Vector3 getMousePosInGameWorldVector3(){
+        return unproject(new Vector3(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0f)));
     }
 
 }

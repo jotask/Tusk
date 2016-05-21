@@ -1,8 +1,11 @@
 package com.github.jotask.tusk.states.play.weapons;
 
-import com.github.jotask.tusk.engine.GameStateManager;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.engine.game.Timer;
+import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.EntityManager;
 import com.github.jotask.tusk.states.play.entities.bullet.Bullet;
 import com.github.jotask.tusk.states.play.entities.player.Player;
@@ -16,7 +19,6 @@ public class BasicWeapon implements Weapon {
 
     private final Timer timer;
 
-    private final int MAX_BULLET = 10;
     private LinkedList<Bullet> bullets;
 
     public BasicWeapon(Player player){
@@ -29,13 +31,38 @@ public class BasicWeapon implements Weapon {
         bullets = new LinkedList<Bullet>();
     }
 
+//    public float getShootAngle(){
+////        Vector2 v =  Play.getInstance().getCamera().getMousePosInGameWorld();
+////        return v;
+//
+//        Vector2 centerPosition = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+//
+//        Vector2 mouseLoc = Play.getInstance().getCamera().getMousePosInGameWorld();
+//
+//        Vector2 direction = mouseLoc.sub(centerPosition);
+//        float mouseAngle = direction.angle();
+//
+//        return mouseAngle;
+//
+//    }
+
     @Override
     public void shot() {
         if(timer.isFinished()){
-            if(bullets.size() <= MAX_BULLET){
-                EntityManager.get().addBullet(Factory.createBullet(player));
-            }
+//            Bullet bullet = Factory.createBullet(player);
+//            EntityManager.get().addBullet(bullet);
         }
+    }
+
+    @Override
+    public void render(SpriteBatch sb) {
+
+    }
+
+    @Override
+    public void debug(ShapeRenderer sr) {
+        Vector2 p = Play.getInstance().getCamera().getMousePosInGameWorld();
+        sr.line(player.getPosition().x, player.getPosition().y, p.x, p.y);
     }
 
 }

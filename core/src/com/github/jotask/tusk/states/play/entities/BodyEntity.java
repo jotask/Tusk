@@ -32,7 +32,7 @@ public class BodyEntity extends Entity{
     @Override
     public void dispose() {
         super.dispose();
-        // FIXME
+        this.world.destroyBody(this.body);
     }
 
     public Body getBody() { return this.body; }

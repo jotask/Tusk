@@ -70,4 +70,6 @@ public class EntityManager implements IEntity{
 
     }
 
+    public int bulletsSize(){ return bullets.size(); };
+
 }

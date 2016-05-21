@@ -9,6 +9,7 @@ import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.states.play.entities.bullet.Bullet;
 import com.github.jotask.tusk.states.play.entities.player.Player;
+import com.github.jotask.tusk.states.play.world.Collisions;
 import com.github.jotask.tusk.states.play.world.Mundo;
 import com.github.jotask.tusk.states.selectplayer.SelectPlayer;
 import com.github.jotask.tusk.util.Util;
@@ -28,8 +29,9 @@ public final class Factory {
     }
 
     public static Bullet createBullet(BodyEntity entity){
-        com.badlogic.gdx.physics.box2d.Body body = Body.createBullet(entity.getWorld(), entity.getPosition(), new Vector2(1f, 0.5f));
-        Bullet bullet = new Bullet(entity.getWorld(), body);
+        boolean isPlayer = (entity instanceof Player);
+        com.badlogic.gdx.physics.box2d.Body body = Body.createBullet(entity.getWorld(), entity.getPosition(), new Vector2(1f, 0.5f), isPlayer);
+        Bullet bullet = new Bullet(entity.getWorld(), entity.getBody(), 0f);
         return bullet;
     }
 
@@ -51,6 +53,8 @@ public final class Factory {
             shape.setAsBox(w / 2, h / 2f);
 
             FixtureDef fd = new FixtureDef();
+            fd.filter.categoryBits = Collisions.Filters.CATEGORY_PLAYER;
+            fd.filter.maskBits = Collisions.Filters.MASK_PLAYER;
             fd.friction = 5f;
             fd.shape = shape;
 
@@ -63,7 +67,7 @@ public final class Factory {
 
         }
 
-        public static com.badlogic.gdx.physics.box2d.Body createBullet(World world, Vector2 position, Vector2 size){
+        public static com.badlogic.gdx.physics.box2d.Body createBullet(World world, Vector2 position, Vector2 size, boolean isPlayer){
 
             BodyDef bd = new BodyDef();
             bd.position.set(position.x, position.y);
@@ -76,6 +80,16 @@ public final class Factory {
             shape.setAsBox(w / 2, h / 2f);
 
             FixtureDef fd = new FixtureDef();
+
+            if(isPlayer){
+                fd.filter.categoryBits = Collisions.Filters.CATEGORY_PLAYER;
+                fd.filter.maskBits = Collisions.Filters.MASK_PLAYER;
+            }
+//            else{
+//                fd.filter.categoryBits = Collisions.Filters.CATEGORY_ENEMY_BULLET;
+//                fd.filter.maskBits = Collisions.Filters.MASK_MONSTER;
+//            }
+
             fd.friction = 5f;
             fd.shape = shape;
             fd.restitution = 0.05f;

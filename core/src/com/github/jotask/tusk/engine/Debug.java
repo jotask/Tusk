@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.states.play.Play;
+import com.github.jotask.tusk.states.play.entities.EntityManager;
 import com.github.jotask.tusk.states.play.entities.player.Player;
 
 public class Debug extends AbstractState{
@@ -42,6 +43,7 @@ public class Debug extends AbstractState{
         if(GameStateManager.get().getState() instanceof Play)
             renderPlay(sb, y, offset);
         sb.end();
+
     }
 
     private void renderPlay(SpriteBatch sb, float y, float offset){
@@ -60,7 +62,10 @@ public class Debug extends AbstractState{
         font.draw(sb, playerPosition, offset + camera.position.x - (camera.viewportWidth / 2), y - 15);
 
         String entities = "Entities: " + play.getWorld().getWorld().getBodyCount();
-        font.draw(sb, entities,offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 2);
+        font.draw(sb, entities, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 2);
+
+        String bullets = "Bullets: " + play.getEntityManager().bulletsSize();
+        font.draw(sb, bullets, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 3);
 
     }
 

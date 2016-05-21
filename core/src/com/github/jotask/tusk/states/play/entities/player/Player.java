@@ -2,12 +2,15 @@ package com.github.jotask.tusk.states.play.entities.player;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.github.jotask.tusk.engine.controller.DesktopPlayerController;
 import com.github.jotask.tusk.engine.controller.PlayerController;
 import com.github.jotask.tusk.engine.game.animations.BasicAnimation;
+import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.states.play.weapons.MachineGun;
 import com.github.jotask.tusk.states.play.weapons.Weapon;
@@ -18,16 +21,14 @@ public class Player extends BodyEntity {
     public static final int height = 16; // 20
 
     private final float SPEED = 5f;
-    private final float JUMP = 200f;
 
-    private boolean canJump;
     private final PlayerController controller;
 
     private com.github.jotask.tusk.engine.game.animations.Animation animation;
 
     private Weapon weapon;
 
-    private Lintern lintern;
+    private Lantern lantern;
 
     public Player(World world, Body body) {
         super(world, body);
@@ -39,7 +40,7 @@ public class Player extends BodyEntity {
 
         this.weapon = new MachineGun(this);
 
-        this.lintern = new Lintern(this);
+        this.lantern = new Lantern(this);
 
     }
 
@@ -64,7 +65,7 @@ public class Player extends BodyEntity {
             velocity.x += SPEED;
         }
 
-        lintern.update();
+        lantern.update();
 
         if(controller.up()) {
             velocity.y += SPEED;
@@ -73,7 +74,7 @@ public class Player extends BodyEntity {
             velocity.y -= SPEED;
         }
 
-        applyLinearImpulse(velocity);
+        this.applyLinearImpulse(velocity);
 
         if (controller.shoot() && weapon != null) {
             weapon.shot();
@@ -89,10 +90,7 @@ public class Player extends BodyEntity {
     @Override
     public void debug(ShapeRenderer sr) {
         //animation.debug(sr, this.body);
-    }
-
-    public void setCanJump(boolean j){
-        this.canJump = j;
+        weapon.debug(sr);
     }
 
     public PlayerController getController() {
