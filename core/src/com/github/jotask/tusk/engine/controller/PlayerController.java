@@ -1,4 +1,4 @@
-package com.github.jotask.tusk.states.play.entities.player;
+package com.github.jotask.tusk.engine.controller;
 
 public interface PlayerController {
 

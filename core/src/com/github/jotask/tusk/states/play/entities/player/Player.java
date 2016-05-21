@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.github.jotask.tusk.engine.controller.DesktopPlayerController;
+import com.github.jotask.tusk.engine.controller.PlayerController;
 import com.github.jotask.tusk.engine.game.animations.BasicAnimation;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.states.play.weapons.MachineGun;

@@ -2,13 +2,12 @@ package com.github.jotask.tusk.engine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
-import com.github.jotask.tusk.states.play.entities.player.DesktopPlayerController;
+import com.github.jotask.tusk.engine.controller.DesktopPlayerController;
 
 public class Camera extends OrthographicCamera {
 

@@ -1,8 +1,7 @@
-package com.github.jotask.tusk.states.play.entities.player;
+package com.github.jotask.tusk.engine.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
 
 public class DesktopPlayerController implements PlayerController{
 
