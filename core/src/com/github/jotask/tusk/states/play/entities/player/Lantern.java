@@ -29,7 +29,7 @@ public class Lantern {
 
         final Vector2 mousePos = Play.getInstance().getCamera().getMousePosInGameWorld();
 
-        light.setDirection(player.getAngleFromPlayer(mousePos));
+        light.setDirection(player.getAngleFromThis(mousePos));
 
     }
 

@@ -1,10 +1,14 @@
 package com.github.jotask.tusk.states.play.world.environment;
 
 import box2dLight.RayHandler;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.github.jotask.tusk.engine.Camera;
+import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.world.environment.lights.Luz;
 
 import java.util.LinkedList;
@@ -23,7 +27,8 @@ public class Environment {
     public Environment(World world) {
 
         RayHandler.useDiffuseLight(true);
-        this.rayHandler = new RayHandler(world);
+        float cons = 4f;
+        this.rayHandler = new RayHandler(world, (int) (Gdx.graphics.getWidth() / cons), (int) (Gdx.graphics.getHeight() / cons));
         this.rayHandler.setShadows(shadows);
 
         this.ambient = new DayCycle(rayHandler);

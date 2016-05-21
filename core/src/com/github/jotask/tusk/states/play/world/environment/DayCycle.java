@@ -1,8 +1,8 @@
 package com.github.jotask.tusk.states.play.world.environment;
 
-import box2dLight.Light;
-import box2dLight.PointLight;
 import box2dLight.RayHandler;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.github.jotask.tusk.engine.game.Timer;
 
@@ -10,16 +10,34 @@ public class DayCycle implements Ambient{
 
     private float DAY_CYCLE_SECONDS = 3f;
 
+    private RayHandler rayHandler;
+
     public enum LIGHT{
-        DAY(Color.WHITE, 1f),
-        NIGHT(Color.BLUE, 1f);
+        DAY(Color.WHITE, 1f, 1f),
+        NIGHT(Color.BLUE, 1f, 0.5f);
 
-        public final Color color;
-        public final float alpha;
+        public final float r;
+        public final float g;
+        public final float b;
+        public final float a;
 
-        LIGHT(Color color, float alpha) {
-            this.color = color;
-            this.alpha = alpha;
+        public final float intensity;
+
+
+        LIGHT(Color color, float intensity) {
+            this(color, color.a, intensity);
+        }
+
+        LIGHT(Color color, float alpha, float intensity) {
+            this(color.r, color.g, color.b, alpha, intensity);
+        }
+
+        LIGHT(float r, float g, float b, float alpha, float intensity) {
+            this.r = r;
+            this.g = g;
+            this.b = b;
+            this.a = alpha;
+            this.intensity = intensity;
         }
     }
 
@@ -27,12 +45,10 @@ public class DayCycle implements Ambient{
 
     private Timer timer;
 
-    private Light light;
-
     public DayCycle(RayHandler rayHandler) {
-        this.light = new PointLight(rayHandler, 10);
-        this.light.setXray(true);
-        this.light.setDistance(100f);
+
+        this.rayHandler = rayHandler;
+
         this.changeLightType(LIGHT.NIGHT);
         this.timer = new Timer(DAY_CYCLE_SECONDS);
         this.isDay = true;
@@ -40,22 +56,26 @@ public class DayCycle implements Ambient{
 
     @Override
     public void update() {
-        if(timer.isFinished()){
-            if(isDay){
-                changeLightType(LIGHT.NIGHT);
-            }else{
-                changeLightType(LIGHT.DAY);
-            }
-            isDay = !isDay;
+        if(Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+//            if (timer.isFinished()) {
+                if (isDay) {
+                    changeLightType(LIGHT.NIGHT);
+                } else {
+                    changeLightType(LIGHT.DAY);
+                }
+                isDay = !isDay;
+//            }
         }
     }
 
     private void changeLightType(LIGHT l){
-        light.setColor(l.color.r, l.color.g, l.color.b, l.alpha);
+        this.rayHandler.setAmbientLight(l.r, l.g, l.b, l.a);
+        this.rayHandler.setAmbientLight(l.intensity);
     }
 
     @Override
     public void dispose() {
 
     }
+
 }

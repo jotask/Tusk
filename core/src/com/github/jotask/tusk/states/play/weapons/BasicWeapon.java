@@ -49,8 +49,8 @@ public class BasicWeapon implements Weapon {
     @Override
     public void shot() {
         if(timer.isFinished()){
-//            Bullet bullet = Factory.createBullet(player);
-//            EntityManager.get().addBullet(bullet);
+            Bullet bullet = Factory.createBullet(player);
+            EntityManager.get().addBullet(bullet);
         }
     }
 

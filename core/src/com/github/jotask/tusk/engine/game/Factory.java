@@ -1,10 +1,7 @@
 package com.github.jotask.tusk.engine.game;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.states.play.entities.bullet.Bullet;
@@ -30,8 +27,9 @@ public final class Factory {
 
     public static Bullet createBullet(BodyEntity entity){
         boolean isPlayer = (entity instanceof Player);
-        com.badlogic.gdx.physics.box2d.Body body = Body.createBullet(entity.getWorld(), entity.getPosition(), new Vector2(1f, 0.5f), isPlayer);
-        Bullet bullet = new Bullet(entity.getWorld(), entity.getBody(), 0f);
+        com.badlogic.gdx.physics.box2d.Body body = Body.createBullet(entity.getWorld(), entity.getPosition(), isPlayer);
+        float angle = entity.getAngleFromThis(Play.getInstance().getCamera().getMousePosInGameWorld());
+        Bullet bullet = new Bullet(entity.getWorld(), body);
         return bullet;
     }
 
@@ -67,17 +65,15 @@ public final class Factory {
 
         }
 
-        public static com.badlogic.gdx.physics.box2d.Body createBullet(World world, Vector2 position, Vector2 size, boolean isPlayer){
+        public static com.badlogic.gdx.physics.box2d.Body createBullet(World world, Vector2 position, boolean isPlayer){
 
             BodyDef bd = new BodyDef();
             bd.position.set(position.x, position.y);
             bd.type = BodyDef.BodyType.DynamicBody;
 
-            PolygonShape shape = new PolygonShape();
 
-            float w = Util.Pixel.toMeter(size.x);
-            float h = Util.Pixel.toMeter(size.y);
-            shape.setAsBox(w / 2, h / 2f);
+            CircleShape shape = new CircleShape();
+            shape.setRadius(Bullet.RADIUS);
 
             FixtureDef fd = new FixtureDef();
 

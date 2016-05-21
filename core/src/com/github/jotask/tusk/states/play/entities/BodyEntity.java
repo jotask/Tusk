@@ -35,6 +35,10 @@ public class BodyEntity extends Entity{
         this.world.destroyBody(this.body);
     }
 
+    public float getAngleFromThis(Vector2 other){
+        return (float)Math.toDegrees(Math.atan2(other.y - this.getPosition().y, other.x - this.getPosition().x));
+    }
+
     public Body getBody() { return this.body; }
     public World getWorld() { return this.world; }
     public Vector2 getPosition(){

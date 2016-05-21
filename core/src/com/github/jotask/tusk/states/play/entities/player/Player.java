@@ -2,15 +2,12 @@ package com.github.jotask.tusk.states.play.entities.player;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.github.jotask.tusk.engine.controller.DesktopPlayerController;
 import com.github.jotask.tusk.engine.controller.PlayerController;
 import com.github.jotask.tusk.engine.game.animations.BasicAnimation;
-import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.states.play.weapons.MachineGun;
 import com.github.jotask.tusk.states.play.weapons.Weapon;
@@ -97,7 +94,4 @@ public class Player extends BodyEntity {
         return controller;
     }
 
-    public float getAngleFromPlayer(Vector2 other){
-        return (float)Math.toDegrees(Math.atan2(other.y - this.getPosition().y, other.x - this.getPosition().x));
-    }
 }

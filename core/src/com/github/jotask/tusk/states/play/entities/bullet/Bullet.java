@@ -1,50 +1,77 @@
 package com.github.jotask.tusk.states.play.entities.bullet;
 
-import com.badlogic.gdx.graphics.Texture;
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.engine.game.Timer;
+import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
-import com.github.jotask.tusk.util.Util;
 
 public class Bullet extends BodyEntity {
+
+    public static final float RADIUS = 0.1f;
 
     public static float SPEED = 10f;
     private final Timer timer;
 
-    private TextureRegion textureRegion;
+    private PointLight light;
 
-    public Bullet(World world, Body body, float angle) {
+    public Bullet(World world, Body body) {
         super(world, body);
         this.timer = new Timer(1f);
 
-        Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.BULLET_TEXTURE);
-        this.textureRegion = new TextureRegion(texture, 16, 20, 7, 3);
+        RayHandler rayHandler = Play.getInstance().getWorld().getEnviorment().getRayHandler();
 
+        this.light = new PointLight(rayHandler, 10);
+        light.setSoft(false);
+        light.setXray(true);
+        light.setDistance(1f);
+        light.setColor(Color.ORANGE);
+        light.attachToBody(body);
+
+        Vector2 targetPosition = Play.getInstance().getCamera().getMousePosInGameWorld();
+        Vector2 currentPosition = body.getPosition();
+
+        float x = targetPosition.x - currentPosition.x;
+        float y = targetPosition.y - targetPosition.y;
+
+        Vector2 vel = new Vector2(x, y);
+
+        vel.y += 10f;
+
+        body.setLinearVelocity(vel);
+
+    }
+
+    @Override
+    public void update() {
     }
 
     public boolean isDead(){
         return timer.isFinished();
     }
 
+
+
     @Override
     public void render(SpriteBatch sb) {
-        Util.Render.render(sb, textureRegion, body);
+
     }
 
     @Override
     public void debug(ShapeRenderer sr) {
-        Util.Render.debug(sr, textureRegion, body);
+        sr.ellipse(body.getPosition().x - (Bullet.RADIUS), body.getPosition().y - (Bullet.RADIUS), Bullet.RADIUS * 2, Bullet.RADIUS * 2);
     }
 
     @Override
     public void dispose() {
         super.dispose();
+        light.remove();
     }
 
 }

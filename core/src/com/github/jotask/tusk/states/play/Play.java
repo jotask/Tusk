@@ -79,9 +79,9 @@ public class Play extends AbstractState {
 
     @Override
     public void dispose() {
-        this.world.dispose();
         this.player.dispose();
         this.entityManager.dispose();
+        this.world.dispose();
         Play.state = null;
     }
 
