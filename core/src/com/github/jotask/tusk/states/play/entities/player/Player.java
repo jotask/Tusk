@@ -1,12 +1,15 @@
 package com.github.jotask.tusk.states.play.entities.player;
 
+import box2dLight.Light;
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.github.jotask.tusk.engine.game.animations.BasicAnimation;
+import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
-import com.github.jotask.tusk.states.play.weapons.BasicWeapon;
 import com.github.jotask.tusk.states.play.weapons.MachineGun;
 import com.github.jotask.tusk.states.play.weapons.Weapon;
 
@@ -19,12 +22,13 @@ public class Player extends BodyEntity {
     private final float JUMP = 200f;
 
     private boolean canJump;
-
     private final PlayerController controller;
 
     private com.github.jotask.tusk.engine.game.animations.Animation animation;
 
     private Weapon weapon;
+
+    private Light light;
 
     private Fixture jumpSensor;
 
@@ -32,6 +36,14 @@ public class Player extends BodyEntity {
         super(world, body);
 
         this.body.setUserData(this);
+
+        {
+            // LIGHT
+            RayHandler rayHandler = Play.getInstance().getWorld().getEnviorment().getRayHandler();
+
+            light = new PointLight(rayHandler, 500);
+
+        }
 
         this.controller = new DesktopPlayerController();
         this.animation = new BasicAnimation();
@@ -51,7 +63,7 @@ public class Player extends BodyEntity {
     private void applyLinearImpulse(Vector2 targetVelocity){
         Vector2 vel = body.getLinearVelocity();
         float dvx = targetVelocity.x - vel.x;
-        float dvy = 0f;
+        float dvy = targetVelocity.y - vel.y;
         body.applyLinearImpulse(new Vector2( body.getMass() * dvx, body.getMass() * dvy), body.getWorldCenter(), true);
     }
 
@@ -70,11 +82,12 @@ public class Player extends BodyEntity {
         }
 
         if(controller.up()) {
-            velocity.y -= SPEED;
-        }
-        if (controller.down()){
             velocity.y += SPEED;
         }
+        if (controller.down()){
+            velocity.y -= SPEED;
+        }
+
         applyLinearImpulse(velocity);
 
         if(canJump && controller.jump()){
@@ -85,6 +98,8 @@ public class Player extends BodyEntity {
             weapon.shot();
         }
 
+        light.setPosition(body.getPosition());
+
     }
 
     @Override
@@ -94,7 +109,7 @@ public class Player extends BodyEntity {
 
     @Override
     public void debug(ShapeRenderer sr) {
-        animation.debug(sr, this.body);
+        //animation.debug(sr, this.body);
     }
 
     public void setCanJump(boolean j){

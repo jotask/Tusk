@@ -11,6 +11,13 @@ import com.github.jotask.tusk.states.play.world.Mundo;
 
 public class Play extends AbstractState {
 
+    private static Play state;
+
+    public static Play getInstance(){
+        if(state == null) throw new UnsupportedOperationException("Can't get instance, is not this state");
+        return state;
+    }
+
     private Mundo world;
     private EntityManager entityManager;
     private Player player;
@@ -18,8 +25,9 @@ public class Play extends AbstractState {
     @Override
     public void init() {
         super.init();
+        Play.state = this;
         this.setBgColor(Color.BLACK);
-        this.world = new Mundo();
+        this.world = new Mundo(this);
         this.entityManager = EntityManager.get();
         this.player = Factory.createPlayer(this);
     }
@@ -36,7 +44,7 @@ public class Play extends AbstractState {
     @Override
     public void render(SpriteBatch sb) {
         super.render(sb);
-        this.world.getLevel().render(this.getCamera());
+        this.world.render(sb, this.camera);
         sb.end();
         sb.begin();
         this.player.render(sb);
@@ -46,12 +54,12 @@ public class Play extends AbstractState {
     @Override
     public void debug(ShapeRenderer sr) {
         super.debug(sr);
-        this.world.debug(this.getCamera().combined);
+        this.world.debug(sr, this.getCamera().combined);
         this.player.debug(sr);
         this.entityManager.debug(sr);
 
-        final float width = 100;
-        final float size = 0.2f;
+//        final float width = 100;
+//        final float size = 0.2f;
 
 //        sr.line(width,0,0,-width,0,0);
 //        for(float i = -width; i < width; i += 1f){
@@ -70,6 +78,7 @@ public class Play extends AbstractState {
         this.world.dispose();
         this.player.dispose();
         this.entityManager.dispose();
+        Play.state = null;
     }
 
     public Player getPlayer() {
