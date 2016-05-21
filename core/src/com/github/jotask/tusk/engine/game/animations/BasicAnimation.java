@@ -9,40 +9,51 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.util.Util;
 
-public class BasicAnimation implements Animation {
+import java.util.HashMap;
 
-    final int width = 15; // 15
-    final int height = 20; // 20
+public abstract  class BasicAnimation implements Animation {
 
-    private TextureRegion[] walkFrames;
-    private TextureRegion currentFrame;
-    private com.badlogic.gdx.graphics.g2d.Animation walkAnimation;
+    public enum ANIMATIONS{
+        IDLE, WALK, DEAD
+    }
+
+    private ANIMATIONS currentAnimations = ANIMATIONS.WALK;
+
+    final int width = 16; // 15
+    final int height = 16; // 20
+
+    public static final float FRAMES = 0.25f;
 
     private float stateTime;
 
-    private boolean flip = true;
+    HashMap<ANIMATIONS, com.badlogic.gdx.graphics.g2d.Animation> animations;
 
     public BasicAnimation() {
-        Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.PLAYER_TEXTURE);
-        walkFrames = new TextureRegion[2];
-        walkFrames[0] = new TextureRegion(texture, 9, 12, width, height);
-        walkFrames[1] = new TextureRegion(texture, 42, 12, width, height);
-        walkAnimation = new com.badlogic.gdx.graphics.g2d.Animation(0.25f, walkFrames);
+        animations = new HashMap<ANIMATIONS, com.badlogic.gdx.graphics.g2d.Animation>(ANIMATIONS.values().length);
+    }
+
+    protected void addAnimation(ANIMATIONS a, com.badlogic.gdx.graphics.g2d.Animation animation){
+        animations.put(a, animation);
+    }
+
+    public void changeAnimation(ANIMATIONS anim){
+        currentAnimations = anim;
     }
 
     @Override
     public void update() {
         stateTime += Gdx.graphics.getDeltaTime();
-        currentFrame = walkAnimation.getKeyFrame(stateTime, true);
     }
 
     @Override
     public void render(SpriteBatch sb, Body body) {
-        Util.Render.render(sb, currentFrame, body);
+        Util.Render.render(sb, animations.get(currentAnimations).getKeyFrame(stateTime, true), body);
     }
 
     @Override
-    public void debug(ShapeRenderer sr, Body body) { Util.Render.debug(sr, currentFrame, body); }
+    public void debug(ShapeRenderer sr, Body body) {
+        Util.Render.debug(sr, animations.get(currentAnimations).getKeyFrame(stateTime, true), body);
+    }
 
     @Override
     public void dispose() {

@@ -8,9 +8,11 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.github.jotask.tusk.engine.controller.DesktopPlayerController;
 import com.github.jotask.tusk.engine.controller.PlayerController;
 import com.github.jotask.tusk.engine.game.animations.BasicAnimation;
+import com.github.jotask.tusk.engine.game.animations.PlayerAnimation;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.states.play.weapons.MachineGun;
 import com.github.jotask.tusk.states.play.weapons.Weapon;
+import com.github.jotask.tusk.engine.game.animations.Animation;
 
 public class Player extends BodyEntity {
 
@@ -21,7 +23,7 @@ public class Player extends BodyEntity {
 
     private final PlayerController controller;
 
-    private com.github.jotask.tusk.engine.game.animations.Animation animation;
+    private Animation animation;
 
     private Weapon weapon;
 
@@ -33,7 +35,7 @@ public class Player extends BodyEntity {
         this.body.setUserData(this);
 
         this.controller = new DesktopPlayerController();
-        this.animation = new BasicAnimation();
+        this.animation = new PlayerAnimation();
 
         this.weapon = new MachineGun(this);
 

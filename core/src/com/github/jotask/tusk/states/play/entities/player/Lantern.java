@@ -20,6 +20,7 @@ public class Lantern {
         RayHandler rayHandler = Play.getInstance().getWorld().getEnviorment().getRayHandler();
         light = new ConeLight(rayHandler, 500, Color.WHITE, 10f, player.getPosition().x, player.getPosition().y,
                 angle, coneDegree);
+        light.setActive(false);
     }
 
     public void update(){
