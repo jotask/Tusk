@@ -25,14 +25,14 @@ public class BodyEntity extends Entity{
 
     @Override
     public void debug(ShapeRenderer sr) {
-        Vector2 p = body.getPosition();
-        Vector2 s = new Vector2(Util.Pixel.toMeter(Player.width) * 2, Util.Pixel.toMeter(Player.height) * 2);
+//        Vector2 p = body.getPosition();
+//        Vector2 s = new Vector2(Util.Pixel.toMeter(Player.width) * 2, Util.Pixel.toMeter(Player.height) * 2);
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        this.world.destroyBody(this.body);
+        // FIXME
     }
 
     public Body getBody() { return this.body; }

@@ -26,7 +26,7 @@ public class Environment {
         this.rayHandler = new RayHandler(world);
         this.rayHandler.setShadows(shadows);
 
-        this.ambient = new BasicAmbient(rayHandler);
+        this.ambient = new DayCycle(rayHandler);
 
         lights = new LinkedList();
 

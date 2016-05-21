@@ -13,7 +13,7 @@ public class SelectPlayer extends AbstractState {
 
     public enum Players {
 
-        DEFAULT(15f, 20f);
+        DEFAULT(1f, 15f);
 
         public final float width, height;
 
