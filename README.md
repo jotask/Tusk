@@ -1,4 +1,4 @@
-# Tusk# Tusk
+# Tusk
 
 Game with an uncertain future. My own project to learn game mechanics and the place to expand/practice my programming skills.
 
