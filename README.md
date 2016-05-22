@@ -27,6 +27,7 @@ Z - Camera Zoom out
 C - Camera Zoom in
 
 F3 - Toggle debug information
+
 Q - Toggle render debug information
 
 # Author
