@@ -6,8 +6,10 @@ public class Constants {
 
     public static final String TITLE = "Tusk";
     public static final String VERSION = "v0.01[PRE-ALPHA]";
-    public static final int APP_WIDTH = 800;
-    public static final int APP_HEIGHT = 600;
+
+    // FIXME
+    public static final int APP_WIDTH = 800 / 2;
+    public static final int APP_HEIGHT = 600 / 2;
     public static final int BACKGROUND_FPS = 30;
     public static final int FOREGROUND_FPS = 30;
 

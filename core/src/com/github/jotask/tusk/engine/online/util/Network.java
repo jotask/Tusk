@@ -36,6 +36,7 @@ public abstract class Network {
     public static class Character{
         public int id;
         public String name;
+        public float angle;
         public Vector2 position;
     }
 

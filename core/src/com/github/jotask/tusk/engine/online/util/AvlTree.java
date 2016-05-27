@@ -2,6 +2,12 @@ package com.github.jotask.tusk.engine.online.util;
 
 import java.util.LinkedList;
 
+/**
+ * INTERNET can't remember the original writter. I only writted the generic type DATA for this class, so i can work
+ * wih different data
+ *
+ * @param <DATA>
+ */
 public class AvlTree<DATA> {
 
     public Node root;

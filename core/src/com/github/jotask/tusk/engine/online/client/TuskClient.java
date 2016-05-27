@@ -24,12 +24,6 @@ public class TuskClient implements Disposable{
 
     private final Client client;
 
-    public void receivedCharacters(LinkedList<Network.Character> characters) {
-        for(Network.Character c: characters){
-            if(this.character.id != c.id) this.receivedCharacter(c);
-        }
-    }
-
     class OnlineEntity{
 
         final Network.Character character;
@@ -64,7 +58,17 @@ public class TuskClient implements Disposable{
     }
 
     public void update(){
-        // TODO update all entities
+        for(OnlineEntity oe: this.avlTree.getAllTree()){
+            if( oe.character.id == this.character.id)continue;
+            System.out.println(oe.character.position);
+              oe.playerIdle.getBody().setTransform(oe.character.position, oe.playerIdle.getBody().getAngle());
+        }
+    }
+
+    public void receivedCharacters(LinkedList<Network.Character> characters) {
+        for(Network.Character c: characters){
+            this.receivedCharacter(c);
+        }
     }
 
     public synchronized void receivedCharacter(Network.Character character){
@@ -74,12 +78,14 @@ public class TuskClient implements Disposable{
             PlayerIdle playerIdle = Factory.createPlayerIdle(game);
             onlineEntity = new OnlineEntity(character, playerIdle);
         }
+        onlineEntity.playerIdle.getBody().setTransform(character.position, character.angle);
         this.avlTree.insert(character.id, onlineEntity);
     }
 
     public void sendPlayer(Player player){
         Network.Character character = this.getCharacter();
         character.position = player.getBody().getPosition();
+        character.angle = player.getBody().getAngle();
         this.getClient().sendUDP(character);
     }
 
@@ -88,7 +94,6 @@ public class TuskClient implements Disposable{
     }
 
     public Client getClient() { return client; }
-    public AvlTree<OnlineEntity> getAvlTree() { return avlTree; }
     public Network.Character getCharacter() { return character; }
     public Play getGame(){ return this.game; }
 
