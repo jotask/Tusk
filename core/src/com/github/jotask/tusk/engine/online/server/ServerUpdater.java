@@ -24,7 +24,10 @@ public class ServerUpdater implements Runnable {
 
             final LinkedList<Network.Character> allTree = tuskServer.getAvlTree().getAllTree();
 
-            tuskServer.getServer().sendToAllUDP(allTree);
+            final Network.Characters characters = new Network.Characters();
+            characters.characters = allTree;
+
+            tuskServer.getServer().sendToAllUDP(characters);
 
             try {
                 Thread.sleep(TIME);
