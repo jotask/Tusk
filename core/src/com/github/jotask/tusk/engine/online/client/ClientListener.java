@@ -37,6 +37,8 @@ public class ClientListener extends Listener {
             client.receivedCharacter((Network.Character) object);
         }else if(object instanceof Network.Disconnected){
             client.disconnected((Network.Disconnected) object);
+        }else if(object instanceof Network.Characters){
+            client.receivedCharacters(((Network.Characters) object).characters);
         }
     }
 

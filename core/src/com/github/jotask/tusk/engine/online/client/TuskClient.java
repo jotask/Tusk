@@ -11,6 +11,7 @@ import com.github.jotask.tusk.states.play.entities.player.Player;
 import com.github.jotask.tusk.states.play.entities.player.PlayerIdle;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 /**
  * Created by Jota on 27/05/2016.
@@ -22,6 +23,12 @@ public class TuskClient implements Disposable{
     private final Network.Character character;
 
     private final Client client;
+
+    public void receivedCharacters(LinkedList<Network.Character> characters) {
+        for(Network.Character c: characters){
+            if(this.character.id != c.id) this.receivedCharacter(c);
+        }
+    }
 
     class OnlineEntity{
 

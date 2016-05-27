@@ -55,8 +55,6 @@ public class DayCycle implements Ambient{
     @Override
     public void update() {
 
-        System.out.println();
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.L)) {
 //            if (timer.isFinished()) {
                 if (isDay) {
