@@ -1,9 +1,9 @@
-package com.github.jotask.tusk.online.server;
+package com.github.jotask.tusk.engine.online.server;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.esotericsoftware.kryonet.Server;
-import com.github.jotask.tusk.online.util.AvlTree;
-import com.github.jotask.tusk.online.util.Network;
+import com.github.jotask.tusk.engine.online.util.AvlTree;
+import com.github.jotask.tusk.engine.online.util.Network;
 
 import java.io.IOException;
 

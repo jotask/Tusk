@@ -1,8 +1,8 @@
-package com.github.jotask.tusk.online.server;
+package com.github.jotask.tusk.engine.online.server;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import com.github.jotask.tusk.online.util.Network;
+import com.github.jotask.tusk.engine.online.util.Network;
 
 /**
  * Created by Jota on 27/05/2016.

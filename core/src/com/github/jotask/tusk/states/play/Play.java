@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.jotask.tusk.engine.AbstractState;
 import com.github.jotask.tusk.engine.game.Factory;
-import com.github.jotask.tusk.online.client.TuskClient;
+import com.github.jotask.tusk.engine.online.client.TuskClient;
 import com.github.jotask.tusk.states.play.entities.EntityManager;
 import com.github.jotask.tusk.states.play.entities.player.Player;
 import com.github.jotask.tusk.states.play.world.Mundo;
@@ -63,6 +63,9 @@ public class Play extends AbstractState {
         this.player.update();
         this.camera.follow(player);
         this.entityManager.update();
+
+        if(this.client != null)
+            this.client.sendPlayer(this.getPlayer());
 
         up();
     }

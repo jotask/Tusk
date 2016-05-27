@@ -1,12 +1,13 @@
-package com.github.jotask.tusk.online.client;
+package com.github.jotask.tusk.engine.online.client;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Listener;
 import com.github.jotask.tusk.engine.game.Factory;
-import com.github.jotask.tusk.online.util.AvlTree;
-import com.github.jotask.tusk.online.util.Network;
+import com.github.jotask.tusk.engine.online.util.AvlTree;
+import com.github.jotask.tusk.engine.online.util.Network;
 import com.github.jotask.tusk.states.play.Play;
+import com.github.jotask.tusk.states.play.entities.player.Player;
 import com.github.jotask.tusk.states.play.entities.player.PlayerIdle;
 
 import java.io.IOException;
@@ -60,7 +61,6 @@ public class TuskClient implements Disposable{
     }
 
     public synchronized void receivedCharacter(Network.Character character){
-        System.out.println("recived " + character.name);
         if(this.character.id == character.id) return;
         OnlineEntity onlineEntity = this.avlTree.exist(character.id);
         if(onlineEntity == null){
@@ -68,6 +68,12 @@ public class TuskClient implements Disposable{
             onlineEntity = new OnlineEntity(character, playerIdle);
         }
         this.avlTree.insert(character.id, onlineEntity);
+    }
+
+    public void sendPlayer(Player player){
+        Network.Character character = this.getCharacter();
+        character.position = player.getBody().getPosition();
+        this.getClient().sendUDP(character);
     }
 
     public synchronized void disconnected(Network.Disconnected disconnected){

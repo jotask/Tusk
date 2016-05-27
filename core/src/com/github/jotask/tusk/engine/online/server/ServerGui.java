@@ -1,7 +1,7 @@
-package com.github.jotask.tusk.online.server;
+package com.github.jotask.tusk.engine.online.server;
 
 
-import com.github.jotask.tusk.online.util.Network;
+import com.github.jotask.tusk.engine.online.util.Network;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package com.github.jotask.tusk.online.util;
+package com.github.jotask.tusk.engine.online.util;
 
 import java.util.LinkedList;
 

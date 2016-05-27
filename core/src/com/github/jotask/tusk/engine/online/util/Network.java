@@ -1,4 +1,4 @@
-package com.github.jotask.tusk.online.util;
+package com.github.jotask.tusk.engine.online.util;
 
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryo.Kryo;
