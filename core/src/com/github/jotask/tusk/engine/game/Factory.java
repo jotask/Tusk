@@ -29,7 +29,7 @@ public final class Factory {
         boolean isPlayer = (entity instanceof Player);
         com.badlogic.gdx.physics.box2d.Body body = Body.createBullet(entity.getWorld(), entity.getPosition(), isPlayer);
         float angle = entity.getAngleFromThis(Play.getInstance().getCamera().getMousePosInGameWorld());
-        Bullet bullet = new Bullet(entity.getWorld(), body);
+        Bullet bullet = new Bullet(entity.getWorld(), body, entity);
         return bullet;
     }
 

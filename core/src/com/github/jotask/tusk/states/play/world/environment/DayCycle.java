@@ -46,9 +46,7 @@ public class DayCycle implements Ambient{
     private Timer timer;
 
     public DayCycle(RayHandler rayHandler) {
-
         this.rayHandler = rayHandler;
-
         this.changeLightType(LIGHT.NIGHT);
         this.timer = new Timer(DAY_CYCLE_SECONDS);
         this.isDay = true;
@@ -56,6 +54,9 @@ public class DayCycle implements Ambient{
 
     @Override
     public void update() {
+
+        System.out.println();
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.L)) {
 //            if (timer.isFinished()) {
                 if (isDay) {

@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.github.jotask.tusk.states.play.entities.player.Player;
-import com.github.jotask.tusk.util.Util;
 
 public class BodyEntity extends Entity{
 
@@ -19,15 +17,10 @@ public class BodyEntity extends Entity{
     }
 
     @Override
-    public void render(SpriteBatch sb) {
-
-    }
+    public void render(SpriteBatch sb) { }
 
     @Override
-    public void debug(ShapeRenderer sr) {
-//        Vector2 p = body.getPosition();
-//        Vector2 s = new Vector2(Util.Pixel.toMeter(Player.width) * 2, Util.Pixel.toMeter(Player.height) * 2);
-    }
+    public void debug(ShapeRenderer sr) { }
 
     @Override
     public void dispose() {

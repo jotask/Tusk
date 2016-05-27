@@ -16,13 +16,17 @@ public class Bullet extends BodyEntity {
 
     public static final float RADIUS = 0.1f;
 
+    private BodyEntity shooter;
+
     public static float SPEED = 100f;
     private final Timer timer;
 
     private PointLight light;
 
-    public Bullet(World world, Body body) {
+    public Bullet(World world, Body body, BodyEntity shooter) {
         super(world, body);
+
+        this.shooter = shooter;
         this.timer = new Timer(1f);
 
         RayHandler rayHandler = Play.getInstance().getWorld().getEnviorment().getRayHandler();
@@ -73,5 +77,7 @@ public class Bullet extends BodyEntity {
         super.dispose();
         light.remove();
     }
+
+    public BodyEntity getShooter() { return shooter; }
 
 }

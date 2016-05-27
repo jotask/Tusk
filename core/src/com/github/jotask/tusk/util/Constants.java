@@ -17,5 +17,6 @@ public class Constants {
 
     public static final int PPM = 16; // RECOMMENDED 30 16 for me
 
-    public static final boolean DEFAULT_DEBUG = false;
+    public static final boolean DEFAULT_DEBUG = true;
+
 }
