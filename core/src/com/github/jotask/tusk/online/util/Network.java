@@ -27,7 +27,8 @@ public abstract class Network {
         kryo.register(Disconnected.class);
     }
 
-    static class Login{
+    public static class Login{
+        public int id;
         public String name;
         public boolean logged;
     }

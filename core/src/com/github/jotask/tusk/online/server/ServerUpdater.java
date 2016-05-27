@@ -1,5 +1,9 @@
 package com.github.jotask.tusk.online.server;
 
+import com.github.jotask.tusk.online.util.Network;
+
+import java.util.LinkedList;
+
 /**
  * Created by Jota on 27/05/2016.
  */
@@ -18,6 +22,10 @@ public class ServerUpdater implements Runnable {
 
         while (!stop){
 
+            final LinkedList<Network.Character> allTree = tuskServer.getAvlTree().getAllTree();
+
+            tuskServer.getServer().sendToAllUDP(allTree);
+
             try {
                 Thread.sleep(TIME);
             } catch (InterruptedException e) {
@@ -25,8 +33,6 @@ public class ServerUpdater implements Runnable {
             }
 
         }
-
-        System.out.println("exiting thread");
 
     }
 
