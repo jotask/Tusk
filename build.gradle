@@ -43,6 +43,10 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
+
+        // http://mvnrepository.com/artifact/com.esotericsoftware/kryonet
+        compile group: 'com.esotericsoftware', name: 'kryonet', version: '2.22.0-RC1'
+
     }
 }
 
