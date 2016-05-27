@@ -18,7 +18,7 @@ public class ServerUpdater implements Runnable {
     public ServerUpdater(TuskServer tuskServer) { this.tuskServer = tuskServer; }
 
     @Override
-    public void run() {
+    public synchronized void run() {
 
         while (!stop){
 

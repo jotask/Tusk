@@ -35,8 +35,11 @@ public class ServerListener extends Listener {
         disconnected.id = connection.getID();
         tuskServer.getAvlTree().delete(connection.getID());
         tuskServer.getServer().sendToAllExceptTCP(disconnected.id, disconnected);
+        this.tuskServer.disconnected(disconnected.id);
     }
 
-    private boolean isValid(String name){ return true; }
+    private boolean isValid(String name){
+        return ((name != null) && (name.length() > 0));
+    }
 
 }

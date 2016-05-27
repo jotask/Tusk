@@ -17,7 +17,6 @@ public class TuskServer implements Disposable {
     private final AvlTree<Network.Character> avlTree;
 
     private final Server server;
-    private final Thread threadServer;
 
     private final ServerUpdater serverUpdater;
     private final Thread threadUpdater;
@@ -35,9 +34,7 @@ public class TuskServer implements Disposable {
             this.server.addListener(listener);
 
             this.server.bind(Network.TCP_PORT, Network.UDP_PORT);
-
-            threadServer = new Thread(this.server);
-            threadServer.start();
+            this.server.start();
 
         }
         {
@@ -77,7 +74,14 @@ public class TuskServer implements Disposable {
         }
     }
 
-    public void receivedCharacter(Network.Character character) {
+    public synchronized void receivedCharacter(Network.Character character) {
         avlTree.insert(character.id, character);
+        gui.updateLabel(character);
     }
+
+    public synchronized void disconnected(int id){
+        avlTree.delete(id);
+        gui.removeLabel(id);
+    }
+
 }
