@@ -7,14 +7,18 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.github.jotask.tusk.engine.AbstractState;
 import com.github.jotask.tusk.engine.game.Factory;
+import com.github.jotask.tusk.online.client.TuskClient;
 import com.github.jotask.tusk.states.play.entities.EntityManager;
 import com.github.jotask.tusk.states.play.entities.player.Player;
 import com.github.jotask.tusk.states.play.world.Mundo;
-import com.github.jotask.tusk.util.Util;
+
+import java.io.IOException;
 
 public class Play extends AbstractState {
 
     private static Play state;
+
+    private TuskClient client;
 
     public static Play getInstance(){
         if(state == null){
@@ -42,12 +46,20 @@ public class Play extends AbstractState {
         this.player = Factory.createPlayer(this);
 
         this.rectangle = new Rectangle(10f,10f,1f,1f);
+
+        try {
+            this.client = new TuskClient(this);
+        } catch (IOException e) {
+            System.err.println("Impossible connect to the server");
+        }
+
     }
 
     @Override
     public void update() {
         super.update();
         this.world.update();
+        if(this.client != null) this.client.update();
         this.player.update();
         this.camera.follow(player);
         this.entityManager.update();
@@ -58,7 +70,7 @@ public class Play extends AbstractState {
     private void up(){
         Vector2 p = new Vector2(rectangle.x, rectangle.y);
         p.y += (float) (0.1f * Math.sin(p.x));
-        System.out.println(p.y);
+//        System.out.println(p.y);
         rectangle.setPosition(p);
     }
 
@@ -87,6 +99,7 @@ public class Play extends AbstractState {
         this.player.dispose();
         this.entityManager.dispose();
         this.world.dispose();
+        if(this.client != null) this.client.dispose();
         Play.state = null;
     }
 

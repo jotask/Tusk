@@ -6,6 +6,7 @@ import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.states.play.entities.bullet.Bullet;
 import com.github.jotask.tusk.states.play.entities.player.Player;
+import com.github.jotask.tusk.states.play.entities.player.PlayerIdle;
 import com.github.jotask.tusk.states.play.world.Collisions;
 import com.github.jotask.tusk.states.play.world.Mundo;
 import com.github.jotask.tusk.states.selectplayer.SelectPlayer;
@@ -21,6 +22,18 @@ public final class Factory {
                 new Vector2(playerType.width, playerType.height));
 
         Player player = new Player(play.getWorld().getWorld(), body);
+        return player;
+
+    }
+
+    public static PlayerIdle createPlayerIdle(Play play){ return createPlayerIdle(play, SelectPlayer.Players.DEFAULT); }
+    public static PlayerIdle createPlayerIdle(Play play, SelectPlayer.Players playerType){
+
+        com.badlogic.gdx.physics.box2d.Body body = Body.createPlayer(play.getWorld(),
+                play.getWorld().getLevel().getPlayerSpawn(),
+                new Vector2(playerType.width, playerType.height));
+
+        PlayerIdle player = new PlayerIdle(play.getWorld().getWorld(), body);
         return player;
 
     }
