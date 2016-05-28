@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.engine.Debug;
-import com.github.jotask.tusk.engine.GameStateManager;
+import com.github.jotask.tusk.states.GameStateManager;
 import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.util.Constants;
 

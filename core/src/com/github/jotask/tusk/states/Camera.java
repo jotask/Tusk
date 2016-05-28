@@ -1,4 +1,4 @@
-package com.github.jotask.tusk.engine;
+package com.github.jotask.tusk.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

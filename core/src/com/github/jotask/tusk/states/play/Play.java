@@ -3,7 +3,7 @@ package com.github.jotask.tusk.states.play;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.github.jotask.tusk.engine.AbstractState;
+import com.github.jotask.tusk.states.AbstractState;
 import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.engine.online.client.TuskClient;
 import com.github.jotask.tusk.states.play.entities.EntityManager;

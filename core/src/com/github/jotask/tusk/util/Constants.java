@@ -1,6 +1,6 @@
 package com.github.jotask.tusk.util;
 
-import com.github.jotask.tusk.engine.STATE;
+import com.github.jotask.tusk.states.STATE;
 
 public class Constants {
 

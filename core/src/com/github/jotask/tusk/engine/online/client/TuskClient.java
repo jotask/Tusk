@@ -69,6 +69,8 @@ public class TuskClient implements Disposable{
         Network.Character character = this.getCharacter();
         character.position = player.getBody().getPosition();
         character.angle = player.getBody().getAngle();
+        character.lantern.on = player.getLantern().isOn();
+
         this.getClient().sendUDP(character);
     }
 

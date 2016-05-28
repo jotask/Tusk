@@ -31,6 +31,9 @@ public class ClientListener extends Listener {
                 character.id = connection.getID();
                 character.name = login.name;
                 character.position = client.getGame().getPlayer().getBody().getPosition();
+                Network.Lantern lantern = new Network.Lantern();
+                lantern.on = client.getGame().getPlayer().getLantern().isOn();
+                character.lantern = lantern;
                 client.getClient().sendTCP(character);
             }
         }else if(object instanceof Network.Character){

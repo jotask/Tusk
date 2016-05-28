@@ -103,4 +103,5 @@ public class Player extends BodyEntity {
         return controller;
     }
 
+    public Lantern getLantern() { return lantern; }
 }

@@ -1,4 +1,4 @@
-package com.github.jotask.tusk.engine;
+package com.github.jotask.tusk.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;

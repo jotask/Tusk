@@ -23,6 +23,8 @@ public class PlayerIdle extends BodyEntity {
 
     private Animation animation;
 
+    private LanterIdle lanterIdle;
+
     public PlayerIdle(Body body, Network.Character character) {
         super(body);
 
@@ -30,12 +32,15 @@ public class PlayerIdle extends BodyEntity {
 
         this.body.setUserData(this);
 
+        this.lanterIdle = new LanterIdle(this);
+
         this.animation = new PlayerAnimation();
 
     }
 
     @Override
     public void update() {
+        this.lanterIdle.update();
         this.animation.update();
         this.animation.changeAnimation(BasicAnimation.ANIMATIONS.IDLE);
         this.body.setTransform(character.position.x, character.position.y, character.angle);
@@ -44,6 +49,7 @@ public class PlayerIdle extends BodyEntity {
     public void setData(Network.Character c){
         this.character.position = c.position;
         this.character.angle = c.angle;
+        this.character.lantern.on = c.lantern.on;
     }
 
     @Override
@@ -54,5 +60,6 @@ public class PlayerIdle extends BodyEntity {
     @Override
     public void debug(ShapeRenderer sr) { }
 
+    public Network.Character getCharacter() { return character; }
 }
 

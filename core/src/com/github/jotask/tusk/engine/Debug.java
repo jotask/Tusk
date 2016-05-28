@@ -6,10 +6,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.engine.online.client.TuskClient;
+import com.github.jotask.tusk.states.AbstractState;
+import com.github.jotask.tusk.states.Camera;
+import com.github.jotask.tusk.states.GameStateManager;
 import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.player.Player;
 
-public class Debug extends AbstractState{
+public class Debug extends AbstractState {
 
     private boolean isEnabled = true;
 

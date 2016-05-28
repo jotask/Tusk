@@ -24,6 +24,7 @@ public abstract class Network {
         kryo.register(LinkedList.class);
         kryo.register(Vector2.class);
         kryo.register(Characters.class);
+        kryo.register(Lantern.class);
         kryo.register(Disconnected.class);
     }
 
@@ -33,11 +34,16 @@ public abstract class Network {
         public boolean logged;
     }
 
+    public static class Lantern{
+        public boolean on;
+    }
+
     public static class Character{
         public int id;
         public String name;
         public float angle;
         public Vector2 position;
+        public Lantern lantern;
     }
 
     public static class Characters{

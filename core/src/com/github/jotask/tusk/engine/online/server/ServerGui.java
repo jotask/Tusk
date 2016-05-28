@@ -59,7 +59,7 @@ public class ServerGui {
             labels.add(label);
         }
 
-        label.label.setText( label.name + " " + character.position.toString());
+        label.label.setText( getString(character));
 
         updatePane();
     }
@@ -83,6 +83,11 @@ public class ServerGui {
         frame.repaint();
     }
 
+    public String getString(Network.Character character){
+        String lanter = ((character.lantern != null) ? String.valueOf(character.lantern.on) : "");
+        return character.name + " : " + lanter + " [" + character.position.toString() + "]";
+    }
+
     public void updateLabel(Network.Character character) {
 
         int id = character.id;
@@ -100,7 +105,7 @@ public class ServerGui {
         }else {
             for (Label l : labels) {
                 if (l.id == id) {
-                    l.label.setText(l.name + " " + character.position.toString());
+                    l.label.setText(getString(character));
                     break;
                 }
             }

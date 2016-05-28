@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.github.jotask.tusk.engine.AbstractState;
-import com.github.jotask.tusk.engine.Camera;
+import com.github.jotask.tusk.states.AbstractState;
+import com.github.jotask.tusk.states.Camera;
 
 public class Test extends AbstractState {
 
@@ -22,12 +22,11 @@ public class Test extends AbstractState {
     @Override
     public void init() {
         this.setBgColor(Color.BLACK);
-//        super.init();
-//        {
-            float width = 7.11f;
-            float height = 4f;
-            this.camera = new Camera(width, height);
-//        }
+
+        float width = 7.11f;
+        float height = 4f;
+        this.camera = new Camera(width, height);
+
         camera.translate(0,1);
         world = new World(new Vector2(0,-9.8f), true);
         renderer = new Box2DDebugRenderer();
