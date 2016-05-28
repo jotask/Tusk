@@ -3,6 +3,7 @@ package com.github.jotask.tusk.states.play.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.states.play.entities.bullet.Bullet;
+import com.github.jotask.tusk.states.play.entities.player.PlayerIdle;
 
 import java.util.LinkedList;
 
@@ -17,59 +18,71 @@ public class EntityManager implements IEntity{
     }
 
     private final int MAX_BULLETS = 10;
-    private LinkedList<Bullet> bullets;
+    private int current_num_bullets = 0;
+
+    private LinkedList<Entity> entities;
 
     private EntityManager() {
-        this.bullets = new LinkedList();
+        this.entities = new LinkedList<Entity>();
     }
 
     @Override
-    public void init() {}
-
-    @Override
     public void update() {
-        LinkedList<Bullet> toDestroy = new LinkedList<Bullet>();
-        for(Bullet b: bullets){
-            if(b.isDead()){
-                toDestroy.add(b);
-                continue;
+        LinkedList<Entity> toDestroy = new LinkedList<Entity>();
+        for(Entity e: entities){
+
+            if(e instanceof Bullet){
+                Bullet bullet = (Bullet) e;
+                if(bullet.isDead()){
+                    current_num_bullets--;
+                    toDestroy.add(e);
+                    continue;
+                }
+            }else if(e instanceof PlayerIdle){
+                PlayerIdle playerIdle = (PlayerIdle) e;
+                if(playerIdle.disconnected){
+                    toDestroy.add(e);
+                    continue;
+                }
             }
+
+            e.update();
+
         }
-        for(Bullet b: toDestroy){
-            bullets.remove(b);
-            b.dispose();
+
+        for(Entity e: toDestroy){
+            entities.remove(e);
+            e.dispose();
         }
+
     }
 
     @Override
     public void render(SpriteBatch sb) {
-        for(Bullet b: bullets){
-            b.render(sb);
+        for(Entity e: entities){
+            e.render(sb);
         }
     }
 
     @Override
     public void debug(ShapeRenderer sr) {
-        for(Bullet b: bullets){
-            b.debug(sr);
+        for(Entity e: entities){
+            e.debug(sr);
         }
+    }
+
+    public void add(Entity entity){
+        if(entity == null) return;
+        this.entities.add(entity);
     }
 
     @Override
     public void dispose() {
-        for(Bullet b: bullets){
-            b.dispose();
+        for (Entity e : entities) {
+            e.dispose();
         }
     }
 
-    public void addBullet(Bullet bullet){
-        if(bullets.size() > MAX_BULLETS)
-            return;
-
-        bullets.add(bullet);
-
-    }
-
-    public int bulletsSize(){ return bullets.size(); };
+    public int bulletsSize(){ return current_num_bullets; }
 
 }

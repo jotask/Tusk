@@ -4,15 +4,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
 import com.github.jotask.tusk.engine.controller.DesktopPlayerController;
 import com.github.jotask.tusk.engine.controller.PlayerController;
+import com.github.jotask.tusk.engine.game.animations.Animation;
 import com.github.jotask.tusk.engine.game.animations.BasicAnimation;
 import com.github.jotask.tusk.engine.game.animations.PlayerAnimation;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
 import com.github.jotask.tusk.states.play.weapons.MachineGun;
 import com.github.jotask.tusk.states.play.weapons.Weapon;
-import com.github.jotask.tusk.engine.game.animations.Animation;
 
 public class Player extends BodyEntity {
 
@@ -29,8 +28,8 @@ public class Player extends BodyEntity {
 
     private Lantern lantern;
 
-    public Player(World world, Body body) {
-        super(world, body);
+    public Player(Body body) {
+        super(body);
 
         this.body.setUserData(this);
 

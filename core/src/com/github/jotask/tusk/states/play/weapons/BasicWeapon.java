@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.engine.game.Timer;
 import com.github.jotask.tusk.states.play.Play;
-import com.github.jotask.tusk.states.play.entities.EntityManager;
 import com.github.jotask.tusk.states.play.entities.bullet.Bullet;
 import com.github.jotask.tusk.states.play.entities.player.Player;
 import com.github.jotask.tusk.util.Util;
@@ -50,7 +49,6 @@ public class BasicWeapon implements Weapon {
     public void shot() {
         if(timer.isFinished()){
             Bullet bullet = Factory.createBullet(player);
-            EntityManager.get().addBullet(bullet);
         }
     }
 

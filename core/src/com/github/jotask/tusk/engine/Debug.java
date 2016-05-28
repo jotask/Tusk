@@ -5,8 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.github.jotask.tusk.engine.online.client.TuskClient;
 import com.github.jotask.tusk.states.play.Play;
-import com.github.jotask.tusk.states.play.entities.EntityManager;
 import com.github.jotask.tusk.states.play.entities.player.Player;
 
 public class Debug extends AbstractState{
@@ -66,6 +66,16 @@ public class Debug extends AbstractState{
 
         String bullets = "Bullets: " + play.getEntityManager().bulletsSize();
         font.draw(sb, bullets, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 3);
+
+        TuskClient tuskClient = play.getClient();
+
+        if(tuskClient != null){
+            String player_name = "Name: " + tuskClient.getCharacter().name;
+            font.draw(sb, player_name, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 4);
+
+            String players_online = "Online: " + (tuskClient.getOnlinePlayers().getAllTree().size() + 1);
+            font.draw(sb, players_online, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 5);
+        }
 
     }
 

@@ -3,6 +3,7 @@ package com.github.jotask.tusk.util;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -53,6 +54,11 @@ public class Util {
             sr.box(x, y, 0, w, h, 0);
 
         }
+
+        public static void debug(ShapeRenderer sr, Rectangle rectangle){
+            sr.box(rectangle.x, rectangle.y, 0, rectangle.width, rectangle.height, 0);
+        }
+
     }
 
 }

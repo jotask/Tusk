@@ -14,7 +14,10 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 /**
- * Created by Jota on 27/05/2016.
+ * TuskClient
+ *
+ * @author Jose Vives Iznardo
+ * @since 27/05/2016
  */
 public class TuskClient implements Disposable{
 
@@ -24,24 +27,12 @@ public class TuskClient implements Disposable{
 
     private final Client client;
 
-    class OnlineEntity{
-
-        final Network.Character character;
-        final PlayerIdle playerIdle;
-
-        OnlineEntity(Network.Character character, PlayerIdle playerIdle) {
-            this.character = character;
-            this.playerIdle = playerIdle;
-        }
-
-    }
-
-    private final AvlTree<OnlineEntity> avlTree;
+    private final AvlTree<PlayerIdle> onlinePlayers;
 
     public TuskClient(Play game) throws IOException {
 
         this.game = game;
-        this.avlTree = new AvlTree<OnlineEntity>();
+        this.onlinePlayers = new AvlTree<PlayerIdle>();
         this.character = new Network.Character();
 
         {
@@ -57,29 +48,21 @@ public class TuskClient implements Disposable{
         }
     }
 
-    public void update(){
-        for(OnlineEntity oe: this.avlTree.getAllTree()){
-            if( oe.character.id == this.character.id)continue;
-            System.out.println(oe.character.position);
-              oe.playerIdle.getBody().setTransform(oe.character.position, oe.playerIdle.getBody().getAngle());
-        }
-    }
-
-    public void receivedCharacters(LinkedList<Network.Character> characters) {
+    synchronized void receivedCharacters(LinkedList<Network.Character> characters) {
         for(Network.Character c: characters){
             this.receivedCharacter(c);
         }
     }
 
-    public synchronized void receivedCharacter(Network.Character character){
+    synchronized void receivedCharacter(Network.Character character){
+        // FIXME
         if(this.character.id == character.id) return;
-        OnlineEntity onlineEntity = this.avlTree.exist(character.id);
-        if(onlineEntity == null){
-            PlayerIdle playerIdle = Factory.createPlayerIdle(game);
-            onlineEntity = new OnlineEntity(character, playerIdle);
+        PlayerIdle playerIdle = this.onlinePlayers.exist(character.id);
+        if(playerIdle == null){
+            playerIdle = Factory.createPlayerIdle(game, character);
         }
-        onlineEntity.playerIdle.getBody().setTransform(character.position, character.angle);
-        this.avlTree.insert(character.id, onlineEntity);
+        playerIdle.setData(character);
+        this.onlinePlayers.insert(character.id, playerIdle);
     }
 
     public void sendPlayer(Player player){
@@ -89,12 +72,17 @@ public class TuskClient implements Disposable{
         this.getClient().sendUDP(character);
     }
 
-    public synchronized void disconnected(Network.Disconnected disconnected){
-        this.avlTree.delete(disconnected.id);
+    synchronized void disconnected(Network.Disconnected disconnected){
+        final PlayerIdle exist = this.onlinePlayers.exist(disconnected.id);
+        exist.disconnected = true;
+        this.onlinePlayers.delete(disconnected.id);
     }
 
     public Client getClient() { return client; }
     public Network.Character getCharacter() { return character; }
+
+    public AvlTree<PlayerIdle> getOnlinePlayers() { return onlinePlayers; }
+
     public Play getGame(){ return this.game; }
 
     @Override

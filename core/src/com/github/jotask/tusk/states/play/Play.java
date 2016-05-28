@@ -3,8 +3,6 @@ package com.github.jotask.tusk.states.play;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.github.jotask.tusk.engine.AbstractState;
 import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.engine.online.client.TuskClient;
@@ -31,8 +29,6 @@ public class Play extends AbstractState {
     private EntityManager entityManager;
     private Player player;
 
-    private Rectangle rectangle;
-
     @Override
     public void init() {
         super.init();
@@ -44,8 +40,6 @@ public class Play extends AbstractState {
 
         this.entityManager = EntityManager.get();
         this.player = Factory.createPlayer(this);
-
-        this.rectangle = new Rectangle(10f,10f,1f,1f);
 
         try {
             this.client = new TuskClient(this);
@@ -59,30 +53,18 @@ public class Play extends AbstractState {
     public void update() {
         super.update();
         this.world.update();
-        if(this.client != null) this.client.update();
         this.player.update();
         this.camera.follow(player);
         this.entityManager.update();
-
-        if(this.client != null)
-            this.client.sendPlayer(this.getPlayer());
-
-        up();
-    }
-
-    private void up(){
-        Vector2 p = new Vector2(rectangle.x, rectangle.y);
-        p.y += (float) (0.1f * Math.sin(p.x));
-//        System.out.println(p.y);
-        rectangle.setPosition(p);
+        if(this.client != null) this.client.sendPlayer(this.getPlayer());
     }
 
     @Override
     public void render(SpriteBatch sb) {
         super.render(sb);
         this.world.render(sb, this.camera);
-        this.player.render(sb);
         this.entityManager.render(sb);
+        this.player.render(sb);
     }
 
     @Override
@@ -92,9 +74,8 @@ public class Play extends AbstractState {
     public void debug(ShapeRenderer sr) {
         super.debug(sr);
         this.world.debug(sr, this.getCamera().combined);
-        this.player.debug(sr);
         this.entityManager.debug(sr);
-        sr.box(rectangle.x, rectangle.y, 0, rectangle.width, rectangle.height, 0);
+        this.player.debug(sr);
     }
 
     @Override
@@ -113,5 +94,9 @@ public class Play extends AbstractState {
 
     public EntityManager getEntityManager() {
         return entityManager;
+    }
+
+    public TuskClient getClient() {
+        return client;
     }
 }

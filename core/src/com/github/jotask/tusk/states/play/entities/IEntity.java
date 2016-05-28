@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public interface IEntity {
 
-    void init();
+//    void init();
 
     void update();
 

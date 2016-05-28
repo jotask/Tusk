@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
 import com.github.jotask.tusk.engine.game.Timer;
 import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
@@ -23,8 +22,8 @@ public class Bullet extends BodyEntity {
 
     private PointLight light;
 
-    public Bullet(World world, Body body, BodyEntity shooter) {
-        super(world, body);
+    public Bullet(Body body, BodyEntity shooter) {
+        super(body);
 
         this.shooter = shooter;
         this.timer = new Timer(1f);

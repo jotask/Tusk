@@ -2,8 +2,10 @@ package com.github.jotask.tusk.engine.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.github.jotask.tusk.engine.online.util.Network;
 import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.BodyEntity;
+import com.github.jotask.tusk.states.play.entities.EntityManager;
 import com.github.jotask.tusk.states.play.entities.bullet.Bullet;
 import com.github.jotask.tusk.states.play.entities.player.Player;
 import com.github.jotask.tusk.states.play.entities.player.PlayerIdle;
@@ -14,6 +16,8 @@ import com.github.jotask.tusk.util.Util;
 
 public final class Factory {
 
+    static EntityManager manager = EntityManager.get();
+
     public static Player createPlayer(Play play){ return createPlayer(play, SelectPlayer.Players.DEFAULT); }
     public static Player createPlayer(Play play, SelectPlayer.Players playerType){
 
@@ -21,19 +25,20 @@ public final class Factory {
                 play.getWorld().getLevel().getPlayerSpawn(),
                 new Vector2(playerType.width, playerType.height));
 
-        Player player = new Player(play.getWorld().getWorld(), body);
+        Player player = new Player(body);
         return player;
 
     }
 
-    public static PlayerIdle createPlayerIdle(Play play){ return createPlayerIdle(play, SelectPlayer.Players.DEFAULT); }
-    public static PlayerIdle createPlayerIdle(Play play, SelectPlayer.Players playerType){
+    public static PlayerIdle createPlayerIdle(Play play, Network.Character character){ return createPlayerIdle(play, character, SelectPlayer.Players.DEFAULT); }
+    public static PlayerIdle createPlayerIdle(Play play, Network.Character character, SelectPlayer.Players playerType){
 
         com.badlogic.gdx.physics.box2d.Body body = Body.createPlayer(play.getWorld(),
                 play.getWorld().getLevel().getPlayerSpawn(),
                 new Vector2(playerType.width, playerType.height));
 
-        PlayerIdle player = new PlayerIdle(play.getWorld().getWorld(), body);
+        PlayerIdle player = new PlayerIdle(body, character);
+        manager.add(player);
         return player;
 
     }
@@ -42,7 +47,8 @@ public final class Factory {
         boolean isPlayer = (entity instanceof Player);
         com.badlogic.gdx.physics.box2d.Body body = Body.createBullet(entity.getWorld(), entity.getPosition(), isPlayer);
         float angle = entity.getAngleFromThis(Play.getInstance().getCamera().getMousePosInGameWorld());
-        Bullet bullet = new Bullet(entity.getWorld(), body, entity);
+        Bullet bullet = new Bullet(body, entity);
+        manager.add(bullet);
         return bullet;
     }
 

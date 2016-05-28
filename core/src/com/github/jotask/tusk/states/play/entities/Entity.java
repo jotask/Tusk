@@ -6,27 +6,14 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public abstract class Entity implements IEntity {
 
     @Override
-    public void init() {
-
-    }
+    public abstract void update();
 
     @Override
-    public void update() {
-
-    }
+    public abstract void render(SpriteBatch sb);
 
     @Override
-    public void render(SpriteBatch sb) {
-
-    }
+    public abstract void debug(ShapeRenderer sr);
 
     @Override
-    public void debug(ShapeRenderer sr) {
-
-    }
-
-    @Override
-    public void dispose() {
-
-    }
+    public abstract void dispose();
 }

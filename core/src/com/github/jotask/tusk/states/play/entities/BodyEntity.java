@@ -8,13 +8,16 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class BodyEntity extends Entity{
 
-    protected World world;
     protected Body body;
 
-    public BodyEntity(World world, Body body) {
+    public BodyEntity(Body body) {
+        super();
         this.body = body;
-        this.world = world;
+        this.body.setUserData(this);
     }
+
+    @Override
+    public void update() { }
 
     @Override
     public void render(SpriteBatch sb) { }
@@ -24,8 +27,7 @@ public class BodyEntity extends Entity{
 
     @Override
     public void dispose() {
-        super.dispose();
-        this.world.destroyBody(this.body);
+        this.body.getWorld().destroyBody(this.body);
     }
 
     public float getAngleFromThis(Vector2 other){
@@ -33,7 +35,7 @@ public class BodyEntity extends Entity{
     }
 
     public Body getBody() { return this.body; }
-    public World getWorld() { return this.world; }
+    public World getWorld() { return this.getBody().getWorld(); }
     public Vector2 getPosition(){
         return this.body.getPosition();
     }
