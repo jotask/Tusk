@@ -4,7 +4,7 @@ import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.github.jotask.tusk.engine.game.Timer;
+import com.github.jotask.tusk.util.Timer;
 
 public class DayCycle implements Ambient{
 

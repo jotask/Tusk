@@ -1,12 +1,10 @@
 package com.github.jotask.tusk.engine.game.animations;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.util.Util;
 
 import java.util.HashMap;

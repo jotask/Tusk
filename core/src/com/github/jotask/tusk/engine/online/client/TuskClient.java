@@ -55,7 +55,6 @@ public class TuskClient implements Disposable{
     }
 
     synchronized void receivedCharacter(Network.Character character){
-        // FIXME
         if(this.character.id == character.id) return;
         PlayerIdle playerIdle = this.onlinePlayers.exist(character.id);
         if(playerIdle == null){
@@ -66,6 +65,7 @@ public class TuskClient implements Disposable{
     }
 
     public void sendPlayer(Player player){
+        if(player == null) System.out.println("is null");
         Network.Character character = this.getCharacter();
         character.position = player.getBody().getPosition();
         character.angle = player.getBody().getAngle();

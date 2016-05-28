@@ -5,10 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.engine.online.client.TuskClient;
 import com.github.jotask.tusk.states.AbstractState;
 import com.github.jotask.tusk.states.Camera;
 import com.github.jotask.tusk.states.GameStateManager;
+import com.github.jotask.tusk.states.play.Mutiplayer;
 import com.github.jotask.tusk.states.play.Play;
 import com.github.jotask.tusk.states.play.entities.player.Player;
 
@@ -25,7 +27,7 @@ public class Debug extends AbstractState {
     @Override
     public void init() {
         this.camera = new Camera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        this.font = new BitmapFont();
+        this.font = AssetManager.get().getFont();
 
     }
 
@@ -70,14 +72,20 @@ public class Debug extends AbstractState {
         String bullets = "Bullets: " + play.getEntityManager().bulletsSize();
         font.draw(sb, bullets, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 3);
 
-        TuskClient tuskClient = play.getClient();
+        // is online
 
-        if(tuskClient != null){
-            String player_name = "Name: " + tuskClient.getCharacter().name;
-            font.draw(sb, player_name, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 4);
+        if(play instanceof Mutiplayer){
 
-            String players_online = "Online: " + (tuskClient.getOnlinePlayers().getAllTree().size() + 1);
-            font.draw(sb, players_online, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 5);
+            TuskClient tuskClient = ((Mutiplayer)play).getClient();
+
+            if(tuskClient != null){
+                String player_name = "Name: " + tuskClient.getCharacter().name;
+                font.draw(sb, player_name, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 4);
+
+                String players_online = "Online: " + (tuskClient.getOnlinePlayers().getAllTree().size() + 1);
+                font.draw(sb, players_online, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 5);
+            }
+
         }
 
     }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.util.Constants;
 
-public class AbstractState implements IState {
+public abstract class AbstractState implements IState {
 
     protected Color bgColor = Color.CYAN;
     protected Camera camera;

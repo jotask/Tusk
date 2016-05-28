@@ -1,14 +1,15 @@
 package com.github.jotask.tusk.engine.game;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class AssetManager {
 
     public enum ASSETS{
 
-        PLAYER_TEXTURE("characters.png", TextureRegion.class),
-        BULLET_TEXTURE("characters.png", TextureRegion.class);
+        PLAYER_TEXTURE("characters.png", Texture.class),
+        BULLET_TEXTURE("characters.png", Texture.class),
+        LOGO_TEXTURE("logo.png", Texture.class);
 
         String texture;
         Class<?> tClass;
@@ -20,7 +21,7 @@ public class AssetManager {
 
     }
 
-    private TextureRegion bullet;
+    private BitmapFont font;
 
     private com.badlogic.gdx.assets.AssetManager manager;
 
@@ -38,10 +39,12 @@ public class AssetManager {
     }
 
     private void load(){
-        manager.load("characters.png", Texture.class);
+        this.font = new BitmapFont();
+        for(ASSETS a: ASSETS.values()) this.manager.load(a.texture, a.tClass);
         manager.finishLoading();
     }
 
+    public BitmapFont getFont(){ return font; }
     public Texture getAsset(ASSETS asset){
         return manager.get(asset.texture);
     }

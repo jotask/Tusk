@@ -25,11 +25,12 @@ public class Tusk extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+
+		AssetManager.get();
+
 		sb = new SpriteBatch();
 		sr = new ShapeRenderer();
 		sr.setAutoShapeType(true);
-
-		AssetManager.get();
 
 		gsm = GameStateManager.get();
 
@@ -84,5 +85,6 @@ public class Tusk extends ApplicationAdapter {
 		debug.dispose();
 		sb.dispose();
 		sr.dispose();
+		AssetManager.get().dispose();
 	}
 }

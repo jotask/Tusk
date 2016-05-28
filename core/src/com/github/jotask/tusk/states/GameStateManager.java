@@ -4,10 +4,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.states.menu.Menu;
 import com.github.jotask.tusk.states.options.Options;
-import com.github.jotask.tusk.states.play.Play;
-import com.github.jotask.tusk.states.selectplayer.SelectPlayer;
+import com.github.jotask.tusk.states.play.Mutiplayer;
+import com.github.jotask.tusk.states.play.SinglePlayer;
 import com.github.jotask.tusk.states.splash.Splash;
-import com.github.jotask.tusk.test.Test;
 import com.github.jotask.tusk.util.Constants;
 
 public class GameStateManager{
@@ -49,20 +48,20 @@ public class GameStateManager{
     public void changeState(STATE state){
         AbstractState screen;
         switch (state){
-            case PLAY:
-                screen = new Play();
-                break;
             case OPTIONS:
                 screen = new Options();
                 break;
             case MENU:
                 screen = new Menu();
                 break;
-            case SELECTPLAYER:
-                screen = new SelectPlayer();
+            case SINGLEPLAYER:
+                screen = new SinglePlayer();
                 break;
-            case TEST:
-                screen = new Test();
+            case MULTIPLAYER:
+                screen = new Mutiplayer();
+                break;
+            case EXIT:
+                screen = new Exit();
                 break;
             default:
             case SPLASH:
