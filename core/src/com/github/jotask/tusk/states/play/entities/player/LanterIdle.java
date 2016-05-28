@@ -1,10 +1,9 @@
 package com.github.jotask.tusk.states.play.entities.player;
 
 import box2dLight.ConeLight;
-import box2dLight.Light;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
+import com.github.jotask.tusk.engine.online.util.Network;
 import com.github.jotask.tusk.states.play.Play;
 
 /**
@@ -15,14 +14,17 @@ import com.github.jotask.tusk.states.play.Play;
  */
 public class LanterIdle {
 
+    private final Network.Lantern lantern;
+
     private final PlayerIdle player;
-    private Light light;
+    private ConeLight light;
 
     private float coneDegree = 35f;
     private float angle = 0f;
 
     public LanterIdle(PlayerIdle player) {
         this.player = player;
+        this.lantern = player.getCharacter().lantern;
         RayHandler rayHandler = Play.getInstance().getWorld().getEnviorment().getRayHandler();
         light = new ConeLight(rayHandler, 500, Color.WHITE, 10f, player.getPosition().x, player.getPosition().y,
                 angle, coneDegree);
@@ -30,13 +32,18 @@ public class LanterIdle {
     }
 
     public void update(){
-        light.setActive(player.getCharacter().lantern.on);
-        light.setPosition(player.getBody().getPosition());
+        light.setActive(lantern.on);
+        if(light.isActive()) {
+            light.setPosition(player.getBody().getPosition());
 
-        final Vector2 mousePos = Play.getInstance().getCamera().getMousePosInGameWorld();
+            light.setDirection(lantern.angle);
+        }
 
-        light.setDirection(player.getAngleFromThis(mousePos));
+    }
 
+    public void setData(Network.Lantern lantern){
+        this.lantern.on = lantern.on;
+        this.lantern.angle = lantern.angle;
     }
 
 }

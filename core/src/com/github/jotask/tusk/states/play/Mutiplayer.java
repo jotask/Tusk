@@ -1,5 +1,6 @@
 package com.github.jotask.tusk.states.play;
 
+import com.badlogic.gdx.Gdx;
 import com.github.jotask.tusk.engine.online.client.TuskClient;
 
 import java.io.IOException;
@@ -21,19 +22,20 @@ public class Mutiplayer extends Play{
             this.client = new TuskClient(this);
         } catch (IOException e) {
             System.err.println("Impossible connect to the server");
+            Gdx.app.exit();
         }
     }
 
     @Override
     public void update () {
         super.update();
-        if (this.client != null) this.client.sendPlayer(this.getPlayer());
+        this.client.sendPlayer(this.getPlayer());
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        if(this.client != null) this.client.dispose();
+        this.client.dispose();
     }
 
     public TuskClient getClient() {

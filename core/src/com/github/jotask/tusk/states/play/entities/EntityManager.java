@@ -73,6 +73,11 @@ public class EntityManager implements IEntity{
 
     public void add(Entity entity){
         if(entity == null) return;
+
+        if(entity instanceof Bullet){
+            current_num_bullets++;
+        }
+
         this.entities.add(entity);
     }
 

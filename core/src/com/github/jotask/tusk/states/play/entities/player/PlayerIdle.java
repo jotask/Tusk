@@ -49,7 +49,7 @@ public class PlayerIdle extends BodyEntity {
     public void setData(Network.Character c){
         this.character.position = c.position;
         this.character.angle = c.angle;
-        this.character.lantern.on = c.lantern.on;
+        this.lanterIdle.setData(c.lantern);
     }
 
     @Override

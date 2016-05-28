@@ -1,16 +1,14 @@
 package com.github.jotask.tusk.states.play.entities.player;
 
 import box2dLight.ConeLight;
-import box2dLight.Light;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 import com.github.jotask.tusk.states.play.Play;
 
 public class Lantern {
 
     private final Player player;
-    private Light light;
+    private ConeLight light;
 
     private float coneDegree = 35f;
     private float angle = 0f;
@@ -28,14 +26,16 @@ public class Lantern {
             light.setActive(!light.isActive());
         light.setPosition(player.getBody().getPosition());
 
-        final Vector2 mousePos = Play.getInstance().getCamera().getMousePosInGameWorld();
+        this.angle = player.getAngleFromThis(Play.getInstance().getCamera().getMousePosInGameWorld());
 
-        light.setDirection(player.getAngleFromThis(mousePos));
+        light.setDirection(angle);
 
     }
 
     public boolean isOn() {
-        return light.isActive();
+        return this.light.isActive();
     }
+
+    public float getAngle(){ return this.angle; }
 
 }

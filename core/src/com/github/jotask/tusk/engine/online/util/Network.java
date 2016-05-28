@@ -36,6 +36,7 @@ public abstract class Network {
 
     public static class Lantern{
         public boolean on;
+        public float angle;
     }
 
     public static class Character{

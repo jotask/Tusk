@@ -1,13 +1,16 @@
 package com.github.jotask.tusk.states.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.github.jotask.tusk.states.AbstractState;
+import com.github.jotask.tusk.states.Camera;
 import com.github.jotask.tusk.states.GameStateManager;
 import com.github.jotask.tusk.states.STATE;
 
@@ -28,9 +31,12 @@ public class Menu extends AbstractState {
     private Skin skin;
     private Stage stage;
 
+    private Logo logo;
+
     @Override
     public void init() {
-        super.init();
+        this.camera = new Camera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        super.setBgColor(Color.CORAL);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         stage = new Stage();
 
@@ -71,35 +77,37 @@ public class Menu extends AbstractState {
 
         }
 
+        this.logo = new Logo();
+
         Gdx.input.setInputProcessor(stage);
 
     }
 
     public TextButton createButton(BUTTONS b, float y){
-
         final TextButton button = new TextButton(b.text, skin, "default");
         button.setWidth(200f);
         button.setHeight(20f);
         button.setPosition(Gdx.graphics.getWidth() /2 - 100f, y);
-//            button.addListener(new ClickListener(){
-//                @Override
-//                public void clicked(InputEvent event, float x, float y){
-//                    button.setText("You clicked the button");
-//                }
-//            });
         stage.addActor(button);
-
         return button;
     }
 
     @Override
     public void render(SpriteBatch sb) {
         stage.draw();
+        logo.render(sb);
+    }
+
+    @Override
+    public void debug(ShapeRenderer sr) {
+        super.debug(sr);
+        logo.debug(sr);
     }
 
     @Override
     public void dispose() {
         super.dispose();
+        logo.dispose();
     }
 
 }
