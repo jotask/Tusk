@@ -23,7 +23,7 @@ public class PlayerIdle extends BodyEntity {
 
     private Animation animation;
 
-    private LanterIdle lanterIdle;
+    private LanternIdle lanterIdle;
 
     public PlayerIdle(Body body, Network.Character character) {
         super(body);
@@ -32,7 +32,7 @@ public class PlayerIdle extends BodyEntity {
 
         this.body.setUserData(this);
 
-        this.lanterIdle = new LanterIdle(this);
+        this.lanterIdle = new LanternIdle(this);
 
         this.animation = new PlayerAnimation();
 

@@ -7,12 +7,12 @@ import com.github.jotask.tusk.engine.online.util.Network;
 import com.github.jotask.tusk.states.play.Play;
 
 /**
- * LanterIdle
+ * Lantern Idle
  *
  * @author Jose Vives Iznardo
  * @since 28/05/2016
  */
-public class LanterIdle {
+public class LanternIdle {
 
     private final Network.Lantern lantern;
 
@@ -22,7 +22,7 @@ public class LanterIdle {
     private float coneDegree = 35f;
     private float angle = 0f;
 
-    public LanterIdle(PlayerIdle player) {
+    public LanternIdle(PlayerIdle player) {
         this.player = player;
         this.lantern = player.getCharacter().lantern;
         RayHandler rayHandler = Play.getInstance().getWorld().getEnviorment().getRayHandler();
