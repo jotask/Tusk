@@ -5,10 +5,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public abstract class Entity implements IEntity {
 
-    private boolean toDestroy;
-
     @Override
-    public boolean toDestroy() { return toDestroy; }
+    public abstract boolean toDestroy();
 
     @Override
     public abstract void update();

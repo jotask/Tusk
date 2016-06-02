@@ -53,9 +53,7 @@ public class TuskServer implements Disposable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         server.stop();
-
     }
 
     public AvlTree<Network.Character> getAvlTree() {

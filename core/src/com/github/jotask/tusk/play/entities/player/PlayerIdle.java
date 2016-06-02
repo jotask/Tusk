@@ -77,10 +77,10 @@ public class PlayerIdle extends BodyEntity {
         this.weapon.dispose();
     }
 
-    public boolean isDisconnected() {
-        return disconnected;
-    }
+    @Override
+    public boolean toDestroy() { return disconnected; }
 
     public void setDisconnected(boolean disconnected) { this.disconnected = disconnected; }
+
 }
 

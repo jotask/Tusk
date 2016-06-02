@@ -50,6 +50,9 @@ public class Player extends BodyEntity {
     }
 
     @Override
+    public boolean toDestroy() { return false; }
+
+    @Override
     public void update() {
 
         this.animation.update();
