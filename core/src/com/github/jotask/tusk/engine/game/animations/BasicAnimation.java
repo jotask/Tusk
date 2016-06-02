@@ -21,11 +21,7 @@ public abstract  class BasicAnimation implements Animation {
 
     private TextureRegion currentFrame;
 
-    private boolean flipX, flipY;
-
     public static final float FRAMES = 0.25f;
-
-    private boolean flip;
 
     private float stateTime;
 
@@ -53,9 +49,7 @@ public abstract  class BasicAnimation implements Animation {
                 if(currentFrame.isFlipX())
                     currentFrame.flip(currentFrame.isFlipX(), currentFrame.isFlipY());
                 break;
-            case UP:
-            case DOWN:
-                default:
+            default:
                 break;
         }
     }
@@ -64,10 +58,13 @@ public abstract  class BasicAnimation implements Animation {
     public void update() {
         stateTime += Gdx.graphics.getDeltaTime();
         currentFrame = animations.get(currentAnimations).getKeyFrame(stateTime, true);
+
     }
 
     @Override
-    public void render(SpriteBatch sb, Body body) { Util.Render.render(sb, currentFrame, body); }
+    public void render(SpriteBatch sb, Body body) {
+        Util.Render.render(sb, currentFrame, body);
+    }
 
     @Override
     public void debug(ShapeRenderer sr, Body body) { Util.Render.debug(sr, currentFrame, body); }

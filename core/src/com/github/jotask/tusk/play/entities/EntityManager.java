@@ -19,7 +19,7 @@ public class EntityManager implements IEntity{
     }
 
     public EntityManager() {
-        this.bullets = new EntityUpdater<Bullet>();
+        this.bullets = new EntityUpdater<Bullet>(10);
         this.playerIdle = new EntityUpdater<PlayerIdle>();
     }
 

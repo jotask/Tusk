@@ -14,7 +14,7 @@ public abstract class Play extends AbstractState {
 
     private static Play state;
     public static Play getInstance(){
-        if(state == null) throw new UnsupportedOperationException("Can't get instance, is not the current state");
+        if(state == null) throw new UnsupportedOperationException("Can't get instance, is not the current running state");
         return state;
     }
 
@@ -42,7 +42,7 @@ public abstract class Play extends AbstractState {
         this.player.update();
         this.camera.follow(player);
         this.entityManager.update();
-        hud.update();
+        this.hud.update();
     }
 
     @Override
@@ -51,7 +51,7 @@ public abstract class Play extends AbstractState {
         this.world.render(sb, this.camera);
         this.entityManager.render(sb);
         this.player.render(sb);
-        hud.render(sb);
+        this.hud.render(sb);
     }
 
     @Override
@@ -66,7 +66,7 @@ public abstract class Play extends AbstractState {
         this.world.debug(sr, this.getCamera().combined);
         this.entityManager.debug(sr);
         this.player.debug(sr);
-        hud.debug(sr);
+        this.hud.debug(sr);
     }
 
     @Override
@@ -74,7 +74,7 @@ public abstract class Play extends AbstractState {
         this.player.dispose();
         this.entityManager.dispose();
         this.world.dispose();
-        hud.dispose();
+        this.hud.dispose();
         Play.state = null;
     }
 
@@ -82,9 +82,5 @@ public abstract class Play extends AbstractState {
         return player;
     }
     public Mundo getWorld() { return world; }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
 
 }

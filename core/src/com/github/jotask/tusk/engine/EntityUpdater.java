@@ -37,7 +37,9 @@ public class EntityUpdater<T extends Entity> implements IEntity{
             if(t.toDestroy()){
                 copy.remove(t);
                 t.dispose();
+                continue;
             }
+            t.update();
         }
         list = copy;
     }
@@ -47,7 +49,13 @@ public class EntityUpdater<T extends Entity> implements IEntity{
         return false;
     }
 
-    public boolean remove(T deleteT){ return list.remove(deleteT); }
+    public boolean remove(T deleteT){
+        if(list.remove(deleteT)){
+            deleteT.dispose();
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public void render(SpriteBatch sb) {

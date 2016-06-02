@@ -39,6 +39,7 @@ public class Util {
     }
 
     public static class Render {
+
         public static void render(SpriteBatch sb, TextureRegion region, Body body){
 
             float w = Util.Pixel.toMeter(region.getRegionWidth());

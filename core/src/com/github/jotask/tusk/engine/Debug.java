@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.engine.online.client.TuskClient;
+import com.github.jotask.tusk.play.entities.EntityManager;
 import com.github.jotask.tusk.states.AbstractState;
 import com.github.jotask.tusk.states.Camera;
 import com.github.jotask.tusk.states.GameStateManager;
@@ -70,7 +71,7 @@ public class Debug extends AbstractState {
         String entities = "Entities: " + play.getWorld().getWorld().getBodyCount();
         font.draw(sb, entities, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 2);
 
-        String bullets = "Bullets: " + play.getEntityManager().getBullets().size();
+        String bullets = "Bullets: " + EntityManager.get().getBullets().size();
         font.draw(sb, bullets, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 3);
 
         // is online

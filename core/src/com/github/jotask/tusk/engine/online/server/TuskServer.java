@@ -73,6 +73,7 @@ public class TuskServer implements Disposable {
     }
 
     public synchronized void receivedCharacter(Network.Character character) {
+        if(character == null) return;
         avlTree.insert(character.id, character);
         gui.updateLabel(character);
     }
