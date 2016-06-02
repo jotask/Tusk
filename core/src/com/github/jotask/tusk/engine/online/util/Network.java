@@ -25,7 +25,9 @@ public abstract class Network {
         kryo.register(Vector2.class);
         kryo.register(Characters.class);
         kryo.register(Lantern.class);
+        kryo.register(Weapon.class);
         kryo.register(Disconnected.class);
+        kryo.register(Weapon.class);
     }
 
     public static class Login{
@@ -39,12 +41,17 @@ public abstract class Network {
         public float angle;
     }
 
+    public static class Weapon{
+        public int fire;
+    }
+
     public static class Character{
         public int id;
         public String name;
         public float angle;
         public Vector2 position;
         public Lantern lantern;
+        public Weapon weapon;
     }
 
     public static class Characters{

@@ -8,17 +8,19 @@ public class Constants {
     public static final String VERSION = "v0.01[PRE-ALPHA]";
 
     // FIXME
-    public static final int APP_WIDTH = 800 / 2;
-    public static final int APP_HEIGHT = 600 / 2;
+    private static final int divider = 1;
+    public static final int APP_WIDTH = 800 / divider;
+    public static final int APP_HEIGHT = 600 / divider;
     public static final int BACKGROUND_FPS = 30;
     public static final int FOREGROUND_FPS = 30;
 
     public static final int SCALE = 50; // 50
 
-    public static final STATE DEFAULT_STATE = STATE.MULTIPLAYER;
+    public static final STATE DEFAULT_STATE = STATE.SINGLEPLAYER;
 
     public static final int PPM = 16; // RECOMMENDED 30 16 for me
 
-    public static final boolean DEFAULT_DEBUG = true;
+    public static final boolean DEFAULT_GAME_INFO = false;
+    public static final boolean DEFAULT_DEBUG = false;
 
 }

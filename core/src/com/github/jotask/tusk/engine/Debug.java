@@ -10,13 +10,14 @@ import com.github.jotask.tusk.engine.online.client.TuskClient;
 import com.github.jotask.tusk.states.AbstractState;
 import com.github.jotask.tusk.states.Camera;
 import com.github.jotask.tusk.states.GameStateManager;
-import com.github.jotask.tusk.states.play.Mutiplayer;
-import com.github.jotask.tusk.states.play.Play;
-import com.github.jotask.tusk.states.play.entities.player.Player;
+import com.github.jotask.tusk.play.Mutiplayer;
+import com.github.jotask.tusk.play.Play;
+import com.github.jotask.tusk.play.entities.player.Player;
+import com.github.jotask.tusk.util.Constants;
 
 public class Debug extends AbstractState {
 
-    private boolean isEnabled = true;
+    private boolean isEnabled = Constants.DEFAULT_GAME_INFO;
 
     private BitmapFont font;
 
@@ -69,7 +70,7 @@ public class Debug extends AbstractState {
         String entities = "Entities: " + play.getWorld().getWorld().getBodyCount();
         font.draw(sb, entities, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 2);
 
-        String bullets = "Bullets: " + play.getEntityManager().bulletsSize();
+        String bullets = "Bullets: " + play.getEntityManager().getBullets().size();
         font.draw(sb, bullets, offset + camera.position.x - (camera.viewportWidth / 2), y - 15 * 3);
 
         // is online

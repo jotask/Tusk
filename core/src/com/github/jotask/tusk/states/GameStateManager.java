@@ -2,11 +2,11 @@ package com.github.jotask.tusk.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.github.jotask.tusk.states.menu.Menu;
-import com.github.jotask.tusk.states.options.Options;
-import com.github.jotask.tusk.states.play.Mutiplayer;
-import com.github.jotask.tusk.states.play.SinglePlayer;
-import com.github.jotask.tusk.states.splash.Splash;
+import com.github.jotask.tusk.menu.Menu;
+import com.github.jotask.tusk.options.Options;
+import com.github.jotask.tusk.play.Mutiplayer;
+import com.github.jotask.tusk.play.SinglePlayer;
+import com.github.jotask.tusk.splash.Splash;
 import com.github.jotask.tusk.util.Constants;
 
 public class GameStateManager{
@@ -46,7 +46,7 @@ public class GameStateManager{
     }
 
     public void changeState(STATE state){
-        AbstractState screen;
+        AbstractState screen = null;
         switch (state){
             case OPTIONS:
                 screen = new Options();

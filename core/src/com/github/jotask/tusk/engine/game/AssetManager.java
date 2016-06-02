@@ -1,7 +1,9 @@
 package com.github.jotask.tusk.engine.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class AssetManager {
 
@@ -22,6 +24,7 @@ public class AssetManager {
     }
 
     private BitmapFont font;
+    private Skin skin;
 
     private com.badlogic.gdx.assets.AssetManager manager;
 
@@ -42,6 +45,7 @@ public class AssetManager {
         this.font = new BitmapFont();
         for(ASSETS a: ASSETS.values()) this.manager.load(a.texture, a.tClass);
         manager.finishLoading();
+        this.skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
     }
 
     public BitmapFont getFont(){ return font; }
@@ -49,8 +53,13 @@ public class AssetManager {
         return manager.get(asset.texture);
     }
 
+    public Skin getSkin(){ return this.skin; }
+
     public void dispose(){
         manager.dispose();
+        font.dispose();
+        skin.dispose();
+        instance = null;
     }
 
 

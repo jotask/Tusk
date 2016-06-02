@@ -6,9 +6,9 @@ import com.esotericsoftware.kryonet.Listener;
 import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.engine.online.util.AvlTree;
 import com.github.jotask.tusk.engine.online.util.Network;
-import com.github.jotask.tusk.states.play.Play;
-import com.github.jotask.tusk.states.play.entities.player.Player;
-import com.github.jotask.tusk.states.play.entities.player.PlayerIdle;
+import com.github.jotask.tusk.play.Play;
+import com.github.jotask.tusk.play.entities.player.Player;
+import com.github.jotask.tusk.play.entities.player.PlayerIdle;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -58,7 +58,7 @@ public class TuskClient implements Disposable{
         if(this.character.id == character.id) return;
         PlayerIdle playerIdle = this.onlinePlayers.exist(character.id);
         if(playerIdle == null){
-            playerIdle = Factory.createPlayerIdle(game, character);
+            playerIdle = Factory.Entities.createPlayerIdle(game, character);
         }
         playerIdle.setData(character);
         this.onlinePlayers.insert(character.id, playerIdle);
@@ -76,12 +76,18 @@ public class TuskClient implements Disposable{
         character.lantern.on = player.getLantern().isOn();
         character.lantern.angle = player.getLantern().getAngle();
 
+        if(character.weapon == null){
+            character.weapon = new Network.Weapon();
+        }
+
+        character.weapon.fire = player.getWeapon().getNeedsToFire();
+
         this.getClient().sendUDP(character);
     }
 
     synchronized void disconnected(Network.Disconnected disconnected){
         final PlayerIdle exist = this.onlinePlayers.exist(disconnected.id);
-        exist.disconnected = true;
+        exist.setDisconnected(true);
         this.onlinePlayers.delete(disconnected.id);
     }
 

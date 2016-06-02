@@ -6,6 +6,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+import com.github.jotask.tusk.play.entities.BodyEntity;
+import com.github.jotask.tusk.play.world.Level;
+import com.github.jotask.tusk.play.world.environment.lights.Fire;
+
+import java.util.LinkedList;
 
 public class Util {
 
@@ -57,6 +64,32 @@ public class Util {
 
         public static void debug(ShapeRenderer sr, Rectangle rectangle){
             sr.box(rectangle.x, rectangle.y, 0, rectangle.width, rectangle.height, 0);
+        }
+
+    }
+
+    public static class Finder {
+
+        public static LinkedList<BodyEntity> getAllBodiesFromPosition(World world, int radius, Vector2 center){
+            LinkedList<BodyEntity> bodiesFounded = null;
+
+            Array<Body> bodies = new Array<Body>();
+
+            world.getBodies(bodies);
+
+            for(Body b: bodies){
+
+                final Object userData = b.getUserData();
+
+                if(userData instanceof Level.Ground){
+
+                }else if(userData instanceof Fire){
+
+                }
+
+            }
+
+            return bodiesFounded;
         }
 
     }
