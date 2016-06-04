@@ -1,7 +1,6 @@
 package com.github.jotask.tusk.splash;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,9 +11,9 @@ import com.github.jotask.tusk.states.Camera;
 import com.github.jotask.tusk.states.GameStateManager;
 import com.github.jotask.tusk.states.STATE;
 import com.github.jotask.tusk.util.Timer;
+import com.github.jotask.tusk.util.Util;
 
 public class Splash extends AbstractState {
-
 
     private final float TIME = 3;
     private Timer timer;
@@ -26,22 +25,23 @@ public class Splash extends AbstractState {
     @Override
     public void init() {
         this.camera = new Camera(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f);
-        super.setBgColor(Color.BROWN);
+        this.setBgColor(Util.getColorFromHex(255,166,158, 1f));
 
-        Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.LOGO_TEXTURE);
+        Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.AIKO);
         region = new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
         position = new Vector2(getCamera().position.x - (region.getRegionWidth() / 2f),
                                 getCamera().position.y - (region.getRegionHeight() / 2f));
 
         timer = new Timer(TIME);
+
     }
 
     @Override
     public void update() {
-        if(timer.isFinished()){
-            GameStateManager.get().changeState(STATE.MENU);
-        }
+        if(timer.isFinished()) GameStateManager.get().changeState(STATE.MENU);
+        this.camera.zoom -= 0.01f;
+        this.camera.update();
     }
 
     @Override
