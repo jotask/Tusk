@@ -15,7 +15,7 @@ public class Item extends Entity{
     private PriceValue value;
 
     private final int max_quantity;
-    private int quantity;
+    private int quantity = 0;
 
     public Item(PriceValue value) {
         this(value, 1);
@@ -29,7 +29,7 @@ public class Item extends Entity{
 
     public void stack(Item item){
         if(max_quantity == 1) return;
-        // TODO improve to short or bytes
+        // TODO improve to short or bytes type
         if(this.quantity + item.quantity < max_quantity){
             this.quantity = (this.quantity + item.quantity);
             item.quantity = 0;
@@ -64,5 +64,7 @@ public class Item extends Entity{
     public void dispose() {
 
     }
+
+    public PriceValue getValue(){ return this.value; }
 
 }

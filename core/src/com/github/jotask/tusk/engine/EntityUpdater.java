@@ -21,7 +21,7 @@ public class EntityUpdater<T extends Entity> implements IEntity{
 
     private LinkedList<T> list;
 
-    public EntityUpdater() { this(0); }
+    public EntityUpdater() { this(200); }
     public EntityUpdater(int max_size){
         this.MAX_SIZE = max_size;
         this.list = new LinkedList<T>();
@@ -45,8 +45,7 @@ public class EntityUpdater<T extends Entity> implements IEntity{
     }
 
     public boolean add(T newT){
-        if(list.size() >= MAX_SIZE) return list.add(newT);
-        return false;
+        return list.add(newT);
     }
 
     public boolean remove(T deleteT){

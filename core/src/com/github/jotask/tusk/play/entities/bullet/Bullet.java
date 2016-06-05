@@ -57,8 +57,7 @@ public class Bullet extends BodyEntity {
 
     @Override
     public boolean toDestroy() {
-        boolean isFinished = timer.isFinished();
-        return isFinished;
+        return timer.isFinished();
     }
 
     @Override
@@ -75,6 +74,7 @@ public class Bullet extends BodyEntity {
     public void dispose() {
         super.dispose();
         light.remove();
+        System.out.println("dispose");
     }
 
     public BodyEntity getShooter() { return shooter; }

@@ -74,7 +74,8 @@ public final class Factory {
             Body body = Bodies.createBullet(entity.getWorld(), entity.getPosition(), isPlayer);
             //float angle = entity.getAngleFromThis(Play.getInstance().getCamera().getMousePosInGameWorld());
             Bullet bullet = new Bullet(body, entity);
-            manager.getBullets().add(bullet);
+            boolean s = manager.getBullets().add(bullet);
+            System.out.println(s);
             return bullet;
         }
 
