@@ -33,9 +33,19 @@ public class Collisions implements ContactListener {
             return;
 
 
+        /*
+        If contanct is player sensor contact with spawner
+        activate spawner
+         */
+
     }
 
-    @Override public void endContact(Contact contact) { }
+    @Override public void endContact(Contact contact) {
+        /*
+        if contact is player sensor with player spawner
+        deactive spawer
+         */
+    }
     @Override public void preSolve(Contact contact, Manifold oldManifold) { }
     @Override public void postSolve(Contact contact, ContactImpulse impulse) { }
 

@@ -73,14 +73,14 @@ public class TuskClient implements Disposable{
             character.lantern = new Network.Lantern();
         }
 
-        character.lantern.on = player.getLantern().isOn();
-        character.lantern.angle = player.getLantern().getAngle();
+        character.lantern.on = player.getInventory().getLantern().isOn();
+        character.lantern.angle = player.getInventory().getLantern().getAngle();
 
         if(character.weapon == null){
             character.weapon = new Network.Weapon();
         }
 
-        character.weapon.fire = player.getWeapon().getNeedsToFire();
+        character.weapon.fire = player.getInventory().getWeapon().getNeedsToFire();
 
         this.getClient().sendUDP(character);
     }

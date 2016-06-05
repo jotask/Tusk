@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.github.jotask.tusk.engine.online.util.Network;
 import com.github.jotask.tusk.play.Play;
 import com.github.jotask.tusk.play.entities.BodyEntity;
+import com.github.jotask.tusk.play.entities.Enemy;
 import com.github.jotask.tusk.play.entities.EntityManager;
 import com.github.jotask.tusk.play.entities.bullet.Bullet;
 import com.github.jotask.tusk.play.entities.player.Player;
@@ -41,6 +42,15 @@ public final class Factory {
             Player player = new Player(body);
             return player;
 
+        }
+
+        public static Enemy createEnemy(Play play, Vector2 position) {
+            return createEnemy(play, position, Enemy.EnemyType.DEFAULT);
+        }
+
+        public static Enemy createEnemy(Play play, Vector2 position, Enemy.EnemyType type){
+            Enemy enemy = new Enemy(Bodies.createEnemy(play.getWorld(), position, type.size));
+            return enemy;
         }
 
         public static PlayerIdle createPlayerIdle(Play play, Network.Character character) {
@@ -137,17 +147,6 @@ public final class Factory {
             }
 
         }
-
-    }
-
-    public static class Weapons{
-
-//        public static MachineGun createWeapon(EquipableEntity equipable){
-//
-//            // TODO
-//            return null;
-//
-//        }
 
     }
 

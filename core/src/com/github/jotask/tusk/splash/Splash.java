@@ -49,4 +49,5 @@ public class Splash extends AbstractState {
         super.render(sb);
         sb.draw(region, position.x, position.y, region.getRegionWidth(), region.getRegionHeight());
     }
+
 }

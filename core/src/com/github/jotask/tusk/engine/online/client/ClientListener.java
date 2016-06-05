@@ -33,11 +33,11 @@ public class ClientListener extends Listener {
                 character.position = client.getGame().getPlayer().getBody().getPosition();
 
                 Network.Lantern lantern = new Network.Lantern();
-                lantern.on = client.getGame().getPlayer().getLantern().isOn();
+                lantern.on = client.getGame().getPlayer().getInventory().getLantern().isOn();
                 character.lantern = lantern;
 
                 Network.Weapon weapon = new Network.Weapon();
-                weapon.fire = client.getGame().getPlayer().getWeapon().getNeedsToFire();
+                weapon.fire = client.getGame().getPlayer().getInventory().getWeapon().getNeedsToFire();
                 character.weapon = weapon;
 
                 client.getClient().sendTCP(character);

@@ -7,7 +7,7 @@ import com.github.jotask.tusk.engine.game.animations.Animation;
 import com.github.jotask.tusk.engine.game.animations.PlayerAnimation;
 import com.github.jotask.tusk.engine.online.util.Network;
 import com.github.jotask.tusk.play.entities.BodyEntity;
-import com.github.jotask.tusk.play.weapons.IdleWeapon;
+import com.github.jotask.tusk.play.items.weapons.IdleWeapon;
 
 /**
  * Created by Jota on 27/05/2016.
@@ -38,7 +38,7 @@ public class PlayerIdle extends BodyEntity {
 
         this.animation = new PlayerAnimation();
 
-        this.weapon = new IdleWeapon(this);
+        this.weapon = new IdleWeapon();
 
     }
 

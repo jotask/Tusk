@@ -23,6 +23,8 @@ import com.github.jotask.tusk.play.world.environment.lights.Fire;
 import com.github.jotask.tusk.util.Util;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.LinkedList;
+
 public class Level implements Disposable {
 
     private TiledMap map;
@@ -30,12 +32,16 @@ public class Level implements Disposable {
 
     private Vector2 playerSpawn;
 
+    private LinkedList<Spawner> enemiesSpawn;
+
     private World world;
 
     public Level(World world) {
         this.world = world;
         map = new TmxMapLoader().load("level/new.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map, 0.0625f);
+
+        this.enemiesSpawn = new LinkedList<Spawner>();
     }
 
     protected void init(){
@@ -231,7 +237,25 @@ public class Level implements Disposable {
 
     }
 
-    public class Spawner{
+    private void createEnemiesSpawners(){
+        Vector2 tmp = Util.Pixel.toMeter(new Vector2());
+        enemiesSpawn.add(new Spawner(tmp));
+    }
+
+    public LinkedList<Vector2> getClosedSpawner(){
+        LinkedList<Vector2> result = new LinkedList<Vector2>();
+        for(Spawner s: enemiesSpawn) if(s.isActive) result.add(s.position);
+        return result;
+    }
+
+    class Spawner{
+        boolean isActive;
+        final Vector2 position;
+
+        public Spawner(Vector2 position) {
+            this.position = position;
+            this.isActive = false;
+        }
 
     }
 

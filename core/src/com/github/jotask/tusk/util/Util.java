@@ -1,5 +1,6 @@
 package com.github.jotask.tusk.util;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -29,14 +30,14 @@ public class Util {
         }
     }
 
-    public static class Meter {
-
-        public static float toPixel(float meter) { return meter * Constants.PPM; }
-
-        public static Vector2 toPixel(Vector2 vecMeter){
-            return new Vector2(Meter.toPixel(vecMeter.x), Meter.toPixel(vecMeter.y));
-        }
-    }
+//    public static class Meter {
+//
+//        public static float toPixel(float meter) { return meter * Constants.PPM; }
+//
+//        public static Vector2 toPixel(Vector2 vecMeter){
+//            return new Vector2(Meter.toPixel(vecMeter.x), Meter.toPixel(vecMeter.y));
+//        }
+//    }
 
     public static class Render {
 
@@ -93,6 +94,13 @@ public class Util {
             return bodiesFounded;
         }
 
+    }
+
+    public static Color getColorFromHex(int R, int G, int B, float alpha){
+        float r = R / 255f;
+        float g = G / 255f;
+        float b = B / 255f;
+        return new Color(r, g, b, alpha);
     }
 
 }

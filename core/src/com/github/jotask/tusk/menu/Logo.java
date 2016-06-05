@@ -1,10 +1,12 @@
 package com.github.jotask.tusk.menu;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.github.jotask.tusk.engine.game.AssetManager;
 
 /**
@@ -13,31 +15,33 @@ import com.github.jotask.tusk.engine.game.AssetManager;
  * @author Jose Vives Iznardo
  * @since 28/05/2016
  */
-public class Logo {
+public class Logo{
 
-    private TextureRegion region;
-    private Vector2 position_logo;
+    private Image itemImage;
 
-    public Logo() {
+    private Label text;
 
-        position_logo = new Vector2(0,0);
+    public Logo(Table table) {
 
         Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.LOGO_TEXTURE);
-        region = new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
+        this.itemImage = new Image();
+//        itemImage.setPosition(10, 10);
+        itemImage.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
+        itemImage.setSize(texture.getWidth(), texture.getHeight());
+        itemImage.setOrigin(itemImage.getWidth() / 2f, itemImage.getHeight() / 2f);
+        itemImage.addAction(Actions.moveBy(10, 10, 3f));
+        table.add(itemImage).padBottom(50f);
+        table.row();
+
+//        text = new Label("Tusk!", AssetManager.get().getSkin());
+//        text.setFontScale(8f);
+//        text.setOrigin(text.getWidth() / 2f, text.getHeight() / 2f);
+//
+//        table.add(text).row();
 
     }
 
-    public void update(){}
-
-    public void render(SpriteBatch sb){
-        sb.draw(region, position_logo.x, position_logo.y, region.getRegionWidth(), region.getRegionHeight());
-    }
-
-    public void debug(ShapeRenderer sr){
-        sr.box(position_logo.x, position_logo.y, 0, region.getRegionWidth(), region.getRegionHeight(), 0);
-    }
-
-    public void dispose(){
+    public void update(){
 
     }
 

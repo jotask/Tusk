@@ -9,9 +9,9 @@ import com.github.jotask.tusk.engine.controller.PlayerController;
 import com.github.jotask.tusk.engine.game.animations.Animation;
 import com.github.jotask.tusk.engine.game.animations.BasicAnimation;
 import com.github.jotask.tusk.engine.game.animations.PlayerAnimation;
+import com.github.jotask.tusk.play.Inventory;
 import com.github.jotask.tusk.play.entities.BodyEntity;
-import com.github.jotask.tusk.play.weapons.BasicWeapon;
-import com.github.jotask.tusk.play.weapons.MachineGun;
+import com.github.jotask.tusk.play.items.weapons.MachineGun;
 
 public class Player extends BodyEntity {
 
@@ -24,22 +24,18 @@ public class Player extends BodyEntity {
 
     private Animation animation;
 
-    private BasicWeapon weapon;
-
-    private Lantern lantern;
+    private Inventory inventory;
 
     public Player(Body body) {
         super(body);
-
         this.body.setUserData(this);
-
+        this.inventory = new Inventory(this);
+        Player instance = this;
+        this.inventory.equipLantern(new Lantern(instance));
+        MachineGun gun = new MachineGun();
+        gun.pickUp(this.inventory);
         this.controller = new DesktopPlayerController();
         this.animation = new PlayerAnimation();
-
-        this.weapon = new MachineGun(this);
-
-        this.lantern = new Lantern(this);
-
     }
 
     private void applyLinearImpulse(Vector2 targetVelocity){
@@ -54,13 +50,11 @@ public class Player extends BodyEntity {
 
     @Override
     public void update() {
-
         this.animation.update();
+        this.inventory.update();
 
         animation.changeAnimation(BasicAnimation.ANIMATIONS.IDLE);
-
         Vector2 velocity = new Vector2();
-
         if(controller.left()) {
             velocity.x -= SPEED;
             this.animation.direction(BasicAnimation.DIRECTION.LEFT);
@@ -70,7 +64,6 @@ public class Player extends BodyEntity {
             this.animation.direction(BasicAnimation.DIRECTION.RIGHT);
         }
 
-        lantern.update();
 
         if(controller.up()) {
             velocity.y += SPEED;
@@ -85,8 +78,8 @@ public class Player extends BodyEntity {
 
         this.applyLinearImpulse(velocity);
 
-        if (controller.shoot() && weapon != null) {
-            weapon.shot();
+        if (controller.shoot() && this.inventory.getWeapon() != null) {
+            this.inventory.getWeapon().shot();
         }
 
     }
@@ -97,16 +90,12 @@ public class Player extends BodyEntity {
     }
 
     @Override
-    public void debug(ShapeRenderer sr) {
-        //animation.debug(sr, this.body);
-        weapon.debug(sr);
-    }
+    public void debug(ShapeRenderer sr) { }
 
     public PlayerController getController() {
         return controller;
     }
 
-    public Lantern getLantern() { return lantern; }
+    public Inventory getInventory() { return this.inventory; }
 
-    public BasicWeapon getWeapon() { return weapon; }
 }
