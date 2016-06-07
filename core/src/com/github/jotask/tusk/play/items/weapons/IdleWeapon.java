@@ -9,11 +9,11 @@ import com.github.jotask.tusk.engine.online.util.Network;
  * @since 28/05/2016
  */
 public class IdleWeapon extends Weapon {
-    
+
     private final Network.Weapon weapon;
 
-    public IdleWeapon() {
-        this.weapon = new Network.Weapon();
+    public IdleWeapon(Network.Weapon weapon) {
+        this.weapon = weapon;
         this.weapon.fire = 0;
     }
 

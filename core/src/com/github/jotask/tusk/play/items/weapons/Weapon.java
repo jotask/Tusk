@@ -8,7 +8,7 @@ import com.github.jotask.tusk.play.items.PriceValue;
 import com.github.jotask.tusk.util.Timer;
 import com.github.jotask.tusk.util.Util;
 
-public class Weapon extends Item implements Equipable{
+public abstract class Weapon extends Item implements Equipable {
 
     private Inventory owner;
 
@@ -25,7 +25,7 @@ public class Weapon extends Item implements Equipable{
 
     public boolean shot() {
         if(timer.isFinished()) {
-            Factory.Entities.createBullet(owner.getOwner());
+            Factory.Bullets.createBullet(owner.getOwner());
             return true;
         }
         return false;
@@ -45,4 +45,5 @@ public class Weapon extends Item implements Equipable{
     public int getNeedsToFire() {
         return 0;
     }
+
 }

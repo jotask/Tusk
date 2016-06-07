@@ -58,7 +58,7 @@ public class TuskClient implements Disposable{
         if(this.character.id == character.id) return;
         PlayerIdle playerIdle = this.onlinePlayers.exist(character.id);
         if(playerIdle == null){
-            playerIdle = Factory.Entities.createPlayerIdle(game, character);
+            playerIdle = Factory.Players.createPlayerIdle(game, character);
         }
         playerIdle.setData(character);
         this.onlinePlayers.insert(character.id, playerIdle);

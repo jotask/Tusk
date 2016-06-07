@@ -3,6 +3,7 @@ package com.github.jotask.tusk.play.entities.player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.engine.game.animations.Animation;
 import com.github.jotask.tusk.engine.game.animations.PlayerAnimation;
 import com.github.jotask.tusk.engine.online.util.Network;
@@ -38,7 +39,7 @@ public class PlayerIdle extends BodyEntity {
 
         this.animation = new PlayerAnimation();
 
-        this.weapon = new IdleWeapon();
+        this.weapon = Factory.Weapons.createIdleWeapon(character.weapon);
 
     }
 

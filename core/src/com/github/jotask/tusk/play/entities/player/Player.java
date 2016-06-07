@@ -6,12 +6,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.github.jotask.tusk.engine.controller.DesktopPlayerController;
 import com.github.jotask.tusk.engine.controller.PlayerController;
+import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.engine.game.animations.Animation;
 import com.github.jotask.tusk.engine.game.animations.BasicAnimation;
 import com.github.jotask.tusk.engine.game.animations.PlayerAnimation;
 import com.github.jotask.tusk.play.Inventory;
 import com.github.jotask.tusk.play.entities.BodyEntity;
-import com.github.jotask.tusk.play.items.weapons.MachineGun;
+import com.github.jotask.tusk.play.items.weapons.Weapon;
 
 public class Player extends BodyEntity {
 
@@ -32,7 +33,7 @@ public class Player extends BodyEntity {
         this.inventory = new Inventory(this);
         Player instance = this;
         this.inventory.equipLantern(new Lantern(instance));
-        MachineGun gun = new MachineGun();
+        Weapon gun = Factory.Weapons.createWeapon();
         gun.pickUp(this.inventory);
         this.controller = new DesktopPlayerController();
         this.animation = new PlayerAnimation();

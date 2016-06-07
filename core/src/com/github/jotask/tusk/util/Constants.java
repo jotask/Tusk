@@ -7,7 +7,6 @@ public class Constants {
     public static final String TITLE = "Tusk";
     public static final String VERSION = "v0.15[PRE-ALPHA]";
 
-    // FIXME
     private static final int divider = 1;
     public static final int APP_WIDTH = 800 / divider;
     public static final int APP_HEIGHT = 600 / divider;

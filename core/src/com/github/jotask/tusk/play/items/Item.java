@@ -27,9 +27,27 @@ public class Item extends Entity{
         this.quantity = 1;
     }
 
+    @Override
+    public boolean toDestroy() {
+        return false;
+    }
+
+    @Override
+    public void update() { }
+
+    @Override
+    public void render(SpriteBatch sb) { }
+
+    @Override
+    public void debug(ShapeRenderer sr) { }
+
+    @Override
+    public void dispose() { }
+
+    public PriceValue getValue(){ return this.value; }
+
     public void stack(Item item){
         if(max_quantity == 1) return;
-        // TODO improve to short or bytes type
         if(this.quantity + item.quantity < max_quantity){
             this.quantity = (this.quantity + item.quantity);
             item.quantity = 0;
@@ -39,32 +57,5 @@ public class Item extends Entity{
             item.quantity = item.quantity - difference;
         }
     }
-
-    @Override
-    public boolean toDestroy() {
-        return false;
-    }
-
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void render(SpriteBatch sb) {
-
-    }
-
-    @Override
-    public void debug(ShapeRenderer sr) {
-
-    }
-
-    @Override
-    public void dispose() {
-
-    }
-
-    public PriceValue getValue(){ return this.value; }
 
 }

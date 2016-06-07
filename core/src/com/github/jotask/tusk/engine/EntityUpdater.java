@@ -44,9 +44,7 @@ public class EntityUpdater<T extends Entity> implements IEntity{
         list = copy;
     }
 
-    public boolean add(T newT){
-        return list.add(newT);
-    }
+    public boolean add(T newT){ return list.add(newT); }
 
     public boolean remove(T deleteT){
         if(list.remove(deleteT)){

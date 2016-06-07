@@ -35,9 +35,9 @@ public abstract class BodyEntity extends Entity {
     }
 
     public Body getBody() { return this.body; }
+
     public World getWorld() { return this.getBody().getWorld(); }
-    public Vector2 getPosition(){
-        return this.body.getPosition();
-    }
+
+    public Vector2 getPosition(){ return this.body.getPosition(); }
 
 }

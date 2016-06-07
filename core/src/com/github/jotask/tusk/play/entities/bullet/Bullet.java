@@ -34,7 +34,7 @@ public class Bullet extends BodyEntity {
         light.setSoft(false);
         light.setXray(true);
         light.setDistance(1f);
-        light.setColor(Color.ORANGE);
+        light.setColor(Color.GREEN);
         light.attachToBody(body);
 
         Vector2 targetPosition = Play.getInstance().getCamera().getMousePosInGameWorld();
@@ -74,7 +74,6 @@ public class Bullet extends BodyEntity {
     public void dispose() {
         super.dispose();
         light.remove();
-        System.out.println("dispose");
     }
 
     public BodyEntity getShooter() { return shooter; }

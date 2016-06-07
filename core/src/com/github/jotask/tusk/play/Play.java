@@ -27,11 +27,11 @@ public abstract class Play extends AbstractState {
     public void init() {
         super.init();
         this.setBgColor(Color.BLACK);
-        state = this;
+        Play.state = this;
         this.world = new Mundo();
         this.world.init();
         this.entityManager = EntityManager.get();
-        this.player = Factory.Entities.createPlayer(this);
+        this.player = Factory.Players.createPlayer(this);
         this.hud = new HUD(this);
     }
 

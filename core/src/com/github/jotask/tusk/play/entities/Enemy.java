@@ -20,11 +20,10 @@ public class Enemy extends BodyEntity {
         EnemyType(final Vector2 size) {
             this.size = size;
         }
+
     }
 
-    public Enemy(Body body) {
-        super(body);
-    }
+    public Enemy(Body body) { super(body); }
 
     @Override
     public boolean toDestroy() {

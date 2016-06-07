@@ -10,6 +10,9 @@ import com.github.jotask.tusk.play.entities.EntityManager;
 import com.github.jotask.tusk.play.entities.bullet.Bullet;
 import com.github.jotask.tusk.play.entities.player.Player;
 import com.github.jotask.tusk.play.entities.player.PlayerIdle;
+import com.github.jotask.tusk.play.items.weapons.IdleWeapon;
+import com.github.jotask.tusk.play.items.weapons.MachineGun;
+import com.github.jotask.tusk.play.items.weapons.Weapon;
 import com.github.jotask.tusk.play.world.Collisions;
 import com.github.jotask.tusk.play.world.Mundo;
 import com.github.jotask.tusk.play.world.environment.Environment;
@@ -19,7 +22,7 @@ import com.github.jotask.tusk.util.Util;
 
 public final class Factory {
 
-    static EntityManager manager = EntityManager.get();
+    private static EntityManager manager = EntityManager.get();
 
     public static class Lights{
 
@@ -31,7 +34,7 @@ public final class Factory {
 
     }
 
-    public static class Entities {
+    public static class Players {
 
         public static Player createPlayer(Play play) { return createPlayer(play, SelectPlayer.Players.DEFAULT); }
 
@@ -42,15 +45,6 @@ public final class Factory {
             Player player = new Player(body);
             return player;
 
-        }
-
-        public static Enemy createEnemy(Play play, Vector2 position) {
-            return createEnemy(play, position, Enemy.EnemyType.DEFAULT);
-        }
-
-        public static Enemy createEnemy(Play play, Vector2 position, Enemy.EnemyType type){
-            Enemy enemy = new Enemy(Bodies.createEnemy(play.getWorld(), position, type.size));
-            return enemy;
         }
 
         public static PlayerIdle createPlayerIdle(Play play, Network.Character character) {
@@ -69,84 +63,129 @@ public final class Factory {
 
         }
 
+    }
+
+    public static class Weapons{
+
+        public enum WeaponType{ MACHINE_GUN }
+
+        public static IdleWeapon createIdleWeapon(Network.Weapon weapon){
+            return new IdleWeapon(weapon);
+        }
+
+        public static Weapon createWeapon(){ return createWeapon(WeaponType.MACHINE_GUN); }
+
+        public static Weapon createWeapon(Factory.Weapons.WeaponType w){
+            Weapon weapon = null;
+            switch (w){
+                default:
+                    weapon = createDefaultGun();
+            }
+            return weapon;
+        }
+
+        private static MachineGun createDefaultGun(){
+            return new MachineGun();
+        }
+
+    }
+
+    public static class Bullets{
+
         public static Bullet createBullet(BodyEntity entity) {
             boolean isPlayer = ((entity instanceof Player) || (entity instanceof PlayerIdle));
             Body body = Bodies.createBullet(entity.getWorld(), entity.getPosition(), isPlayer);
             //float angle = entity.getAngleFromThis(Play.getInstance().getCamera().getMousePosInGameWorld());
             Bullet bullet = new Bullet(body, entity);
-            boolean s = manager.getBullets().add(bullet);
-            System.out.println(s);
+            boolean added = manager.getBullets().add(bullet);
+            if(!added){
+                bullet.dispose();
+                return null;
+            }
             return bullet;
         }
 
-        private static class Bodies {
+    }
 
-            public static Body createPlayer(Mundo world, Vector2 position, Vector2 size) {
+    public static class Enemies{
 
-                float x = Util.Pixel.toMeter(position.x);
-                float y = Util.Pixel.toMeter(position.y);
+        public static Enemy createEnemy(Play play, Vector2 position) {
+            return createEnemy(play, position, Enemy.EnemyType.DEFAULT);
+        }
 
-                BodyDef bd = new BodyDef();
-                bd.position.set(x, y);
-                bd.type = BodyDef.BodyType.DynamicBody;
+        public static Enemy createEnemy(Play play, Vector2 position, Enemy.EnemyType type){
+            Enemy enemy = new Enemy(Bodies.createEnemy(play.getWorld(), position, type.size));
+            return enemy;
+        }
 
-                PolygonShape shape = new PolygonShape();
+    }
 
-                float w = Util.Pixel.toMeter(size.x);
-                float h = Util.Pixel.toMeter(size.y);
-                shape.setAsBox(w / 2, h / 2f);
+    private static class Bodies {
 
-                FixtureDef fd = new FixtureDef();
+        public static Body createPlayer(Mundo world, Vector2 position, Vector2 size) {
+
+            float x = Util.Pixel.toMeter(position.x);
+            float y = Util.Pixel.toMeter(position.y);
+
+            BodyDef bd = new BodyDef();
+            bd.position.set(x, y);
+            bd.type = BodyDef.BodyType.DynamicBody;
+
+            PolygonShape shape = new PolygonShape();
+
+            float w = Util.Pixel.toMeter(size.x);
+            float h = Util.Pixel.toMeter(size.y);
+            shape.setAsBox(w / 2, h / 2f);
+
+            FixtureDef fd = new FixtureDef();
+            fd.filter.categoryBits = Collisions.Filters.CATEGORY_PLAYER;
+            fd.filter.maskBits = Collisions.Filters.MASK_PLAYER;
+            fd.friction = 5f;
+            fd.shape = shape;
+
+            com.badlogic.gdx.physics.box2d.Body body = world.getWorld().createBody(bd);
+            body.createFixture(fd);
+
+            shape.dispose();
+
+            return body;
+
+        }
+
+        public static Body createBullet(World world, Vector2 position, boolean isPlayer) {
+
+            BodyDef bd = new BodyDef();
+            bd.position.set(position.x, position.y);
+            bd.type = BodyDef.BodyType.DynamicBody;
+
+
+            CircleShape shape = new CircleShape();
+            shape.setRadius(Bullet.RADIUS);
+
+            FixtureDef fd = new FixtureDef();
+
+            if (isPlayer) {
                 fd.filter.categoryBits = Collisions.Filters.CATEGORY_PLAYER;
                 fd.filter.maskBits = Collisions.Filters.MASK_PLAYER;
-                fd.friction = 5f;
-                fd.shape = shape;
-
-                com.badlogic.gdx.physics.box2d.Body body = world.getWorld().createBody(bd);
-                body.createFixture(fd);
-
-                shape.dispose();
-
-                return body;
-
+            } else {
+                fd.filter.categoryBits = Collisions.Filters.CATEGORY_ENEMY_BULLET;
+                fd.filter.maskBits = Collisions.Filters.MASK_MONSTER;
             }
 
-            public static Body createBullet(World world, Vector2 position, boolean isPlayer) {
+            fd.friction = 0.25f;
+            fd.shape = shape;
+            fd.restitution = 0.01f;
 
-                BodyDef bd = new BodyDef();
-                bd.position.set(position.x, position.y);
-                bd.type = BodyDef.BodyType.DynamicBody;
+            Body body = world.createBody(bd);
+            body.createFixture(fd);
 
+            shape.dispose();
 
-                CircleShape shape = new CircleShape();
-                shape.setRadius(Bullet.RADIUS);
+            return body;
+        }
 
-                FixtureDef fd = new FixtureDef();
-
-                if (isPlayer) {
-                    fd.filter.categoryBits = Collisions.Filters.CATEGORY_PLAYER;
-                    fd.filter.maskBits = Collisions.Filters.MASK_PLAYER;
-                } else {
-                    fd.filter.categoryBits = Collisions.Filters.CATEGORY_ENEMY_BULLET;
-                    fd.filter.maskBits = Collisions.Filters.MASK_MONSTER;
-                }
-
-                fd.friction = 0.25f;
-                fd.shape = shape;
-                fd.restitution = 0.01f;
-
-                Body body = world.createBody(bd);
-                body.createFixture(fd);
-
-                shape.dispose();
-
-                return body;
-            }
-
-            public static Body createEnemy(Mundo world, Vector2 position, Vector2 size) {
-                return createPlayer(world, position, size);
-            }
-
+        public static Body createEnemy(Mundo world, Vector2 position, Vector2 size) {
+            return createPlayer(world, position, size);
         }
 
     }
