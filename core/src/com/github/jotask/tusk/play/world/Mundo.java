@@ -15,6 +15,8 @@ public class Mundo {
     private World world;
     private Box2DDebugRenderer debug;
 
+    private NewWorld newWorld;
+
     private Level level;
 
     private Environment environment;
@@ -28,6 +30,8 @@ public class Mundo {
         this.environment = new Environment(this.world);
 
         this.level = new Level(this.world);
+
+        this.newWorld = new NewWorld();
 
     }
 
@@ -56,12 +60,16 @@ public class Mundo {
     public void update(){
         this.world.step(Gdx.graphics.getDeltaTime(), 6, 2);
         this.environment.update();
+
+        this.newWorld.update();
     }
 
     public void render(SpriteBatch sb, OrthographicCamera camera){
         this.level.render(camera);
         sb.end();
         sb.begin();
+
+        newWorld.render(sb);
     }
 
     public void postRender(SpriteBatch sb){
@@ -71,6 +79,8 @@ public class Mundo {
     public void debug(ShapeRenderer sr, Matrix4 matrix){
         this.debug.render(this.world, matrix);
         this.environment.debug(sr);
+
+        newWorld.debug(sr);
     }
 
     public void dispose(){
@@ -78,6 +88,8 @@ public class Mundo {
         this.world.dispose();
         this.level.dispose();
         this.environment.dispose();
+
+        newWorld.dispose();
     }
 
     public World getWorld() {
