@@ -1,18 +1,18 @@
 package com.github.jotask.tusk.play.game;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.engine.game.Factory;
+import com.github.jotask.tusk.play.AbstractGameState;
+import com.github.jotask.tusk.play.Play;
 import com.github.jotask.tusk.play.game.entities.EntityManager;
 import com.github.jotask.tusk.play.game.entities.player.Player;
 import com.github.jotask.tusk.play.game.ui.HUD;
 import com.github.jotask.tusk.play.game.world.Mundo;
 import com.github.jotask.tusk.play.game.world.NewWorld;
-import com.github.jotask.tusk.states.AbstractState;
+import com.github.jotask.tusk.states.Camera;
 
-public abstract class Game extends AbstractState {
+public class Game extends AbstractGameState {
 
     private static Game instance;
     public static Game getInstance(){ return instance; }
@@ -24,14 +24,16 @@ public abstract class Game extends AbstractState {
 
     private NewWorld newWorld;
 
-    protected Game(final Tusk tusk) { super(tusk);
+    private Camera camera;
+
+    public Game(final Play play) { super(play);
         Game.instance = this;
+        this.camera = play.getCamera();
     }
 
     @Override
     public void init() {
         super.init();
-        this.setBgColor(Color.BLACK);
         this.world = new Mundo();
         this.world.init();
         this.entityManager = EntityManager.get();
@@ -73,7 +75,7 @@ public abstract class Game extends AbstractState {
     @Override
     public void debug(ShapeRenderer sr) {
         super.debug(sr);
-        this.world.debug(sr, this.getCamera().combined);
+        this.world.debug(sr, this.camera.combined);
         this.newWorld.debug(sr);
         this.entityManager.debug(sr);
         this.player.debug(sr);

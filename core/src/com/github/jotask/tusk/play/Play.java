@@ -1,5 +1,6 @@
 package com.github.jotask.tusk.play;
 
+import com.badlogic.gdx.graphics.Color;
 import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.states.AbstractState;
 
@@ -20,6 +21,7 @@ public final class Play extends AbstractState {
     @Override
     public void init() {
         this.manager = new GameManager(this);
+        this.setBgColor(Color.BLACK);
     }
 
 }
