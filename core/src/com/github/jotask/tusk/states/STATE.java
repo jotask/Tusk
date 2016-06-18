@@ -5,8 +5,7 @@ public enum STATE {
     SPLASH,
     MENU,
     OPTIONS,
-    SINGLEPLAYER,
-    MULTIPLAYER,
+    PLAY,
     EXIT
 
 }

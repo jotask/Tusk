@@ -56,7 +56,7 @@ public final class GameStateManager{
             case MENU:
                 screen = new Menu(tusk);
                 break;
-            case SINGLEPLAYER:
+            case PLAY:
                 screen = new Play(tusk);
                 break;
             case EXIT:

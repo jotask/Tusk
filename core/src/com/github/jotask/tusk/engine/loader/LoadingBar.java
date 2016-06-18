@@ -13,15 +13,13 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class LoadingBar {
 
-    OrthographicCamera camera;
+    private Rectangle bounds;
 
-    Rectangle bounds;
+    private Rectangle loading;
 
-    Rectangle loading;
+    private final float max;
 
     public LoadingBar(OrthographicCamera camera) {
-
-        this.camera = camera;
 
         final float offset = 10f;
 
@@ -52,8 +50,6 @@ public class LoadingBar {
         max = loading.width - offset;
 
     }
-
-    final float max;
 
     public void update(float progress){
         float w = (max * progress) / 1f;

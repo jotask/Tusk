@@ -73,7 +73,7 @@ public class Menu extends AbstractState {
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        tusk.getGsm().changeState(STATE.SINGLEPLAYER);
+                        tusk.getGsm().changeState(STATE.PLAY);
                     }
                 });
                 break;
@@ -81,7 +81,7 @@ public class Menu extends AbstractState {
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        tusk.getGsm().changeState(STATE.MULTIPLAYER);
+                        tusk.getGsm().changeState(STATE.PLAY);
                     }
                 });
                 break;

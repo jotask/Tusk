@@ -2,6 +2,7 @@ package com.github.jotask.tusk.play;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.github.jotask.tusk.engine.loader.LoadGame;
 import com.github.jotask.tusk.play.dungeon.Dungeon;
 import com.github.jotask.tusk.states.AbstractState;
 import com.github.jotask.tusk.states.IState;
@@ -16,7 +17,7 @@ public class GameManager extends AbstractState {
 
     private IState currentState;
 
-    public enum Game { GAME, SHOP, DUNGEON }
+    public enum Game { GAME, DUNGEON }
 
     private Play play;
 
@@ -26,8 +27,6 @@ public class GameManager extends AbstractState {
     }
 
     public void changeState(Game game){
-
-        // TODO
 
         AbstractGameState state;
         switch (game){
@@ -45,7 +44,7 @@ public class GameManager extends AbstractState {
         if(currentState != null)
             this.currentState.dispose();
 
-//        this.currentState = new LoadGame(play, state);
+        this.currentState = new LoadGame(play, state);
 
         this.currentState.init();
 

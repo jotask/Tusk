@@ -15,7 +15,7 @@ public class Constants {
 
     public static final int SCALE = 50; // 50
 
-    public static final STATE DEFAULT_STATE = STATE.SPLASH;
+    public static final STATE DEFAULT_STATE = STATE.PLAY;
 
     public static final int PPM = 16; // RECOMMENDED 30 16 for me
 
