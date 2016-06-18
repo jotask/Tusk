@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.states.AbstractState;
 import com.github.jotask.tusk.states.Camera;
-import com.github.jotask.tusk.states.GameStateManager;
 import com.github.jotask.tusk.states.STATE;
 import com.github.jotask.tusk.util.Timer;
 import com.github.jotask.tusk.util.Util;
@@ -21,6 +21,8 @@ public class Splash extends AbstractState {
     private TextureRegion region;
 
     private Vector2 position;
+
+    public Splash(final Tusk tusk) { super(tusk); }
 
     @Override
     public void init() {
@@ -39,7 +41,7 @@ public class Splash extends AbstractState {
 
     @Override
     public void update() {
-        if(timer.isFinished()) GameStateManager.get().changeState(STATE.MENU);
+        if(timer.isFinished()) tusk.getGsm().changeState(STATE.MENU);
         this.camera.zoom -= 0.01f;
         this.camera.update();
     }

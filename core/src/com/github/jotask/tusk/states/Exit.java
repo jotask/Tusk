@@ -1,6 +1,7 @@
 package com.github.jotask.tusk.states;
 
 import com.badlogic.gdx.Gdx;
+import com.github.jotask.tusk.Tusk;
 
 /**
  * Exit
@@ -9,6 +10,8 @@ import com.badlogic.gdx.Gdx;
  * @since 28/05/2016
  */
 public class Exit extends AbstractState {
+
+    public Exit(final Tusk tusk) { super(tusk); }
 
     @Override
     public void init() {

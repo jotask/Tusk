@@ -2,20 +2,22 @@ package com.github.jotask.tusk.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.menu.Menu;
 import com.github.jotask.tusk.options.Options;
-import com.github.jotask.tusk.play.Mutiplayer;
-import com.github.jotask.tusk.play.SinglePlayer;
+import com.github.jotask.tusk.play.game.Mutiplayer;
+import com.github.jotask.tusk.play.game.SinglePlayer;
 import com.github.jotask.tusk.splash.Splash;
 import com.github.jotask.tusk.util.Constants;
 
-public class GameStateManager{
-
-    private static GameStateManager instance;
+public final class GameStateManager{
 
     private AbstractState state;
 
-    private GameStateManager() {
+    private final Tusk tusk;
+
+    public GameStateManager(final Tusk tusk) {
+        this.tusk = tusk;
         changeState(Constants.DEFAULT_STATE);
     }
 
@@ -49,23 +51,23 @@ public class GameStateManager{
         AbstractState screen = null;
         switch (state){
             case OPTIONS:
-                screen = new Options();
+                screen = new Options(tusk);
                 break;
             case MENU:
-                screen = new Menu();
+                screen = new Menu(tusk);
                 break;
             case SINGLEPLAYER:
-                screen = new SinglePlayer();
+                screen = new SinglePlayer(tusk);
                 break;
             case MULTIPLAYER:
-                screen = new Mutiplayer();
+                screen = new Mutiplayer(tusk);
                 break;
             case EXIT:
-                screen = new Exit();
+                screen = new Exit(tusk);
                 break;
             default:
             case SPLASH:
-                screen = new Splash();
+                screen = new Splash(tusk);
                 break;
         }
 
@@ -77,19 +79,12 @@ public class GameStateManager{
         this.state.init();
     }
 
-    public static GameStateManager get(){
-        if(instance == null)
-            instance = new GameStateManager();
-        return instance;
-    }
-
     public AbstractState getState(){
         return state;
     }
 
     public void dispose(){
         if(state != null) state.dispose();
-        instance = null;
     }
 
 }

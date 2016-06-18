@@ -3,20 +3,23 @@ package com.github.jotask.tusk.engine.game;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.github.jotask.tusk.engine.online.util.Network;
-import com.github.jotask.tusk.play.Play;
-import com.github.jotask.tusk.play.entities.BodyEntity;
-import com.github.jotask.tusk.play.entities.Enemy;
-import com.github.jotask.tusk.play.entities.EntityManager;
-import com.github.jotask.tusk.play.entities.bullet.Bullet;
-import com.github.jotask.tusk.play.entities.player.Player;
-import com.github.jotask.tusk.play.entities.player.PlayerIdle;
-import com.github.jotask.tusk.play.items.weapons.IdleWeapon;
-import com.github.jotask.tusk.play.items.weapons.MachineGun;
-import com.github.jotask.tusk.play.items.weapons.Weapon;
-import com.github.jotask.tusk.play.world.Collisions;
-import com.github.jotask.tusk.play.world.Mundo;
-import com.github.jotask.tusk.play.world.environment.Environment;
-import com.github.jotask.tusk.play.world.environment.lights.Fire;
+import com.github.jotask.tusk.play.game.Game;
+import com.github.jotask.tusk.play.game.entities.BodyEntity;
+import com.github.jotask.tusk.play.game.entities.Enemy;
+import com.github.jotask.tusk.play.game.entities.EntityManager;
+import com.github.jotask.tusk.play.game.entities.bullet.Bullet;
+import com.github.jotask.tusk.play.game.entities.player.Player;
+import com.github.jotask.tusk.play.game.entities.player.PlayerIdle;
+import com.github.jotask.tusk.play.game.items.weapons.IdleWeapon;
+import com.github.jotask.tusk.play.game.items.weapons.MachineGun;
+import com.github.jotask.tusk.play.game.items.weapons.Weapon;
+import com.github.jotask.tusk.play.game.world.Collisions;
+import com.github.jotask.tusk.play.game.world.Dungeon.Dungeon;
+import com.github.jotask.tusk.play.game.world.Dungeon.DungeonConfig;
+import com.github.jotask.tusk.play.game.world.Dungeon.Room;
+import com.github.jotask.tusk.play.game.world.Mundo;
+import com.github.jotask.tusk.play.game.world.environment.Environment;
+import com.github.jotask.tusk.play.game.world.environment.lights.Fire;
 import com.github.jotask.tusk.selectplayer.SelectPlayer;
 import com.github.jotask.tusk.util.Util;
 
@@ -36,9 +39,9 @@ public final class Factory {
 
     public static class Players {
 
-        public static Player createPlayer(Play play) { return createPlayer(play, SelectPlayer.Players.DEFAULT); }
+        public static Player createPlayer(Game play) { return createPlayer(play, SelectPlayer.Players.DEFAULT); }
 
-        public static Player createPlayer(Play play, SelectPlayer.Players playerType) {
+        public static Player createPlayer(Game play, SelectPlayer.Players playerType) {
             Body body = Bodies.createPlayer(play.getWorld(),
                     play.getWorld().getLevel().getPlayerSpawn(),
                     new Vector2(playerType.width, playerType.height));
@@ -47,11 +50,11 @@ public final class Factory {
 
         }
 
-        public static PlayerIdle createPlayerIdle(Play play, Network.Character character) {
+        public static PlayerIdle createPlayerIdle(Game play, Network.Character character) {
             return createPlayerIdle(play, character, SelectPlayer.Players.DEFAULT);
         }
 
-        public static PlayerIdle createPlayerIdle(Play play, Network.Character character, SelectPlayer.Players playerType) {
+        public static PlayerIdle createPlayerIdle(Game play, Network.Character character, SelectPlayer.Players playerType) {
 
             Body body = Bodies.createPlayer(play.getWorld(),
                     play.getWorld().getLevel().getPlayerSpawn(),
@@ -109,11 +112,11 @@ public final class Factory {
 
     public static class Enemies{
 
-        public static Enemy createEnemy(Play play, Vector2 position) {
+        public static Enemy createEnemy(Game play, Vector2 position) {
             return createEnemy(play, position, Enemy.EnemyType.DEFAULT);
         }
 
-        public static Enemy createEnemy(Play play, Vector2 position, Enemy.EnemyType type){
+        public static Enemy createEnemy(Game play, Vector2 position, Enemy.EnemyType type){
             Enemy enemy = new Enemy(Bodies.createEnemy(play.getWorld(), position, type.size));
             return enemy;
         }
@@ -186,6 +189,23 @@ public final class Factory {
 
         public static Body createEnemy(Mundo world, Vector2 position, Vector2 size) {
             return createPlayer(world, position, size);
+        }
+
+    }
+
+    public static class DungeonFactory{
+
+        public static Dungeon generateDungeon(){
+
+            DungeonConfig cfg = new DungeonConfig();
+
+            return new Dungeon(cfg);
+
+        }
+
+        public static Room generateRoom(final long seed){
+            Room room = new Room(seed);
+            return room;
         }
 
     }

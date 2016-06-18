@@ -2,8 +2,8 @@ package com.github.jotask.tusk.engine;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.github.jotask.tusk.play.entities.Entity;
-import com.github.jotask.tusk.play.entities.IEntity;
+import com.github.jotask.tusk.play.game.entities.Entity;
+import com.github.jotask.tusk.play.game.entities.IEntity;
 
 import java.util.LinkedList;
 

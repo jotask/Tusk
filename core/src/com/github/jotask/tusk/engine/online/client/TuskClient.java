@@ -6,9 +6,9 @@ import com.esotericsoftware.kryonet.Listener;
 import com.github.jotask.tusk.engine.game.Factory;
 import com.github.jotask.tusk.engine.online.util.AvlTree;
 import com.github.jotask.tusk.engine.online.util.Network;
-import com.github.jotask.tusk.play.Play;
-import com.github.jotask.tusk.play.entities.player.Player;
-import com.github.jotask.tusk.play.entities.player.PlayerIdle;
+import com.github.jotask.tusk.play.game.Game;
+import com.github.jotask.tusk.play.game.entities.player.Player;
+import com.github.jotask.tusk.play.game.entities.player.PlayerIdle;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -21,7 +21,7 @@ import java.util.LinkedList;
  */
 public class TuskClient implements Disposable{
 
-    private final Play game;
+    private final Game game;
 
     private final Network.Character character;
 
@@ -29,7 +29,7 @@ public class TuskClient implements Disposable{
 
     private final AvlTree<PlayerIdle> onlinePlayers;
 
-    public TuskClient(Play game) throws IOException {
+    public TuskClient(Game game) throws IOException {
 
         this.game = game;
         this.onlinePlayers = new AvlTree<PlayerIdle>();
@@ -96,7 +96,7 @@ public class TuskClient implements Disposable{
 
     public AvlTree<PlayerIdle> getOnlinePlayers() { return onlinePlayers; }
 
-    public Play getGame(){ return this.game; }
+    public Game getGame(){ return this.game; }
 
     @Override
     public void dispose() {

@@ -32,9 +32,9 @@ public class Tusk extends ApplicationAdapter {
 		sr = new ShapeRenderer();
 		sr.setAutoShapeType(true);
 
-		gsm = GameStateManager.get();
+		gsm = new GameStateManager(this);
 
-		debug = new Debug();
+		debug = new Debug(this);
 	}
 
 	@Override
@@ -87,4 +87,6 @@ public class Tusk extends ApplicationAdapter {
 		sr.dispose();
 		AssetManager.get().dispose();
 	}
+
+	public GameStateManager getGsm() { return gsm; }
 }

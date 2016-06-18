@@ -4,12 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.util.Constants;
 
 public abstract class AbstractState implements IState {
 
     protected Color bgColor = Color.CYAN;
     protected Camera camera;
+
+    protected final Tusk tusk;
+
+    protected AbstractState(final Tusk tusk) {
+        this.tusk = tusk;
+    }
 
     @Override
     public void init() {
@@ -18,42 +25,28 @@ public abstract class AbstractState implements IState {
     }
 
     @Override
-    public void preUpdate() {
-
-    }
+    public void preUpdate() { }
 
     @Override
-    public void update() {
-
-    }
+    public void update() { }
 
     @Override
-    public void postUpdate() {
-
-    }
+    public void postUpdate() { }
 
     @Override
-    public void preRender(SpriteBatch sb) {
-
-    }
+    public void preRender(SpriteBatch sb) { }
 
     @Override
-    public void render(SpriteBatch sb) {
-        
-    }
+    public void render(SpriteBatch sb) { }
 
     @Override
-    public void postRender(SpriteBatch sb) {
-
-    }
+    public void postRender(SpriteBatch sb) { }
 
     @Override
-    public void debug(ShapeRenderer sr) {
-
-    }
+    public void debug(ShapeRenderer sr) { }
 
     @Override
-    public void dispose() {}
+    public void dispose() { }
 
     public Color getBgColor() {
         return bgColor;
@@ -64,5 +57,7 @@ public abstract class AbstractState implements IState {
     public void setBgColor(Color bgColor) {
         this.bgColor = bgColor;
     }
+
+    public Tusk getTusk() { return tusk; }
 
 }

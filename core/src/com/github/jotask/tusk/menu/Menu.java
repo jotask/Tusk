@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.states.AbstractState;
 import com.github.jotask.tusk.states.Camera;
@@ -34,6 +35,8 @@ public class Menu extends AbstractState {
     private Stage stage;
 
     private Logo logo;
+
+    public Menu(final Tusk tusk) { super(tusk); }
 
     @Override
     public void init() {
@@ -73,7 +76,7 @@ public class Menu extends AbstractState {
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        GameStateManager.get().changeState(STATE.SINGLEPLAYER);
+                        tusk.getGsm().changeState(STATE.SINGLEPLAYER);
                     }
                 });
                 break;
@@ -81,7 +84,7 @@ public class Menu extends AbstractState {
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        GameStateManager.get().changeState(STATE.MULTIPLAYER);
+                        tusk.getGsm().changeState(STATE.MULTIPLAYER);
                     }
                 });
                 break;
@@ -89,7 +92,7 @@ public class Menu extends AbstractState {
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        GameStateManager.get().changeState(STATE.OPTIONS);
+                        tusk.getGsm().changeState(STATE.OPTIONS);
                     }
                 });
                 break;
@@ -97,7 +100,7 @@ public class Menu extends AbstractState {
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        GameStateManager.get().changeState(STATE.EXIT);
+                        tusk.getGsm().changeState(STATE.EXIT);
                     }
                 });
                 break;

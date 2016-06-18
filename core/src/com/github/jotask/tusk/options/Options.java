@@ -7,11 +7,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.states.AbstractState;
 import com.github.jotask.tusk.states.GameStateManager;
 import com.github.jotask.tusk.states.STATE;
 
 public class Options extends AbstractState {
+
+    public Options(Tusk tusk) { super(tusk); }
 
     public enum BUTTONS {
         BACK("Back to menu");
@@ -45,7 +48,7 @@ public class Options extends AbstractState {
                 button.addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        GameStateManager.get().changeState(STATE.MENU);
+                        tusk.getGsm().changeState(STATE.MENU);
                     }
                 });
             }

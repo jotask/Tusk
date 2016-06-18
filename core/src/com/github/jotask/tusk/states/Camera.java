@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.github.jotask.tusk.engine.controller.DesktopPlayerController;
-import com.github.jotask.tusk.play.entities.BodyEntity;
+import com.github.jotask.tusk.play.game.entities.BodyEntity;
 
 public class Camera extends OrthographicCamera {
 

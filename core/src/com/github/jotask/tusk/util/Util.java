@@ -9,9 +9,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.github.jotask.tusk.play.entities.BodyEntity;
-import com.github.jotask.tusk.play.world.Level;
-import com.github.jotask.tusk.play.world.environment.lights.Fire;
+import com.github.jotask.tusk.play.game.entities.BodyEntity;
+import com.github.jotask.tusk.play.game.world.Level;
+import com.github.jotask.tusk.play.game.world.environment.lights.Fire;
 
 import java.util.LinkedList;
 
