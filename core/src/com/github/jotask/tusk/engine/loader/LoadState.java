@@ -41,13 +41,15 @@ public class LoadState extends AbstractState {
 
 //        this.progress = loader.manager.getProgress();
 
-        this.progress += .01f;
+//        this.progress += .01f;
+
+        this.progress = 1f;
 
         bar.update(this.progress);
 
         if(this.progress >= 1f){
-//            tusk.getGsm().finishLoading(stateToLoaded);
-            this.progress = 0f;
+            tusk.getGsm().finishLoading(stateToLoaded);
+//            this.progress = 0f;
         }
 
     }

@@ -19,8 +19,6 @@ public class LoadingBar {
 
     Rectangle loading;
 
-    private final float HEIGHT = 100f;
-
     public LoadingBar(OrthographicCamera camera) {
 
         this.camera = camera;
@@ -30,7 +28,6 @@ public class LoadingBar {
         final int SCALE = (int) (Gdx.graphics.getWidth() / camera.viewportWidth);
 
         {
-
             float x = camera.position.x - (camera.viewportWidth / 2f);
             x += offset;
 
@@ -52,7 +49,7 @@ public class LoadingBar {
             loading.setSize(bounds.width - offset * 2, bounds.height - offset * 2);
         }
 
-        max = loading.width;
+        max = loading.width - offset;
 
     }
 
