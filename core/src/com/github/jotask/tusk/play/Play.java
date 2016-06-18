@@ -14,9 +14,7 @@ public final class Play extends AbstractState {
 
     private GameManager manager;
 
-    public Play(final Tusk tusk) {
-        super(tusk);
-    }
+    public Play(final Tusk tusk) { super(tusk); }
 
     @Override
     public void init() {

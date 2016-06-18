@@ -26,6 +26,7 @@ public class Splash extends AbstractState {
 
     @Override
     public void init() {
+
         this.camera = new Camera(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f);
         this.setBgColor(Util.getColorFromHex(255,166,158, 1f));
 

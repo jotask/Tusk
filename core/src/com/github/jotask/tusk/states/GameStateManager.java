@@ -3,10 +3,10 @@ package com.github.jotask.tusk.states;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.Tusk;
+import com.github.jotask.tusk.engine.loader.LoadState;
 import com.github.jotask.tusk.menu.Menu;
 import com.github.jotask.tusk.options.Options;
-import com.github.jotask.tusk.play.game.Mutiplayer;
-import com.github.jotask.tusk.play.game.SinglePlayer;
+import com.github.jotask.tusk.play.Play;
 import com.github.jotask.tusk.splash.Splash;
 import com.github.jotask.tusk.util.Constants;
 
@@ -57,10 +57,7 @@ public final class GameStateManager{
                 screen = new Menu(tusk);
                 break;
             case SINGLEPLAYER:
-                screen = new SinglePlayer(tusk);
-                break;
-            case MULTIPLAYER:
-                screen = new Mutiplayer(tusk);
+                screen = new Play(tusk);
                 break;
             case EXIT:
                 screen = new Exit(tusk);
@@ -74,8 +71,14 @@ public final class GameStateManager{
         if(this.state != null)
             this.state.dispose();
 
-        this.state = screen;
+        this.state = new LoadState(tusk, screen);
 
+        this.state.init();
+    }
+
+    public void finishLoading(AbstractState loaded){
+        this.state.dispose();
+        this.state = loaded;
         this.state.init();
     }
 

@@ -89,4 +89,5 @@ public class Tusk extends ApplicationAdapter {
 	}
 
 	public GameStateManager getGsm() { return gsm; }
+
 }

@@ -1,6 +1,6 @@
 package com.github.jotask.tusk.play.game;
 
-import com.github.jotask.tusk.Tusk;
+import com.github.jotask.tusk.play.Play;
 
 /**
  * SinglePlayer
@@ -10,6 +10,5 @@ import com.github.jotask.tusk.Tusk;
  */
 public class SinglePlayer extends Game {
 
-    public SinglePlayer(final Tusk tusk) { super(tusk); }
-
+    public SinglePlayer(final Play play) { super(play); }
 }

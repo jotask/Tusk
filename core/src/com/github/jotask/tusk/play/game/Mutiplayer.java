@@ -1,8 +1,8 @@
 package com.github.jotask.tusk.play.game;
 
 import com.badlogic.gdx.Gdx;
-import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.engine.online.client.TuskClient;
+import com.github.jotask.tusk.play.Play;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class Mutiplayer extends Game {
 
     private TuskClient client;
 
-    public Mutiplayer(final Tusk tusk) { super(tusk); }
+    public Mutiplayer(final Play play) { super(play); }
 
     @Override
     public void init() {

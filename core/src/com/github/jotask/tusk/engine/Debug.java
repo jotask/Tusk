@@ -8,11 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.engine.game.AssetManager;
-import com.github.jotask.tusk.engine.online.client.TuskClient;
-import com.github.jotask.tusk.play.game.Game;
-import com.github.jotask.tusk.play.game.Mutiplayer;
-import com.github.jotask.tusk.play.game.entities.EntityManager;
-import com.github.jotask.tusk.play.game.entities.player.Player;
 import com.github.jotask.tusk.states.AbstractState;
 import com.github.jotask.tusk.states.Camera;
 import com.github.jotask.tusk.util.Constants;
@@ -63,50 +58,51 @@ public class Debug extends AbstractState {
         drawFontRight(sb, javaHeap);
         drawFontRight(sb, nativeHeap);
 
-        if(tusk.getGsm().getState() instanceof Game)
-            renderPlay(sb);
+//        if(tusk.getGsm().getState() instanceof Game)
+//            renderPlay(sb);
+
         sb.end();
 
     }
 
-    private void renderPlay(SpriteBatch sb){
-        Game play = (Game) tusk.getGsm().getState();
-        Player player = play.getPlayer();
-
-        if(player == null)
-            return;
-
-        float playerX = player.getPosition().x;
-        final float PRECISION = 1000f;
-        playerX = Math.round(playerX * PRECISION) / PRECISION;
-        float playerY = player.getPosition().y;
-        playerY = Math.round(playerY * PRECISION) / PRECISION;
-        String playerPosition = "Player: [x: " + playerX + "] [y: " + playerY + "]";
-        drawFontLeft(sb, playerPosition);
-
-        String entities = "Entities: " + play.getWorld().getWorld().getBodyCount();
-        drawFontLeft(sb, entities);
-
-        String bullets = "Bullets: " + EntityManager.get().getBullets().size();
-        drawFontLeft(sb, bullets);
-
-        // is online
-
-        if(play instanceof Mutiplayer){
-
-            TuskClient tuskClient = ((Mutiplayer)play).getClient();
-
-            if(tuskClient != null){
-                String player_name = "Name: " + tuskClient.getCharacter().name;
-                drawFontLeft(sb, player_name);
-
-                String players_online = "Online: " + (tuskClient.getOnlinePlayers().getAllTree().size() + 1);
-                drawFontLeft(sb, players_online);
-            }
-
-        }
-
-    }
+//    private void renderPlay(SpriteBatch sb){
+//        Game play = (Game) tusk.getGsm().getState();
+//        Player player = play.getPlayer();
+//
+//        if(player == null)
+//            return;
+//
+//        float playerX = player.getPosition().x;
+//        final float PRECISION = 1000f;
+//        playerX = Math.round(playerX * PRECISION) / PRECISION;
+//        float playerY = player.getPosition().y;
+//        playerY = Math.round(playerY * PRECISION) / PRECISION;
+//        String playerPosition = "Player: [x: " + playerX + "] [y: " + playerY + "]";
+//        drawFontLeft(sb, playerPosition);
+//
+//        String entities = "Entities: " + play.getWorld().getWorld().getBodyCount();
+//        drawFontLeft(sb, entities);
+//
+//        String bullets = "Bullets: " + EntityManager.get().getBullets().size();
+//        drawFontLeft(sb, bullets);
+//
+//        // is online
+//
+//        if(play instanceof Mutiplayer){
+//
+//            TuskClient tuskClient = ((Mutiplayer)play).getClient();
+//
+//            if(tuskClient != null){
+//                String player_name = "Name: " + tuskClient.getCharacter().name;
+//                drawFontLeft(sb, player_name);
+//
+//                String players_online = "Online: " + (tuskClient.getOnlinePlayers().getAllTree().size() + 1);
+//                drawFontLeft(sb, players_online);
+//            }
+//
+//        }
+//
+//    }
 
     @Override
     public void debug(ShapeRenderer sr) {

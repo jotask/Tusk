@@ -15,14 +15,17 @@ public abstract class AbstractState implements IState {
     protected final Tusk tusk;
 
     protected AbstractState(final Tusk tusk) {
+        this(tusk, Constants.SCALE);
+    }
+
+    protected AbstractState(final Tusk tusk, final float SCALE) {
         this.tusk = tusk;
+        this.camera = new Camera(Gdx.graphics.getWidth() / SCALE,
+                Gdx.graphics.getHeight() / SCALE);
     }
 
     @Override
-    public void init() {
-        this.camera = new Camera(Gdx.graphics.getWidth() / Constants.SCALE,
-                Gdx.graphics.getHeight() / Constants.SCALE);
-    }
+    public void init() { }
 
     @Override
     public void preUpdate() { }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.github.jotask.tusk.play.game.Game;
 import com.github.jotask.tusk.play.game.world.environment.Environment;
 
 public class Mundo {
@@ -65,7 +64,7 @@ public class Mundo {
     }
 
     public void postRender(SpriteBatch sb){
-        this.environment.render(sb, Game.getInstance().getCamera());
+//        this.environment.render(sb, Game.getInstance().getCamera());
     }
 
     public void debug(ShapeRenderer sr, Matrix4 matrix){
