@@ -19,7 +19,7 @@ public class Constants {
 
     public static final int PPM = 16; // RECOMMENDED 30 16 for me
 
-    public static final boolean DEFAULT_GAME_INFO = false;
-    public static final boolean DEFAULT_DEBUG = false;
+    public static final boolean DEFAULT_GAME_INFO = true;
+    public static final boolean DEFAULT_DEBUG = true;
 
 }

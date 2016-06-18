@@ -1,5 +1,6 @@
 package com.github.jotask.tusk.engine.loader;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -21,23 +22,29 @@ public class LoadingBar {
     private final float HEIGHT = 100f;
 
     public LoadingBar(OrthographicCamera camera) {
+
         this.camera = camera;
 
-        float offset = 10f;
+        final float offset = 10f;
 
-        float x = camera.position.x - (camera.viewportWidth  / 2f);
-        x += offset;
+        final int SCALE = (int) (Gdx.graphics.getWidth() / camera.viewportWidth);
 
-        float y = camera.position.y - (HEIGHT / 2f);
-        y += offset;
+        {
 
-        float w = camera.viewportWidth;
-        w -= offset * 2;
+            float x = camera.position.x - (camera.viewportWidth / 2f);
+            x += offset;
 
-        float h = HEIGHT;
-        h -= offset * 2;
+            float y = camera.position.y - (camera.viewportHeight / 2f);
+            y += offset;
 
-        bounds = new Rectangle(x, y, w, h);
+            float w = camera.viewportWidth;
+            w -= offset * 2;
+
+            float h = camera.viewportHeight;
+            h -= offset * 2;
+
+            bounds = new Rectangle(x * SCALE, y * SCALE, w * SCALE, h * SCALE);
+        }
 
         {
             loading = new Rectangle();
@@ -54,10 +61,6 @@ public class LoadingBar {
     public void update(float progress){
         float w = (max * progress) / 1f;
         loading.width = w;
-    }
-
-    private void finishLoading(){
-        System.out.println("finished loading");
     }
 
     public void render(ShapeRenderer sr){

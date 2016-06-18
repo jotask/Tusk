@@ -1,6 +1,5 @@
 package com.github.jotask.tusk.splash;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -8,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.states.AbstractState;
-import com.github.jotask.tusk.states.Camera;
 import com.github.jotask.tusk.states.STATE;
 import com.github.jotask.tusk.util.Timer;
 import com.github.jotask.tusk.util.Util;
@@ -22,12 +20,10 @@ public class Splash extends AbstractState {
 
     private Vector2 position;
 
-    public Splash(final Tusk tusk) { super(tusk); }
+    public Splash(final Tusk tusk) { super(tusk, 2f); }
 
     @Override
     public void init() {
-
-        this.camera = new Camera(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f);
         this.setBgColor(Util.getColorFromHex(255,166,158, 1f));
 
         Texture texture = AssetManager.get().getAsset(AssetManager.ASSETS.AIKO);

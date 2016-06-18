@@ -32,6 +32,7 @@ public class Game extends AbstractGameState {
 
     @Override
     public void init() {
+        System.out.println("Play.game");
 //        super.init();
 //        this.world = new Mundo();
 //        this.world.init();

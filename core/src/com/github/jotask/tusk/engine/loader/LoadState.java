@@ -1,5 +1,6 @@
 package com.github.jotask.tusk.engine.loader;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -24,9 +25,10 @@ public class LoadState extends AbstractState {
     private float progress;
 
     public LoadState(final Tusk tusk, AbstractState s) {
-        super(tusk);
+        super(tusk, 1f);
         this.stateToLoaded = s;
         this.font = AssetManager.get().getFont();
+        this.setBgColor(Color.BLACK);
     }
 
     @Override
@@ -39,12 +41,13 @@ public class LoadState extends AbstractState {
 
 //        this.progress = loader.manager.getProgress();
 
-        this.progress = 1f;
+        this.progress += .01f;
 
         bar.update(this.progress);
 
         if(this.progress >= 1f){
-            tusk.getGsm().finishLoading(stateToLoaded);
+//            tusk.getGsm().finishLoading(stateToLoaded);
+            this.progress = 0f;
         }
 
     }

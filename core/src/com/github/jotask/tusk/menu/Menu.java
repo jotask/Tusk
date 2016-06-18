@@ -12,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.github.jotask.tusk.Tusk;
 import com.github.jotask.tusk.engine.game.AssetManager;
 import com.github.jotask.tusk.states.AbstractState;
-import com.github.jotask.tusk.states.Camera;
-import com.github.jotask.tusk.states.GameStateManager;
 import com.github.jotask.tusk.states.STATE;
 import com.github.jotask.tusk.util.Util;
 
@@ -36,11 +34,10 @@ public class Menu extends AbstractState {
 
     private Logo logo;
 
-    public Menu(final Tusk tusk) { super(tusk); }
+    public Menu(final Tusk tusk) { super(tusk, 4f); }
 
     @Override
     public void init() {
-        this.camera = new Camera(Gdx.graphics.getWidth() / 4f, Gdx.graphics.getHeight() / 4f);
         this.setBgColor(Util.getColorFromHex(255,166,158, 1f));
         this.skin = AssetManager.get().getSkin();
         this.stage = new Stage();

@@ -15,4 +15,8 @@ public class Dungeon extends AbstractGameState {
         super(play);
     }
 
+    @Override
+    public void init() {
+        System.out.println("Play.dungeon");
+    }
 }
