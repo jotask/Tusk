@@ -11,4 +11,5 @@ import com.github.jotask.tusk.play.Play;
 public class SinglePlayer extends Game {
 
     public SinglePlayer(final Play play) { super(play); }
+
 }

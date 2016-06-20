@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.github.jotask.tusk.engine.loader.LoadGame;
 import com.github.jotask.tusk.play.dungeon.Dungeon;
+import com.github.jotask.tusk.play.game.SinglePlayer;
 import com.github.jotask.tusk.states.AbstractState;
-import com.github.jotask.tusk.states.IState;
 
 /**
  * GameManager
@@ -15,7 +15,7 @@ import com.github.jotask.tusk.states.IState;
  */
 public class GameManager extends AbstractState {
 
-    private IState currentState;
+    private AbstractGameState currentState;
 
     public enum Game { GAME, DUNGEON }
 
@@ -35,7 +35,7 @@ public class GameManager extends AbstractState {
                 break;
             case GAME:
             default:
-                state = new com.github.jotask.tusk.play.game.Game(play);
+                state = new SinglePlayer(play);
         }
 
         if(state == null)
@@ -50,7 +50,7 @@ public class GameManager extends AbstractState {
 
     }
 
-    public void finishLoading(IState loaded){
+    public void finishLoading(AbstractGameState loaded){
         this.currentState.dispose();
         this.currentState = loaded;
         this.currentState.init();

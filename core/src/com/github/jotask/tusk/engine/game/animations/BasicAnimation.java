@@ -63,7 +63,8 @@ public abstract  class BasicAnimation implements Animation {
 
     @Override
     public void render(SpriteBatch sb, Body body) {
-        Util.Render.render(sb, currentFrame, body);
+        if(currentFrame != null)
+            Util.Render.render(sb, currentFrame, body);
     }
 
     @Override

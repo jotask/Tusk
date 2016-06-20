@@ -51,6 +51,7 @@ public class Player extends BodyEntity {
 
     @Override
     public void update() {
+
         this.animation.update();
         this.inventory.update();
 
@@ -86,9 +87,7 @@ public class Player extends BodyEntity {
     }
 
     @Override
-    public void render(SpriteBatch sb) {
-        animation.render(sb, this.body);
-    }
+    public void render(SpriteBatch sb) { animation.render(sb, this.body); }
 
     @Override
     public void debug(ShapeRenderer sr) { }

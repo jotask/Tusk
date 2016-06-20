@@ -38,4 +38,5 @@ public final class Play extends AbstractState {
     public void dispose() { this.manager.dispose(); }
 
     public GameManager getManager() { return manager; }
+
 }

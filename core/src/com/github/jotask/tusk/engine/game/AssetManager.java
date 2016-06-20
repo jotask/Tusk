@@ -45,7 +45,8 @@ public class AssetManager {
 
     private void load(){
         this.font = new BitmapFont();
-        for(ASSETS a: ASSETS.values()) this.manager.load(a.texture, a.tClass);
+        for(ASSETS a: ASSETS.values())
+            this.manager.load(a.texture, a.tClass);
         this.skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         manager.finishLoading();
     }

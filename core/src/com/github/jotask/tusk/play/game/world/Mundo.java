@@ -64,6 +64,7 @@ public class Mundo {
     }
 
     public void postRender(SpriteBatch sb){
+        // TODO
 //        this.environment.render(sb, Game.getInstance().getCamera());
     }
 
