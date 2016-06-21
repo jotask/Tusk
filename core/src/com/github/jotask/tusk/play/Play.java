@@ -26,10 +26,22 @@ public final class Play extends AbstractState {
     }
 
     @Override
+    public void preUpdate() { this.manager.preUpdate(); }
+
+    @Override
     public void update() { this.manager.update(); }
 
     @Override
+    public void postUpdate() { this.manager.postUpdate(); }
+
+    @Override
+    public void preRender(SpriteBatch sb) { this.manager.preRender(sb); }
+
+    @Override
     public void render(SpriteBatch sb) { this.manager.render(sb); }
+
+    @Override
+    public void postRender(SpriteBatch sb) { this.manager.postRender(sb); }
 
     @Override
     public void debug(ShapeRenderer sr) { this.manager.debug(sr); }

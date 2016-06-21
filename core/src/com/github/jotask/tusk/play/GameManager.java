@@ -57,10 +57,22 @@ public class GameManager extends AbstractState {
     }
 
     @Override
+    public void preUpdate() { this.currentState.preUpdate(); }
+
+    @Override
     public void update() { this.currentState.update(); }
 
     @Override
+    public void postUpdate() { this.currentState.postUpdate(); }
+
+    @Override
+    public void preRender(SpriteBatch sb) { this.currentState.preRender(sb); }
+
+    @Override
     public void render(SpriteBatch sb) { this.currentState.render(sb); }
+
+    @Override
+    public void postRender(SpriteBatch sb) { this.currentState.postRender(sb); }
 
     @Override
     public void debug(ShapeRenderer sr) { this.currentState.debug(sr); }
